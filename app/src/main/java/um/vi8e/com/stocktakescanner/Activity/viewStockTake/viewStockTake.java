@@ -13,7 +13,7 @@ public class viewStockTake extends CoreActivity {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_landing);
+	setContentView(R.layout.activity_view_stocktake);
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 

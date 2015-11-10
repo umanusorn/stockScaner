@@ -74,7 +74,7 @@ public CommentRecycleAdapter(ArrayList<StocktakeModel> dataSet, Context context)
 public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 	// Create a new view.
 	View v = LayoutInflater.from(viewGroup.getContext())
-	                       .inflate(R.layout.recycle_comment, viewGroup, false);
+	                       .inflate(R.layout.recycle_stocktake, viewGroup, false);
 	return new ViewHolder(v);
 }
 

@@ -24,11 +24,17 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
 	start=(Button)findViewById(R.id.startStockTakebtn);
-	viewStockTake=(Button)findViewById(R.id.view_finder_view);
+	viewStockTake=(Button)findViewById(R.id.viewStockTake);
 
 	start.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			IntentCaller.start(thisActivity);
+		}
+	});
+
+	viewStockTake.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			IntentCaller.viewStockTake(thisActivity);
 		}
 	});
 
