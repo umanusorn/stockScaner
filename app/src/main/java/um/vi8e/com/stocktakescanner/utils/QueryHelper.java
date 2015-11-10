@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel2;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 
 
 /**
@@ -175,7 +177,17 @@ public static void genListAndTask(Context context) {
 
 		StocktakeModel stocktakeModel = new StocktakeModel("timeStart" + i, "timeEnd", "completed", "location " + i, "Um",
 		                                                   "DeviceDetail");
-		context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+		Uri uri = context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+
+		for (int k = 0; k < 3; k++) {
+			StocktakeresultModel2
+					stocktakeresultModel =
+					new StocktakeresultModel2(uri.getPathSegments().get(1),
+					                         "dummyBarCode" + k + "," + uri.getPathSegments().get(1),
+					                         "1",
+					                         "dummyDate");
+			context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+		}
 	}
 
 }

@@ -32,10 +32,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.R;
-import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
-import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeSelection;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultSelection;
 import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 
 /**
@@ -45,10 +44,10 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 public class ViewStockResultFragment extends Fragment {
 
 private static final String TAG = "ViewStockResultFragment";
-protected RecyclerView               mRecyclerView;
-protected ViewStockResultAdapter     mAdapter;
-protected RecyclerView.LayoutManager mLayoutManager;
-protected ArrayList<StocktakeModel>  mDataSet;
+protected RecyclerView                     mRecyclerView;
+protected ViewStockResultAdapter           mAdapter;
+protected RecyclerView.LayoutManager       mLayoutManager;
+protected ArrayList<StocktakeresultModel2> mDataSet;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +61,8 @@ public void onCreate(Bundle savedInstanceState) {
  */
 private void initDataSet(Context context) {
 	//todo change
-	StocktakeSelection where = new StocktakeSelection();
-	//where.taskId(TaskActivity.currentTask.getId());
+	StocktakeresultSelection where = new StocktakeresultSelection();
+	where.stocktakeId(viewStockTakeResultActivity.currentStockTakeId);
 	Cursor c = where.query(context.getContentResolver());
 	c.moveToFirst();
 	Log.d(TAG, "setUpAdapter" + String.valueOf(c.getCount()));
@@ -73,11 +72,11 @@ private void initDataSet(Context context) {
 	Log.d("setUpAdapter", String.valueOf(c.getCount()));
 
 	//todo change
-	List<ContentValues> allCommentValues = QueryHelper.getValuesFromCursor(c, StocktakeColumns.ALL_COLUMNS);
+	List<ContentValues> allCommentValues = QueryHelper.getValuesFromCursor(c, StocktakeresultColumns.ALL_COLUMNS);
 	mDataSet = new ArrayList<>();
 	for (ContentValues commentValue : allCommentValues) {
 		//todo change
-		mDataSet.add(new StocktakeModel(commentValue));
+		mDataSet.add(new StocktakeresultModel2(commentValue));
 	}
 }
 

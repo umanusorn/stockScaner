@@ -27,10 +27,6 @@ public StocktakeModel(String datetimeStarted,
 }
 
 
-public StocktakeModel(ContentValues listValues) {
-	setValues(listValues);
-}
-
 @Nullable @Override public String getLocation() {
 	return Location;
 }
@@ -38,6 +34,11 @@ public StocktakeModel(ContentValues listValues) {
 public void setLocation(String location) {
 	this.Location = location;
 }
+
+public StocktakeModel(ContentValues listValues) {
+	setValues(listValues);
+}
+
 
 public StocktakeModel setValues(ContentValues values) {
 	id=values.getAsString(StocktakeColumns._ID);

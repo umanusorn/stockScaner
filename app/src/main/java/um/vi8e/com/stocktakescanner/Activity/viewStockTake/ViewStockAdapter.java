@@ -88,10 +88,10 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 @Override
 public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
-	StocktakeModel listModel = mDataSet.get(position);
+	final StocktakeModel listModel = mDataSet.get(position);
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			IntentCaller.viewStockTakeResult(viewStockTakeActivity.thisActivity);
+			IntentCaller.viewStockTakeResult(viewStockTakeActivity.thisActivity,listModel);
 		}
 	});
 	viewHolder.dateTieme.setText(listModel.getDatetimeStarted());

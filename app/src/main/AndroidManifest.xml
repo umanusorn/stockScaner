@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="um.vi8e.com.stocktakescanner" >
 
-
-    <!--camera stuff-->
+    <!-- camera stuff -->
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,17 +17,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-
         <provider
-                android:name=".provider.MasterProvider"
-                android:authorities="um.vi8e.com.stocktakescanner.provider"
-                android:exported="false" />
+            android:name=".provider.MasterProvider"
+            android:authorities="um.vi8e.com.stocktakescanner.provider"
+            android:exported="false" />
 
         <activity
             android:name=".Activity.LandingActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
-           back <intent-filter>
+           back 
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -37,20 +38,22 @@
             android:label="@string/title_activity_core"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
         <activity
-                android:name=".Activity.StartStockTake"
-                android:theme="@style/AppTheme.NoActionBar" >
+            android:name=".Activity.StartStockTake"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
         <activity
-                android:name=".Activity.viewStockTake.viewStockTakeActivity"
-                android:theme="@style/AppTheme.NoActionBar" >
+            android:name=".Activity.viewStockTake.viewStockTakeActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
         <activity
-                android:name=".Activity.viewStockTakeResult.viewStockTakeResultActivity"
-                android:theme="@style/AppTheme.NoActionBar" >
+            android:name=".Activity.viewStockTakeResult.viewStockTakeResultActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Activity.SimpleScannerActivity"
+            android:label="@string/title_activity_simple_scanner"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

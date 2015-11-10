@@ -3,9 +3,12 @@ import android.app.Activity;
 import android.content.Intent;
 
 import um.vi8e.com.stocktakescanner.Activity.DeveloperActivity;
+import um.vi8e.com.stocktakescanner.Activity.SimpleScannerActivity;
 import um.vi8e.com.stocktakescanner.Activity.StartStockTake;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.viewStockTakeResultActivity;
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 
 
 /**
@@ -40,8 +43,20 @@ public static
 }
 
 public static
-void viewStockTakeResult ( Activity activity ) {
+void simpleScanner ( Activity activity ) {
+	Intent intent = new Intent ( activity, SimpleScannerActivity.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
+}
+
+public static
+void viewStockTakeResult ( Activity activity,StocktakeModel stocktakeModel ) {
 	Intent intent = new Intent ( activity, viewStockTakeResultActivity.class);
+	intent.putExtra ( StocktakeColumns._ID, stocktakeModel.getId() );
+	intent.putExtra ( StocktakeColumns.LOCATION, stocktakeModel.getLocation() );
+	intent.putExtra ( StocktakeColumns.STATUS, stocktakeModel.getStatus() );
+	intent.putExtra ( StocktakeColumns.DATETIME_STARTED, stocktakeModel.getDatetimeStarted() );
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	activity.startActivity ( intent );
 

@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="START NOW"
-            android:id="@+id/button3"
+            android:id="@+id/startNow"
             android:layout_marginBottom="105dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             card_view:cardCornerRadius="3dp"
             android:layout_marginBottom="54dp"
-            android:layout_above="@+id/button3"
+            android:layout_above="@+id/startNow"
             android:layout_alignParentEnd="true">
 
 
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
 
-                    android:text="Set Date &amp; Time"
+                    android:text="Set Date"
                     android:id="@+id/reminder_text_taskDetail"
                     android:textColor="@color/grey_800"
                     android:layout_alignWithParentIfMissing="false"

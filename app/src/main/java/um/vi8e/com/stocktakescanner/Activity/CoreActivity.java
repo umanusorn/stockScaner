@@ -13,7 +13,7 @@ import um.vi8e.com.stocktakescanner.R;
 public class CoreActivity extends AppCompatActivity {
 public static AppCompatActivity thisActivity;
 
-private final String TAG = this.getClass().getSimpleName();
+protected final String TAG = this.getClass().getSimpleName();
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {

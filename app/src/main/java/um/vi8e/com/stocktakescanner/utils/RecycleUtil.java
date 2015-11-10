@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.ViewStockFragment;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.ViewStockResultFragment;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
 
@@ -25,7 +26,7 @@ public static void setUpRecycleFragment(Bundle savedInstanceState, AppCompatActi
 		Fragment fragment = null;
 		switch (modelType) {
 			case ModelType.LIST:
-			//	fragment = new LandingRecycleFragment();
+				fragment = new ViewStockResultFragment();
 				break;
 			case ModelType.SUB_TASK:
 			//	fragment = new SubTaskRecycleFragment();

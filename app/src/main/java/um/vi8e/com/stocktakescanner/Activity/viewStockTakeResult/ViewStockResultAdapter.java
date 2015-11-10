@@ -22,10 +22,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.R;
 
 /**
@@ -34,17 +34,22 @@ import um.vi8e.com.stocktakescanner.R;
 public class ViewStockResultAdapter extends RecyclerView.Adapter<ViewStockResultAdapter.ViewHolder> {
 private static final String TAG = "ViewStockResultAdapter";
 
-private ArrayList<StocktakeModel> mDataSet;
-private Context                   mContext;
-
-// BEGIN_INCLUDE(recyclerViewSampleViewHolder)
+private ArrayList<StocktakeresultModel2> mDataSet;
+private Context                          mContext;
 
 /**
  * Provide a reference to the type of views that you are using (custom ViewHolder)
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
+	TextView barCode, qty;
 
+	public TextView getBarCode() {
+		return barCode;
+	}
 
+	public TextView getQty() {
+		return qty;
+	}
 
 	public ViewHolder(View view) {
 		super(view);
@@ -55,41 +60,38 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 				Log.d(TAG, "Element " + getPosition() + " clicked.");
 			}
 		});
-
+		barCode = (TextView) view.findViewById(R.id.barcode);
+		qty = (TextView) view.findViewById(R.id.qty);
 	}
 
 }
 
-/**
- * Initialize the dataset of the Adapter.
- *
- * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
- */
-public ViewStockResultAdapter(ArrayList<StocktakeModel> dataSet, Context context) {
-	mDataSet = dataSet;
-	mContext = context;
-}
 
-// Create new views (invoked by the layout manager)
 @Override
 public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-	// Create a new view.
+
 	View v = LayoutInflater.from(viewGroup.getContext())
-	                       .inflate(R.layout.recycle_stocktake, viewGroup, false);
+	                       .inflate(R.layout.list_row_stocktake_result, viewGroup, false);
 	return new ViewHolder(v);
 }
 
-// Replace the contents of a view (invoked by the layout manager)
 @Override
 public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
-	StocktakeModel listModel = mDataSet.get(position);
+	StocktakeresultModel2 listModel = mDataSet.get(position);
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 
 		}
 	});
+viewHolder.qty.setText(listModel.getQty());
+	viewHolder.barCode.setText(listModel.getBarcode());
+}
 
+
+public ViewStockResultAdapter(ArrayList<StocktakeresultModel2> dataSet, Context context) {
+	mDataSet = dataSet;
+	mContext = context;
 }
 
 @Override
