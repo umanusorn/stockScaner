@@ -27,6 +27,8 @@ public class StocktakeColumns implements BaseColumns {
 
     public static final String DEVICE_DETAIL = "device_detail";
 
+    public static final String LOCATION = "location";
+
 
     public static final String DEFAULT_ORDER = TABLE_NAME + "." +_ID;
 
@@ -37,7 +39,8 @@ public class StocktakeColumns implements BaseColumns {
             DATETIME_ENDED,
             STATUS,
             USERNAME,
-            DEVICE_DETAIL
+            DEVICE_DETAIL,
+            LOCATION
     };
     // @formatter:on
 
@@ -49,6 +52,7 @@ public class StocktakeColumns implements BaseColumns {
             if (c.equals(STATUS) || c.contains("." + STATUS)) return true;
             if (c.equals(USERNAME) || c.contains("." + USERNAME)) return true;
             if (c.equals(DEVICE_DETAIL) || c.contains("." + DEVICE_DETAIL)) return true;
+            if (c.equals(LOCATION) || c.contains("." + LOCATION)) return true;
         }
         return false;
     }

@@ -275,4 +275,44 @@ public class StocktakeSelection extends AbstractSelection<StocktakeSelection> {
         orderBy(StocktakeColumns.DEVICE_DETAIL, false);
         return this;
     }
+
+    public StocktakeSelection location(String... value) {
+        addEquals(StocktakeColumns.LOCATION, value);
+        return this;
+    }
+
+    public StocktakeSelection locationNot(String... value) {
+        addNotEquals(StocktakeColumns.LOCATION, value);
+        return this;
+    }
+
+    public StocktakeSelection locationLike(String... value) {
+        addLike(StocktakeColumns.LOCATION, value);
+        return this;
+    }
+
+    public StocktakeSelection locationContains(String... value) {
+        addContains(StocktakeColumns.LOCATION, value);
+        return this;
+    }
+
+    public StocktakeSelection locationStartsWith(String... value) {
+        addStartsWith(StocktakeColumns.LOCATION, value);
+        return this;
+    }
+
+    public StocktakeSelection locationEndsWith(String... value) {
+        addEndsWith(StocktakeColumns.LOCATION, value);
+        return this;
+    }
+
+    public StocktakeSelection orderByLocation(boolean desc) {
+        orderBy(StocktakeColumns.LOCATION, desc);
+        return this;
+    }
+
+    public StocktakeSelection orderByLocation() {
+        orderBy(StocktakeColumns.LOCATION, false);
+        return this;
+    }
 }

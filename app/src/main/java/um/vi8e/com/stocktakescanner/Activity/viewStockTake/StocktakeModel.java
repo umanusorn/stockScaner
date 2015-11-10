@@ -9,11 +9,12 @@ import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
  */
 public class StocktakeModel implements um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeModel {
 
-String id,DatetimeStarted,DatetimeEnded,Status,Username,DeviceDetail;
+String id,DatetimeStarted,DatetimeEnded,Status,Username,DeviceDetail, Location;
 
 public StocktakeModel(String datetimeStarted,
                       String datetimeEnded,
                       String status,
+                      String location,
                       String username,
                       String deviceDetail)
 {
@@ -22,12 +23,20 @@ public StocktakeModel(String datetimeStarted,
 	Status = status;
 	Username = username;
 	DeviceDetail = deviceDetail;
+	Location = location;
 }
-
 
 
 public StocktakeModel(ContentValues listValues) {
 	setValues(listValues);
+}
+
+@Nullable @Override public String getLocation() {
+	return Location;
+}
+
+public void setLocation(String location) {
+	this.Location = location;
 }
 
 public StocktakeModel setValues(ContentValues values) {
@@ -37,7 +46,7 @@ public StocktakeModel setValues(ContentValues values) {
 	Status=values.getAsString(StocktakeColumns.STATUS);
 	Username=values.getAsString(StocktakeColumns.USERNAME);
 	DeviceDetail=values.getAsString(StocktakeColumns.DEVICE_DETAIL);
-
+Location=values.getAsString(StocktakeColumns.LOCATION);
 	return this;
 }
 
@@ -49,6 +58,7 @@ ContentValues getValues () {
 	values.put ( StocktakeColumns.STATUS, getStatus() );
 	values.put ( StocktakeColumns.DATETIME_ENDED, getDatetimeEnded() );
 	values.put ( StocktakeColumns.DATETIME_STARTED, getDatetimeStarted());
+	values.put ( StocktakeColumns.LOCATION, getLocation());
 	values.put ( StocktakeColumns._ID,id );
 	return values;
 }

@@ -72,4 +72,14 @@ public class StocktakeCursor extends AbstractCursor implements StocktakeModel {
         String res = getStringOrNull(StocktakeColumns.DEVICE_DETAIL);
         return res;
     }
+
+    /**
+     * Get the {@code location} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    public String getLocation() {
+        String res = getStringOrNull(StocktakeColumns.LOCATION);
+        return res;
+    }
 }

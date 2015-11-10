@@ -92,8 +92,8 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
 		}
 	});
-	viewHolder.dateTieme.setText(listModel.DatetimeStarted);
-	//viewHolder.location.setText(listModel.);
+	viewHolder.dateTieme.setText(listModel.getDatetimeStarted());
+	viewHolder.location.setText(listModel.getLocation());
 	viewHolder.status.setText(listModel.getStatus());
 
 }

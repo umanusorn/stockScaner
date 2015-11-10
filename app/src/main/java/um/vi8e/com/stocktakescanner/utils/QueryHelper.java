@@ -16,8 +16,7 @@ import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 /**
  * Created by um.anusorn on 8/31/2015.
  */
-public
-class QueryHelper {
+public class QueryHelper {
 
 /*public static
 Cursor getSubTaskValueCursor ( Context context ) {
@@ -34,29 +33,28 @@ void deleteAllListValues ( Context context ) {
 }*/
 
 
-public static
-List<ContentValues> getValuesFromCursor ( Cursor c, String[] ALL_COLUMNS ) {
-	List<ContentValues> values = new ArrayList<ContentValues> ();
+public static List<ContentValues> getValuesFromCursor(Cursor c, String[] ALL_COLUMNS) {
+	List<ContentValues> values = new ArrayList<ContentValues>();
 	int i = 0;
 	String key;
 	int index;
 	c.moveToFirst();
-	if ( c.getCount () > 0 ) {
+	if (c.getCount() > 0) {
 		do {
-			ContentValues value = new ContentValues ();
+			ContentValues value = new ContentValues();
 			//Log.d ( "InWhile cursor=", c.getCount () + "  Values=" + values.size () );
-			for ( int j = 0 ; j < c.getColumnCount () ; j++ ) {
-				key = ALL_COLUMNS[ j ];
-				index = c.getColumnIndex ( key );
+			for (int j = 0; j < c.getColumnCount(); j++) {
+				key = ALL_COLUMNS[j];
+				index = c.getColumnIndex(key);
 				//Log.d ( "InFor",key+">>"+index );
-				value.put ( key, c.getString ( index ) );
+				value.put(key, c.getString(index));
 			}
 			i++;
-			values.add ( value );
+			values.add(value);
 		}
-		while ( c.moveToNext () );
+		while (c.moveToNext());
 	}
-	Log.d ( "getCount cursor=", c.getCount () + "  Values=" + values.size() );
+	Log.d("getCount cursor=", c.getCount() + "  Values=" + values.size());
 
 	return values;
 }
@@ -171,20 +169,19 @@ void genListAndTask ( Context context ) {
 	}
 }*/
 
-public static
-void genListAndTask ( Context context ) {
+public static void genListAndTask(Context context) {
 
-		for ( int j = 0 ; j < 10 ; j++ ) {
+	for (int i = 0; i < 10; i++) {
 
-			StocktakeModel stocktakeModel = new StocktakeModel ("timeStart"+j,"timeEnd","completed","Um","DeviceDetail");
-			context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
-		}
-
+		StocktakeModel stocktakeModel = new StocktakeModel("timeStart" + i, "timeEnd", "completed", "location " + i, "Um",
+		                                                   "DeviceDetail");
+		context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
 	}
 
+}
 
-public static
-String getIdFromUri ( Uri uri ) {
-	return uri.getPathSegments ().get ( 1 );
+
+public static String getIdFromUri(Uri uri) {
+	return uri.getPathSegments().get(1);
 }
 }

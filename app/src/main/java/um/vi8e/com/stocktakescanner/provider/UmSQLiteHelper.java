@@ -18,7 +18,7 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
     private static final String TAG = UmSQLiteHelper.class.getSimpleName();
 
     public static final String DATABASE_FILE_NAME = "um.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static UmSQLiteHelper sInstance;
     private final Context mContext;
     private final UmSQLiteHelperCallbacks mOpenHelperCallbacks;
@@ -31,7 +31,8 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
             + StocktakeColumns.DATETIME_ENDED + " TEXT DEFAULT '0', "
             + StocktakeColumns.STATUS + " TEXT DEFAULT '0', "
             + StocktakeColumns.USERNAME + " TEXT DEFAULT '0', "
-            + StocktakeColumns.DEVICE_DETAIL + " TEXT DEFAULT '0' "
+            + StocktakeColumns.DEVICE_DETAIL + " TEXT DEFAULT '0', "
+            + StocktakeColumns.LOCATION + " TEXT DEFAULT '0' "
             + " );";
 
     public static final String SQL_CREATE_TABLE_STOCKTAKERESULT = "CREATE TABLE IF NOT EXISTS "

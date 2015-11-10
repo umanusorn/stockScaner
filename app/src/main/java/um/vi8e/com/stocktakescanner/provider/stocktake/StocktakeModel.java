@@ -43,4 +43,11 @@ public interface StocktakeModel extends BaseModel {
      */
     @Nullable
     String getDeviceDetail();
+
+    /**
+     * Get the {@code location} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    String getLocation();
 }

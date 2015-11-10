@@ -85,4 +85,14 @@ public class StocktakeContentValues extends AbstractContentValues {
         mContentValues.putNull(StocktakeColumns.DEVICE_DETAIL);
         return this;
     }
+
+    public StocktakeContentValues putLocation(@Nullable String value) {
+        mContentValues.put(StocktakeColumns.LOCATION, value);
+        return this;
+    }
+
+    public StocktakeContentValues putLocationNull() {
+        mContentValues.putNull(StocktakeColumns.LOCATION);
+        return this;
+    }
 }
