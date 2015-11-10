@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class viewStockTakeActivity extends CoreActivity {
@@ -18,6 +19,8 @@ protected void onCreate(Bundle savedInstanceState) {
 	setSupportActionBar(toolbar);
 
 	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.COMMENT);
+	ActivityUi.setToolBar(thisActivity,toolbar,"VIEW STOCKTAKE");
+
 }
 
 }
