@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -30,8 +31,8 @@ import um.vi8e.com.stocktakescanner.R;
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
-public class CommentRecycleAdapter extends RecyclerView.Adapter<CommentRecycleAdapter.ViewHolder> {
-private static final String TAG = "CommentRecycleAdapter";
+public class ViewStockAdapter extends RecyclerView.Adapter<ViewStockAdapter.ViewHolder> {
+private static final String TAG = "ViewStockResultAdapter";
 
 private ArrayList<StocktakeModel> mDataSet;
 private Context                   mContext;
@@ -43,7 +44,7 @@ private Context                   mContext;
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
 
-
+TextView dateTieme,location,status;
 
 	public ViewHolder(View view) {
 		super(view);
@@ -55,6 +56,9 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 			}
 		});
 
+		dateTieme = (TextView)view.findViewById(R.id.datetime);
+		location = (TextView)view.findViewById(R.id.location);
+		status = (TextView)view.findViewById(R.id.status);
 	}
 
 }
@@ -64,7 +68,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
  *
  * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
  */
-public CommentRecycleAdapter(ArrayList<StocktakeModel> dataSet, Context context) {
+public ViewStockAdapter(ArrayList<StocktakeModel> dataSet, Context context) {
 	mDataSet = dataSet;
 	mContext = context;
 }
@@ -88,6 +92,9 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
 		}
 	});
+	viewHolder.dateTieme.setText(listModel.DatetimeStarted);
+	//viewHolder.location.setText(listModel.);
+	viewHolder.status.setText(listModel.getStatus());
 
 }
 

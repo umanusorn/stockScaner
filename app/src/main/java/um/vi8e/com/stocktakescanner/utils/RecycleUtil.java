@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import um.vi8e.com.stocktakescanner.Activity.viewStockTake.CommentRecycleFragment;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.ViewStockFragment;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
 
@@ -34,8 +34,8 @@ public static void setUpRecycleFragment(Bundle savedInstanceState, AppCompatActi
 
 				break;
 			case ModelType.COMMENT:
-				fragment = new CommentRecycleFragment();
-			//	fragment = new CommentRecycleFragment();
+				fragment = new ViewStockFragment();
+			//	fragment = new ViewStockResultFragment();
 				break;
 			default:
 				Log.e(TAG, "ModelType ERROR:" + modelType);

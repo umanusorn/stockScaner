@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package um.vi8e.com.stocktakescanner.Activity.viewStockTake;
+package um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeSelection;
@@ -41,13 +42,13 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class CommentRecycleFragment extends Fragment {
+public class ViewStockResultFragment extends Fragment {
 
-private static final String TAG = "CommentRecycleFragment";
+private static final String TAG = "ViewStockResultFragment";
 protected RecyclerView               mRecyclerView;
-protected CommentRecycleAdapter      mAdapter;
+protected ViewStockResultAdapter     mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
-protected ArrayList<StocktakeModel>    mDataSet;
+protected ArrayList<StocktakeModel>  mDataSet;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -89,8 +90,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	setView(savedInstanceState, rootView);
 
 	//todo change
-	mAdapter = new CommentRecycleAdapter(mDataSet, getContext());
-	// Set CommentRecycleAdapter as the adapter for RecyclerView.
+	mAdapter = new ViewStockResultAdapter(mDataSet, getContext());
+	// Set ViewStockResultAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
 
 	return rootView;

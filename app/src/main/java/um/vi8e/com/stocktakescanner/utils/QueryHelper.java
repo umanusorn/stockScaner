@@ -176,7 +176,7 @@ void genListAndTask ( Context context ) {
 
 		for ( int j = 0 ; j < 10 ; j++ ) {
 
-			StocktakeModel stocktakeModel = new StocktakeModel ("timeStart","timeEnd","completed","Um","DeviceDetail");
+			StocktakeModel stocktakeModel = new StocktakeModel ("timeStart"+j,"timeEnd","completed","Um","DeviceDetail");
 			context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
 		}
 
