@@ -11,7 +11,7 @@ import android.widget.Toast;
 import um.vi8e.com.stocktakescanner.R;
 
 public class CoreActivity extends AppCompatActivity {
-protected AppCompatActivity thisActivity;
+public static AppCompatActivity thisActivity;
 
 private final String TAG = this.getClass().getSimpleName();
 

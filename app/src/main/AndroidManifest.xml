@@ -49,7 +49,7 @@
         </activity>
 
         <activity
-                android:name=".Activity.viewStockTakeResult.viewStockTakeResult"
+                android:name=".Activity.viewStockTakeResult.viewStockTakeResultActivity"
                 android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import um.vi8e.com.stocktakescanner.Activity.DeveloperActivity;
 import um.vi8e.com.stocktakescanner.Activity.StartStockTake;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.viewStockTakeResultActivity;
 
 
 /**
@@ -31,8 +32,16 @@ void start ( Activity activity ) {
 }
 
 public static
-void viewStockTake ( Activity activity ) {
+ void viewStockTake ( Activity activity ) {
 	Intent intent = new Intent ( activity, viewStockTakeActivity.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
+}
+
+public static
+void viewStockTakeResult ( Activity activity ) {
+	Intent intent = new Intent ( activity, viewStockTakeResultActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	activity.startActivity ( intent );
 

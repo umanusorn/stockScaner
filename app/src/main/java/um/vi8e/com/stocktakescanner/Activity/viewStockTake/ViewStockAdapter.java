@@ -27,6 +27,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -53,6 +54,7 @@ TextView dateTieme,location,status;
 			@Override
 			public void onClick(View v) {
 				Log.d(TAG, "Element " + getPosition() + " clicked.");
+
 			}
 		});
 
@@ -89,7 +91,7 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	StocktakeModel listModel = mDataSet.get(position);
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-
+			IntentCaller.viewStockTakeResult(viewStockTakeActivity.thisActivity);
 		}
 	});
 	viewHolder.dateTieme.setText(listModel.getDatetimeStarted());

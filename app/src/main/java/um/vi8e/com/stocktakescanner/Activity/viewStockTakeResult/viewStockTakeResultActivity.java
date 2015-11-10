@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
 import um.vi8e.com.stocktakescanner.R;
 
-public class viewStockTakeResult extends CoreActivity {
+public class viewStockTakeResultActivity extends CoreActivity {
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
