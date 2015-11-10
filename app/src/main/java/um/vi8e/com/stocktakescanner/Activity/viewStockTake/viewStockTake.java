@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
+import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class viewStockTake extends CoreActivity {
 
@@ -14,6 +16,8 @@ protected void onCreate(Bundle savedInstanceState) {
 	setContentView(R.layout.activity_landing);
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
+
+	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.COMMENT);
 }
 
 }

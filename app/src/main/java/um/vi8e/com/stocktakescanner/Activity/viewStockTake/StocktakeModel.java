@@ -1,6 +1,9 @@
-package um.vi8e.com.stocktakescanner.Model;
+package um.vi8e.com.stocktakescanner.Activity.viewStockTake;
 
+import android.content.ContentValues;
 import android.support.annotation.Nullable;
+
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 /**
  * Created by Fixer on 11/10/2015.
  */
@@ -20,6 +23,23 @@ public StocktakeModel(String datetimeStarted,
 	Username = username;
 	DeviceDetail = deviceDetail;
 }
+
+public StocktakeModel(ContentValues listValues) {
+	setValues(listValues);
+}
+
+public StocktakeModel setValues(ContentValues values) {
+	id=values.getAsString(StocktakeColumns._ID);
+	DatetimeStarted = values.getAsString(StocktakeColumns.DATETIME_STARTED);
+	DatetimeEnded=values.getAsString(StocktakeColumns.DATETIME_ENDED);
+	Status=values.getAsString(StocktakeColumns.STATUS);
+	Username=values.getAsString(StocktakeColumns.USERNAME);
+	DeviceDetail=values.getAsString(StocktakeColumns.DEVICE_DETAIL);
+
+	return this;
+}
+
+
 
 public String getId() {
 	return id;
