@@ -1,19 +1,18 @@
 package um.vi8e.com.stocktakescanner.Activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Button;
 
-import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
+import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class LandingActivity extends CoreActivity {
+
+Button start,viewStockTake;
+
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +21,18 @@ protected void onCreate(Bundle savedInstanceState) {
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 	ActivityUi.setToolBar(this, toolbar, "Stocktake Scanner");
+
+
+	start=(Button)findViewById(R.id.startStockTakebtn);
+	viewStockTake=(Button)findViewById(R.id.view_finder_view);
+
+	start.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			IntentCaller.start(thisActivity);
+		}
+	});
+
+
 }
 
 }

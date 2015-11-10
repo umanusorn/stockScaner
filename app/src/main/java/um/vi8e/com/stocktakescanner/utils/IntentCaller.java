@@ -1,10 +1,10 @@
 package um.vi8e.com.stocktakescanner.utils;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.widget.TextView;
 
 import um.vi8e.com.stocktakescanner.Activity.DeveloperActivity;
+import um.vi8e.com.stocktakescanner.Activity.StartStockTake;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTake;
 
 
 /**
@@ -22,6 +22,21 @@ void developer ( Activity activity ) {
 
 }
 
+public static
+void start ( Activity activity ) {
+	Intent intent = new Intent ( activity, StartStockTake.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
+}
+
+public static
+void viewStockTake ( Activity activity ) {
+	Intent intent = new Intent ( activity, viewStockTake.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
+}
 
 /*
 public static
