@@ -9,6 +9,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
+
 
 /**
  * Created by um.anusorn on 8/31/2015.
@@ -37,7 +40,7 @@ List<ContentValues> getValuesFromCursor ( Cursor c, String[] ALL_COLUMNS ) {
 	int i = 0;
 	String key;
 	int index;
-	c.moveToFirst ();
+	c.moveToFirst();
 	if ( c.getCount () > 0 ) {
 		do {
 			ContentValues value = new ContentValues ();
@@ -53,7 +56,7 @@ List<ContentValues> getValuesFromCursor ( Cursor c, String[] ALL_COLUMNS ) {
 		}
 		while ( c.moveToNext () );
 	}
-	Log.d ( "getCount cursor=", c.getCount () + "  Values=" + values.size () );
+	Log.d ( "getCount cursor=", c.getCount () + "  Values=" + values.size() );
 
 	return values;
 }
@@ -85,10 +88,7 @@ void addSubTaskToDB ( Context context, String title,String taskId,ListView listV
 }
 
 
-public static
-String getIdFromUri ( Uri uri ) {
-	return uri.getPathSegments ().get ( 1 );
-}
+
 
 public static
 Uri addListToDB ( Context context, String title ) {
@@ -170,4 +170,21 @@ void genListAndTask ( Context context ) {
 
 	}
 }*/
+
+public static
+void genListAndTask ( Context context ) {
+
+		for ( int j = 0 ; j < 10 ; j++ ) {
+
+			StocktakeModel stocktakeModel = new StocktakeModel ("timeStart","timeEnd","completed","Um","DeviceDetail");
+			context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+		}
+
+	}
+
+
+public static
+String getIdFromUri ( Uri uri ) {
+	return uri.getPathSegments ().get ( 1 );
+}
 }

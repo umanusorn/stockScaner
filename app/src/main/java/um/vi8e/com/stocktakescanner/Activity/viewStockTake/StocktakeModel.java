@@ -24,6 +24,8 @@ public StocktakeModel(String datetimeStarted,
 	DeviceDetail = deviceDetail;
 }
 
+
+
 public StocktakeModel(ContentValues listValues) {
 	setValues(listValues);
 }
@@ -39,7 +41,17 @@ public StocktakeModel setValues(ContentValues values) {
 	return this;
 }
 
-
+public
+ContentValues getValues () {
+	ContentValues values = new ContentValues ();
+	values.put ( StocktakeColumns.DEVICE_DETAIL, DeviceDetail );
+	values.put ( StocktakeColumns.USERNAME, getUsername() );
+	values.put ( StocktakeColumns.STATUS, getStatus() );
+	values.put ( StocktakeColumns.DATETIME_ENDED, getDatetimeEnded() );
+	values.put ( StocktakeColumns.DATETIME_STARTED, getDatetimeStarted());
+	values.put ( StocktakeColumns._ID,id );
+	return values;
+}
 
 public String getId() {
 	return id;

@@ -8,7 +8,7 @@ import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
-public class viewStockTake extends CoreActivity {
+public class viewStockTakeActivity extends CoreActivity {
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {

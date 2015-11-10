@@ -11,6 +11,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-        <include layout="@layout/recycle_stocktake"/>
+        <FrameLayout
+                android:id="@+id/recycle_content_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbars="none"
+
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"/>
 
 </RelativeLayout>

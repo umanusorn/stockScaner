@@ -8,6 +8,7 @@ import android.widget.Button;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
+import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 
 public class LandingActivity extends CoreActivity {
 
@@ -37,6 +38,8 @@ protected void onCreate(Bundle savedInstanceState) {
 			IntentCaller.viewStockTake(thisActivity);
 		}
 	});
+
+	QueryHelper.genListAndTask(getApplicationContext());
 
 
 }
