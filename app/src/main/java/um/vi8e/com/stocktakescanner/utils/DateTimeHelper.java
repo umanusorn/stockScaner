@@ -23,12 +23,11 @@ public static
 String getFormatedDate ( Date date ) {
 
 	String format;
-	if ( date.getYear () != Calendar.getInstance ().getTime ().getYear () ) {
-		format = "EEE dd MMM yyyy";
-	}
-	else {
-		format = "EEE dd MMM ";
-	}
+
+
+		//format = "EEE dd MMM yyyy";
+		format = "dd MMM yyyy";
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat (
 			format, Locale.getDefault () );
 	return dateFormat.format ( date );

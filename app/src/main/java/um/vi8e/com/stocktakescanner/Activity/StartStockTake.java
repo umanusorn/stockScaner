@@ -1,18 +1,28 @@
 package um.vi8e.com.stocktakescanner.Activity;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
-import um.vi8e.com.stocktakescanner.utils.DatePickerFragment;
+import um.vi8e.com.stocktakescanner.utils.DateTimeHelper;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class StartStockTake extends CoreActivity {
+static CardView cardView;
+static TextView setDateTv;
+
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +33,14 @@ protected void onCreate(Bundle savedInstanceState) {
 	ActivityUi.setToolBar(this, toolbar, "START STOCKTAKE");
 
 
-	CardView cardView =(CardView)findViewById(R.id.card_viewSetDate);
-cardView.setOnClickListener(new View.OnClickListener() {
-	@Override public void onClick(View v) {
-		showDatePickerDialog(v);
-	}
-});
-
-	Button startNow = (Button)findViewById(R.id.startNow);
+	CardView cardView = (CardView) findViewById(R.id.card_viewSetDate);
+	cardView.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			showDatePickerDialog(v);
+		}
+	});
+	setDateTv = (TextView) cardView.findViewById(R.id.setDateTv);
+	Button startNow = (Button) findViewById(R.id.startNow);
 	startNow.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			IntentCaller.simpleScanner(thisActivity);
@@ -41,10 +51,36 @@ cardView.setOnClickListener(new View.OnClickListener() {
 }
 
 
-
 public void showDatePickerDialog(View v) {
 	DialogFragment newFragment = new DatePickerFragment();
 	newFragment.show(getSupportFragmentManager(), "datePicker");
 }
 
+public static class DatePickerFragment extends DialogFragment
+		implements DatePickerDialog.OnDateSetListener {
+
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		// Use the current date as the default date in the picker
+		final Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		int day = c.get(Calendar.DAY_OF_MONTH);
+
+		// Create a new instance of DatePickerDialog and return it
+		return new DatePickerDialog(getActivity(), this, year, month, day);
+	}
+
+	public void onDateSet(DatePicker view, int year, int month, int day) {
+		//todo update ui, var
+
+
+
+		Date date=new Date(year-1900,month,day);
+		setDateTv.setText(DateTimeHelper.getFormatedDate(date));
+
+
+	}
+
+}
 }

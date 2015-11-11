@@ -27,5 +27,8 @@ public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 public void onDateSet(DatePicker view, int year, int month, int day) {
 	//todo update ui, var
+
+
+
 }
 }
