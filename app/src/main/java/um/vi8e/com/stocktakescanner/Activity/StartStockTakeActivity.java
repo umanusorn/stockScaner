@@ -26,7 +26,7 @@ import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.DateTimeHelper;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
-public class StartStockTake extends CoreActivity {
+public class StartStockTakeActivity extends CoreActivity {
 static CardView cardView;
 static TextView setDateTv;
 static EditText locationEditText;

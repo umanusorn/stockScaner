@@ -32,6 +32,7 @@ import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultSelection;
 import um.vi8e.com.stocktakescanner.utils.ConfirmDialog;
+import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 /**
@@ -93,7 +94,7 @@ public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 	viewHolder.model = listModel;
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-
+			IntentCaller.barcode(StockResultActivity.thisActivity);
 		}
 	});
 	viewHolder.qty.setText(listModel.getQty());

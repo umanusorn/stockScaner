@@ -39,7 +39,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Activity.StartStockTake"
+            android:name=".Activity.StartStockTakeActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
@@ -54,6 +54,15 @@
             android:name=".Activity.ScannerActivity"
             android:label="@string/title_activity_simple_scanner"
             android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Activity.BarcodeActivity"
+            android:label="@string/title_activity_barcode"
+            android:parentActivityName=".Activity.CoreActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="um.vi8e.com.stocktakescanner.Activity.CoreActivity" />
         </activity>
     </application>
 

@@ -26,7 +26,7 @@ public void handleResult(Result rawResult) {
                          ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();*/
     Toast.makeText(this,"Scanned",Toast.LENGTH_SHORT).show();
     mScannerView.startCamera();
-    StartStockTake.saveToDB(getApplicationContext(), rawResult.getText());
+    StartStockTakeActivity.saveToDB(getApplicationContext(), rawResult.getText());
     finish();
 }
 
