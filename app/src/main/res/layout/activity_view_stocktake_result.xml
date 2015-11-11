@@ -28,6 +28,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="31dp"
                 android:layout_marginTop="24dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Started On: "
+                    android:id="@+id/startedOn"
+                    android:layout_alignTop="@+id/dateTitle"
+                    android:layout_alignStart="@+id/locationTitle"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -36,7 +44,7 @@
                 android:text="12 Nov 2015"
                 android:id="@+id/dateTitle"
                 android:layout_below="@+id/locationTitle"
-                android:layout_alignStart="@+id/locationTitle"/>
+                android:layout_toEndOf="@+id/startedOn"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -44,8 +52,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Completed"
                 android:id="@+id/statusTitle"
-                android:layout_below="@+id/dateTitle"
-                android:layout_alignStart="@+id/dateTitle"/>
+                android:layout_below="@+id/startedOn"
+                android:layout_alignStart="@+id/startedOn"/>
     </RelativeLayout>
 
     <FrameLayout

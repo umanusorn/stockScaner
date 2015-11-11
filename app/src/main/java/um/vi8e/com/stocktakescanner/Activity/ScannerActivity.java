@@ -50,6 +50,8 @@ public void handleResult(Result rawResult) {
         Toast.makeText(this, "Contents = " + rawResult.getText() +
                 ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
         mScannerView.startCamera();
+    StartStockTake.saveToDB(getApplicationContext(), rawResult.getText());
+    finish();
     }
 
     private static class CustomViewFinderView extends ViewFinderView {

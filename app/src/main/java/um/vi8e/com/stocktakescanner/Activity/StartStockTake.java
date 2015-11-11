@@ -2,6 +2,7 @@ package um.vi8e.com.stocktakescanner.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -28,8 +29,9 @@ import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 public class StartStockTake extends CoreActivity {
 static CardView cardView;
 static TextView setDateTv;
-EditText locationEditText;
+static EditText locationEditText;
 static Date selectedDate;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -70,23 +72,22 @@ protected void onCreate(Bundle savedInstanceState) {
 	}
 }*/
 
-void saveToDB() {
-
-
+public static void saveToDB(Context context, String barcode) {
 	String location = locationEditText.getText().toString();
- String dateScanned = String.valueOf(selectedDate.getSeconds());
 
-			StocktakeModel stocktakeModel = new StocktakeModel("timeStart", "timeEnd", "completed", location, "User Um",
-	                                                       "DeviceDetail");
-	Uri uri = getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+	String dateScanned = setDateTv.getText().toString();
+
+	StocktakeModel stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", "completed", location, "User Um",
+	                                                   "DeviceDetail");
+	Uri uri = context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
 
 	StocktakeresultModel
 			stocktakeresultModel =
 			new StocktakeresultModel(uri.getPathSegments().get(1),
-			                         "dummyBarCode",
+			                         barcode,
 			                         "1",
 			                         dateScanned);
-	getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+	context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
 }
 
 public void showDatePickerDialog(View v) {
@@ -112,7 +113,7 @@ public static class DatePickerFragment extends DialogFragment
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		//todo update ui, var
 
-		selectedDate=new Date(year-1900,month,day);
+		selectedDate = new Date(year - 1900, month, day);
 		setDateTv.setText(DateTimeHelper.getFormatedDate(selectedDate));
 
 	}
