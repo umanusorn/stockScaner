@@ -47,7 +47,7 @@ private static final String TAG = "ViewStockResultFragment";
 protected RecyclerView               mRecyclerView;
 protected ViewStockAdapter           mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
-protected ArrayList<StocktakeModel>  mDataSet;
+public static ArrayList<StocktakeModel>  mDataSet;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {

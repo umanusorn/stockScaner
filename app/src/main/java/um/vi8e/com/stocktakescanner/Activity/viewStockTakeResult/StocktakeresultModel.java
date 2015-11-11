@@ -10,7 +10,20 @@ import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColu
 public class StocktakeresultModel
 		implements um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultModel {
 
-String id,StocktakeId,Barcode,Qty,DatetimeScannned;
+String id;
+
+public String getId() {
+	return id;
+}
+
+public void setId(String id) {
+	this.id = id;
+}
+
+String StocktakeId;
+String Barcode;
+String Qty;
+String DatetimeScannned;
 
 public StocktakeresultModel(String stocktakeId, String barcode, String qty, String datetimeScannned) {
 	StocktakeId = stocktakeId;
@@ -20,33 +33,32 @@ public StocktakeresultModel(String stocktakeId, String barcode, String qty, Stri
 
 }
 
+
 public StocktakeresultModel(ContentValues listValues) {
 	setValues(listValues);
 }
 
 
 public StocktakeresultModel setValues(ContentValues values) {
-	id=values.getAsString(StocktakeresultColumns._ID);
+	id = values.getAsString(StocktakeresultColumns._ID);
 	StocktakeId = values.getAsString(StocktakeresultColumns.STOCKTAKE_ID);
-	Barcode= values.getAsString(StocktakeresultColumns.BARCODE);
-	Qty= values.getAsString(StocktakeresultColumns.QTY);
+	Barcode = values.getAsString(StocktakeresultColumns.BARCODE);
+	Qty = values.getAsString(StocktakeresultColumns.QTY);
 	DatetimeScannned = values.getAsString(StocktakeresultColumns.DATETIME_SCANNNED);
 
 	return this;
 }
 
-public
-ContentValues getValues () {
-	ContentValues values = new ContentValues ();
-	values.put ( StocktakeresultColumns.STOCKTAKE_ID, getStocktakeId() );
-	values.put ( StocktakeresultColumns.QTY, getQty() );
-	values.put ( StocktakeresultColumns.DATETIME_SCANNNED, getDatetimeScannned() );
-	values.put ( StocktakeresultColumns.BARCODE, getBarcode() );
+public ContentValues getValues() {
+	ContentValues values = new ContentValues();
+	values.put(StocktakeresultColumns.STOCKTAKE_ID, getStocktakeId());
+	values.put(StocktakeresultColumns.QTY, getQty());
+	values.put(StocktakeresultColumns.DATETIME_SCANNNED, getDatetimeScannned());
+	values.put(StocktakeresultColumns.BARCODE, getBarcode());
 
-	values.put ( StocktakeresultColumns._ID,id );
+	values.put(StocktakeresultColumns._ID, id);
 	return values;
 }
-
 
 
 @Nullable @Override public String getStocktakeId() {
