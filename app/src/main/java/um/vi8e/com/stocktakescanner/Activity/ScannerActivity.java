@@ -21,6 +21,16 @@ public class ScannerActivity extends ActionBarActivity implements ZXingScannerVi
 private ZXingScannerView mScannerView;
 
 @Override
+public void handleResult(Result rawResult) {
+  /*  Toast.makeText(this, "Contents = " + rawResult.getText() +
+                         ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();*/
+    Toast.makeText(this,"Scanned",Toast.LENGTH_SHORT).show();
+    mScannerView.startCamera();
+    StartStockTake.saveToDB(getApplicationContext(), rawResult.getText());
+    finish();
+}
+
+@Override
 public void onCreate(Bundle state) {
     super.onCreate(state);
     mScannerView = new ZXingScannerView(this) {
@@ -45,14 +55,7 @@ public void onPause() {
     mScannerView.stopCamera();
 }
 
-@Override
-public void handleResult(Result rawResult) {
-        Toast.makeText(this, "Contents = " + rawResult.getText() +
-                ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
-        mScannerView.startCamera();
-    StartStockTake.saveToDB(getApplicationContext(), rawResult.getText());
-    finish();
-    }
+
 
     private static class CustomViewFinderView extends ViewFinderView {
         public static final String TRADE_MARK_TEXT = " ";
