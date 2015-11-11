@@ -7,12 +7,12 @@ import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColu
 /**
  * Created by Fixer on 11/10/2015.
  */
-public class StocktakeresultModel2
+public class StocktakeresultModel
 		implements um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultModel {
 
 String id,StocktakeId,Barcode,Qty,DatetimeScannned;
 
-public StocktakeresultModel2(String stocktakeId, String barcode, String qty, String datetimeScannned) {
+public StocktakeresultModel(String stocktakeId, String barcode, String qty, String datetimeScannned) {
 	StocktakeId = stocktakeId;
 	Barcode = barcode;
 	Qty = qty;
@@ -20,12 +20,12 @@ public StocktakeresultModel2(String stocktakeId, String barcode, String qty, Str
 
 }
 
-public StocktakeresultModel2(ContentValues listValues) {
+public StocktakeresultModel(ContentValues listValues) {
 	setValues(listValues);
 }
 
 
-public StocktakeresultModel2 setValues(ContentValues values) {
+public StocktakeresultModel setValues(ContentValues values) {
 	id=values.getAsString(StocktakeresultColumns._ID);
 	StocktakeId = values.getAsString(StocktakeresultColumns.STOCKTAKE_ID);
 	Barcode= values.getAsString(StocktakeresultColumns.BARCODE);

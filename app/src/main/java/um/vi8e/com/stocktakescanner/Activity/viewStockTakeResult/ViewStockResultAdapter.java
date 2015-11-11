@@ -34,8 +34,8 @@ import um.vi8e.com.stocktakescanner.R;
 public class ViewStockResultAdapter extends RecyclerView.Adapter<ViewStockResultAdapter.ViewHolder> {
 private static final String TAG = "ViewStockResultAdapter";
 
-private ArrayList<StocktakeresultModel2> mDataSet;
-private Context                          mContext;
+private ArrayList<StocktakeresultModel> mDataSet;
+private Context                         mContext;
 
 /**
  * Provide a reference to the type of views that you are using (custom ViewHolder)
@@ -78,7 +78,7 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 @Override
 public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
-	StocktakeresultModel2 listModel = mDataSet.get(position);
+	StocktakeresultModel listModel = mDataSet.get(position);
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 
@@ -89,7 +89,7 @@ viewHolder.qty.setText(listModel.getQty());
 }
 
 
-public ViewStockResultAdapter(ArrayList<StocktakeresultModel2> dataSet, Context context) {
+public ViewStockResultAdapter(ArrayList<StocktakeresultModel> dataSet, Context context) {
 	mDataSet = dataSet;
 	mContext = context;
 }

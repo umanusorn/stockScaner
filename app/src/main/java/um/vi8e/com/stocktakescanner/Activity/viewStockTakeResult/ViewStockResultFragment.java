@@ -44,10 +44,10 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 public class ViewStockResultFragment extends Fragment {
 
 private static final String TAG = "ViewStockResultFragment";
-protected RecyclerView                     mRecyclerView;
-protected ViewStockResultAdapter           mAdapter;
-protected RecyclerView.LayoutManager       mLayoutManager;
-protected ArrayList<StocktakeresultModel2> mDataSet;
+protected RecyclerView                    mRecyclerView;
+protected ViewStockResultAdapter          mAdapter;
+protected RecyclerView.LayoutManager      mLayoutManager;
+protected ArrayList<StocktakeresultModel> mDataSet;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ private void initDataSet(Context context) {
 	mDataSet = new ArrayList<>();
 	for (ContentValues commentValue : allCommentValues) {
 		//todo change
-		mDataSet.add(new StocktakeresultModel2(commentValue));
+		mDataSet.add(new StocktakeresultModel(commentValue));
 	}
 }
 
