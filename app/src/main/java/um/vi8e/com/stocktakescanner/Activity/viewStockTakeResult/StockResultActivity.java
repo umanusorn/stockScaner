@@ -12,7 +12,7 @@ import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
-public class viewStockTakeResultActivity2 extends CoreActivity {
+public class StockResultActivity extends CoreActivity {
 public static String currentStockTakeId;
 public static Bundle thisSavedInstanceState;
 @Override

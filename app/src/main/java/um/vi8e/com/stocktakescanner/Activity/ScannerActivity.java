@@ -17,7 +17,7 @@ import me.dm7.barcodescanner.core.IViewFinder;
 import me.dm7.barcodescanner.core.ViewFinderView;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class SimpleScannerActivity extends ActionBarActivity implements ZXingScannerView.ResultHandler {
+public class ScannerActivity extends ActionBarActivity implements ZXingScannerView.ResultHandler {
 private ZXingScannerView mScannerView;
 
 @Override

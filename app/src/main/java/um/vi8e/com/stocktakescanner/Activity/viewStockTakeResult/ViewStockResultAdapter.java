@@ -141,7 +141,7 @@ void deleteBarcode(ViewHolder viewHolder) {
 			StocktakeresultSelection where = new StocktakeresultSelection ();
 			where.id(Long.parseLong(viewHolder.model.id));
 			where.delete(mContext);
-			RecycleUtil.setUpRecycleFragment(viewStockTakeResultActivity2.thisSavedInstanceState, viewStockTakeResultActivity2
+			RecycleUtil.setUpRecycleFragment(StockResultActivity.thisSavedInstanceState, StockResultActivity
 					.thisActivity, ModelType.STOCK_RESULT);
 		}
 	};

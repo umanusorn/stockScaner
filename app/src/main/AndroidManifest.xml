@@ -47,11 +47,11 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Activity.viewStockTakeResult.viewStockTakeResultActivity2"
+            android:name=".Activity.viewStockTakeResult.StockResultActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Activity.SimpleScannerActivity"
+            android:name=".Activity.ScannerActivity"
             android:label="@string/title_activity_simple_scanner"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
