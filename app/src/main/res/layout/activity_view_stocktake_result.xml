@@ -135,15 +135,14 @@
             android:scrollbars="none"
             android:padding="0dp"
 
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_below="@+id/rowBg"/>
+            android:layout_below="@+id/rowBg"
+            android:layout_above="@+id/include"/>
 
     <include layout="@layout/bottombar_stocktake_result"
-            >
+             android:id="@+id/include">
 
     </include>
 

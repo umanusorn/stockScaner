@@ -9,7 +9,9 @@ import um.vi8e.com.stocktakescanner.Activity.StartStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StockResultActivity;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 
 
 /**
@@ -36,9 +38,15 @@ void start ( Activity activity ) {
 }
 
 public static
-void barcode ( Activity activity ) {
+void barcode ( Activity activity,StocktakeresultModel stocktakeresultModel) {
 	Intent intent = new Intent ( activity, BarcodeActivity.class);
-	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	intent.putExtra(StocktakeresultColumns._ID, stocktakeresultModel.getId());
+	intent.putExtra(StocktakeresultColumns.BARCODE, stocktakeresultModel.getBarcode());
+	intent.putExtra(StocktakeresultColumns.DATETIME_SCANNNED, stocktakeresultModel.getDatetimeScannned());
+	intent.putExtra(StocktakeresultColumns.QTY, stocktakeresultModel.getQty());
+	intent.putExtra(StocktakeresultColumns.STOCKTAKE_ID, stocktakeresultModel.getStocktakeId());
+
 	activity.startActivity ( intent );
 
 }

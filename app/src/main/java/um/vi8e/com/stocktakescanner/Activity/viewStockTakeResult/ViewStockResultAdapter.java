@@ -94,7 +94,7 @@ public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 	viewHolder.model = listModel;
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			IntentCaller.barcode(StockResultActivity.thisActivity);
+			IntentCaller.barcode(StockResultActivity.thisActivity,listModel);
 		}
 	});
 	viewHolder.qty.setText(listModel.getQty());

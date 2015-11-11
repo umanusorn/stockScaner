@@ -26,7 +26,11 @@ protected void onCreate(Bundle savedInstanceState) {
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 	Bundle extras = getIntent().getExtras();
-	ActivityUi.setToolBar(thisActivity, toolbar, extras.getString(StocktakeColumns.DATETIME_STARTED));
+	ActivityUi.setToolBar(thisActivity,
+	                      toolbar,
+	                      extras.getString(StocktakeColumns.DATETIME_STARTED) +
+	                      " " +
+	                      extras.getString(StocktakeColumns.LOCATION));
 
 	thisSavedInstanceState = savedInstanceState;
 
@@ -52,12 +56,12 @@ protected void onCreate(Bundle savedInstanceState) {
 			ViewStockResultFragment.mDataSet.get(0);
 			for (StocktakeresultModel stocktakeresultModel :
 					ViewStockResultFragment.mDataSet) {
-				String id = stocktakeresultModel.getId ();
-				Uri uri = Uri.parse ( String.valueOf (StocktakeresultColumns.CONTENT_URI ) + "/" + id );
+				String id = stocktakeresultModel.getId();
+				Uri uri = Uri.parse(String.valueOf(StocktakeresultColumns.CONTENT_URI) + "/" + id);
 				thisActivity.getContentResolver().update(uri, stocktakeresultModel.getValues(), null, null);
 			}
 
-			Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
 			finish();
 		}
 	});

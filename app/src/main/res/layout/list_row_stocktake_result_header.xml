@@ -38,7 +38,7 @@
                     android:textColor="@color/black"
                     android:singleLine="true"
                     android:id="@+id/datetime"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/header_text_size"
                     android:layout_alignParentTop="true"/>
 
             <TextView
@@ -48,7 +48,7 @@
                     android:text="Qty"
                     android:id="@+id/location"
                     android:padding="2dp"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/header_text_size"
                     android:layout_gravity="center_horizontal"
                     android:layout_alignTop="@+id/status"
                     android:layout_centerHorizontal="true"/>
@@ -59,9 +59,8 @@
                     android:padding="2dp"
                     android:textColor="@color/black"
                     android:text="Action"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/header_text_size"
                     android:id="@+id/status"
-
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="22dp"/>
         </RelativeLayout>
