@@ -3,7 +3,6 @@ package um.vi8e.com.stocktakescanner.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
@@ -12,10 +11,8 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,6 +100,7 @@ public static int setListViewHeight(ListView listView) {
 		listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);//UNSPECIFIED
 
 		totalHeight += listItem.getMeasuredHeight();
+
 		Log.d("setTaskListViewHeight", "height= " + totalHeight);
 	}
 	ViewGroup.LayoutParams params = listView.getLayoutParams();

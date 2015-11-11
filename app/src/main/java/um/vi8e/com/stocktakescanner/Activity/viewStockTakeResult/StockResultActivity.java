@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
@@ -56,7 +57,7 @@ protected void onCreate(Bundle savedInstanceState) {
 				thisActivity.getContentResolver().update(uri, stocktakeresultModel.getValues(), null, null);
 			}
 
-
+			Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
 			finish();
 		}
 	});
