@@ -42,15 +42,15 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/plus"
+                        android:id="@+id/plusBtn"
                         android:src="@android:drawable/btn_plus"
                         android:layout_alignParentTop="true"
-                        android:layout_toStartOf="@+id/minus"/>
+                        android:layout_toStartOf="@+id/minusBtn"/>
 
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/minus"
+                        android:id="@+id/minusBtn"
 android:layout_marginLeft="-60dp"
                         android:src="@android:drawable/btn_minus"
                         android:layout_alignParentTop="true"

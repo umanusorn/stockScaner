@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ private Context                         mContext;
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
 	TextView barCode, qty;
+	ImageView plus, minus, delete;
+	public StocktakeresultModel listModel;
 
 	public TextView getBarCode() {
 		return barCode;
@@ -62,6 +65,9 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 		});
 		barCode = (TextView) view.findViewById(R.id.barcode);
 		qty = (TextView) view.findViewById(R.id.qty);
+		plus = (ImageView) view.findViewById(R.id.plusBtn);
+		minus = (ImageView) view.findViewById(R.id.minusBtn);
+		delete = (ImageView) view.findViewById(R.id.deleteBtn);
 	}
 
 }
@@ -76,16 +82,48 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 }
 
 @Override
-public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
-	StocktakeresultModel listModel = mDataSet.get(position);
+	final StocktakeresultModel listModel = mDataSet.get(position);
+	viewHolder.listModel=listModel;
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 
 		}
 	});
-viewHolder.qty.setText(listModel.getQty());
+	viewHolder.qty.setText(listModel.getQty());
 	viewHolder.barCode.setText(listModel.getBarcode());
+	viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			deleteBarcode(listModel);
+		}
+	});
+viewHolder.plus.setOnClickListener(new View.OnClickListener() {
+	@Override public void onClick(View v) {
+		plusQty(1, viewHolder);
+	}
+});
+	viewHolder.minus.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			plusQty(-1,viewHolder);
+		}
+	});
+
+}
+
+private void plusQty(int amount,ViewHolder viewHolder) {
+
+	final StocktakeresultModel listModel = viewHolder.listModel;
+	int newQty = Integer.parseInt(listModel.getQty())+amount;
+	String newQtyString = String.valueOf(newQty);
+	listModel.setQty(newQtyString);
+viewHolder.getQty().setText(newQtyString);
+
+
+}
+
+void deleteBarcode(StocktakeresultModel stocktakeresultModel){
+
 }
 
 
