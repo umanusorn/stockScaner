@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Activity.viewStockTakeResult.viewStockTakeResultActivity"
+            android:name=".Activity.viewStockTakeResult.viewStockTakeResultActivity2"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity

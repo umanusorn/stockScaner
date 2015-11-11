@@ -62,7 +62,7 @@ public void onCreate(Bundle savedInstanceState) {
 private void initDataSet(Context context) {
 	//todo change
 	StocktakeresultSelection where = new StocktakeresultSelection();
-	where.stocktakeId(viewStockTakeResultActivity.currentStockTakeId);
+	where.stocktakeId(viewStockTakeResultActivity2.currentStockTakeId);
 	Cursor c = where.query(context.getContentResolver());
 	c.moveToFirst();
 	Log.d(TAG, "setUpAdapter" + String.valueOf(c.getCount()));

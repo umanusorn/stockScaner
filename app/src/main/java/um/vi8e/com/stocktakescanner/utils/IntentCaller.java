@@ -7,7 +7,7 @@ import um.vi8e.com.stocktakescanner.Activity.SimpleScannerActivity;
 import um.vi8e.com.stocktakescanner.Activity.StartStockTake;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
-import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.viewStockTakeResultActivity;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.viewStockTakeResultActivity2;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 
 
@@ -52,7 +52,7 @@ void simpleScanner ( Activity activity ) {
 
 public static
 void viewStockTakeResult ( Activity activity,StocktakeModel stocktakeModel ) {
-	Intent intent = new Intent ( activity, viewStockTakeResultActivity.class);
+	Intent intent = new Intent ( activity, viewStockTakeResultActivity2.class);
 	intent.putExtra ( StocktakeColumns._ID, stocktakeModel.getId() );
 	intent.putExtra ( StocktakeColumns.LOCATION, stocktakeModel.getLocation() );
 	intent.putExtra ( StocktakeColumns.STATUS, stocktakeModel.getStatus() );

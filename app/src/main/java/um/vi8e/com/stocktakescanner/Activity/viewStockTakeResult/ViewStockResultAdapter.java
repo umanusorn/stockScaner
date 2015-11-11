@@ -139,9 +139,9 @@ void deleteBarcode(ViewHolder viewHolder) {
 	return new ConfirmDialog.ConfirmListener() {
 		@Override public void onConfirm(String key) {
 			StocktakeresultSelection where = new StocktakeresultSelection ();
-			where.id ( Long.parseLong ( viewHolder.model.id ) );
+			where.id(Long.parseLong(viewHolder.model.id));
 			where.delete(mContext);
-			RecycleUtil.setUpRecycleFragment(viewStockTakeResultActivity.thisSavedInstanceState,viewStockTakeResultActivity
+			RecycleUtil.setUpRecycleFragment(viewStockTakeResultActivity2.thisSavedInstanceState, viewStockTakeResultActivity2
 					.thisActivity, ModelType.STOCK_RESULT);
 		}
 	};
