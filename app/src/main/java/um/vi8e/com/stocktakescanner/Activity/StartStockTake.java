@@ -2,6 +2,7 @@ package um.vi8e.com.stocktakescanner.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.CardView;
@@ -9,12 +10,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.DateTimeHelper;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
@@ -22,8 +28,8 @@ import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 public class StartStockTake extends CoreActivity {
 static CardView cardView;
 static TextView setDateTv;
-
-
+EditText locationEditText;
+static Date selectedDate;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -33,13 +39,14 @@ protected void onCreate(Bundle savedInstanceState) {
 	ActivityUi.setToolBar(this, toolbar, "START STOCKTAKE");
 
 
-	CardView cardView = (CardView) findViewById(R.id.card_viewSetDate);
+	cardView = (CardView) findViewById(R.id.card_viewSetDate);
 	cardView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			showDatePickerDialog(v);
 		}
 	});
 	setDateTv = (TextView) cardView.findViewById(R.id.setDateTv);
+	locationEditText = (EditText) findViewById(R.id.locationEditText);
 	Button startNow = (Button) findViewById(R.id.startNow);
 	startNow.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
@@ -50,6 +57,24 @@ protected void onCreate(Bundle savedInstanceState) {
 
 }
 
+void saveToDB() {
+
+
+	String location = locationEditText.getText().toString();
+ String dateScanned = String.valueOf(selectedDate.getSeconds());
+
+			StocktakeModel stocktakeModel = new StocktakeModel("timeStart", "timeEnd", "completed", location, "User Um",
+	                                                       "DeviceDetail");
+	Uri uri = getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+
+	StocktakeresultModel
+			stocktakeresultModel =
+			new StocktakeresultModel(uri.getPathSegments().get(1),
+			                         "dummyBarCode",
+			                         "1",
+			                         dateScanned);
+	getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+}
 
 public void showDatePickerDialog(View v) {
 	DialogFragment newFragment = new DatePickerFragment();
@@ -74,11 +99,8 @@ public static class DatePickerFragment extends DialogFragment
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		//todo update ui, var
 
-
-
-		Date date=new Date(year-1900,month,day);
-		setDateTv.setText(DateTimeHelper.getFormatedDate(date));
-
+		selectedDate=new Date(year-1900,month,day);
+		setDateTv.setText(DateTimeHelper.getFormatedDate(selectedDate));
 
 	}
 
