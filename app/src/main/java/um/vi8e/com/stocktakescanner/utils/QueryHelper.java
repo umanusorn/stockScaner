@@ -92,8 +92,8 @@ void addSubTaskToDB ( Context context, String title,String taskId,ListView listV
 
 public static
 Uri addListToDB ( Context context, String title ) {
-	ListModel listModel = new ListModel ( title );
-	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+	ListModel model = new ListModel ( title );
+	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, model.getValues () );
 }
 
 public static
@@ -109,15 +109,15 @@ Uri addCommentToDB ( Context context, String title, String taskId ) {
 }
 
 public static
-void updateListAdapter ( ListModel listModel, ListView listView) {
+void updateListAdapter ( ListModel model, ListView listView) {
 
-	LandingActivity.mLandingListAdapter.add ( 0,listModel );
+	LandingActivity.mLandingListAdapter.add ( 0,model );
 	UiMng.setTaskListViewHeight(listView);
 }
 
 public static
-Uri addListToDB ( Context context, ListModel listModel ) {
-	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+Uri addListToDB ( Context context, ListModel model ) {
+	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, model.getValues () );
 }
 
 public static

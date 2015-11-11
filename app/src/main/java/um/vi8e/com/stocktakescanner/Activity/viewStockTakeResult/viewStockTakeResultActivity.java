@@ -14,6 +14,7 @@ import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class viewStockTakeResultActivity extends CoreActivity {
 public static String currentStockTakeId;
+public static Bundle thisSavedInstanceState;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -23,7 +24,9 @@ protected void onCreate(Bundle savedInstanceState) {
 	Bundle extras = getIntent().getExtras();
 	ActivityUi.setToolBar(thisActivity, toolbar, extras.getString(StocktakeColumns.DATETIME_STARTED));
 
-	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.LIST);
+	thisSavedInstanceState = savedInstanceState;
+
+	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
 
 	currentStockTakeId= extras.getString(StocktakeColumns._ID);

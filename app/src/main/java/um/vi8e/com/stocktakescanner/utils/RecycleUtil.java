@@ -25,7 +25,7 @@ public static void setUpRecycleFragment(Bundle savedInstanceState, AppCompatActi
 
 		Fragment fragment = null;
 		switch (modelType) {
-			case ModelType.LIST:
+			case ModelType.STOCK_RESULT:
 				fragment = new ViewStockResultFragment();
 				break;
 			case ModelType.SUB_TASK:
@@ -34,7 +34,7 @@ public static void setUpRecycleFragment(Bundle savedInstanceState, AppCompatActi
 			case ModelType.TASK:
 
 				break;
-			case ModelType.COMMENT:
+			case ModelType.STOCK_TAKE:
 				fragment = new ViewStockFragment();
 			//	fragment = new ViewStockResultFragment();
 				break;

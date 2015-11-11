@@ -18,7 +18,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 
-	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.COMMENT);
+	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_TAKE);
 	ActivityUi.setToolBar(thisActivity,toolbar,"VIEW STOCKTAKE");
 
 }

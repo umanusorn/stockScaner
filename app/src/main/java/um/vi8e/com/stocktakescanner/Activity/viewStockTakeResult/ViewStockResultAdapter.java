@@ -17,6 +17,7 @@
 package um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultSelection;
+import um.vi8e.com.stocktakescanner.utils.ConfirmDialog;
+import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -44,7 +49,7 @@ private Context                         mContext;
 public static class ViewHolder extends RecyclerView.ViewHolder {
 	TextView barCode, qty;
 	ImageView plus, minus, delete;
-	public StocktakeresultModel listModel;
+	public StocktakeresultModel model;
 
 	public TextView getBarCode() {
 		return barCode;
@@ -85,7 +90,7 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
 	final StocktakeresultModel listModel = mDataSet.get(position);
-	viewHolder.listModel=listModel;
+	viewHolder.model = listModel;
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 
@@ -95,35 +100,51 @@ public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 	viewHolder.barCode.setText(listModel.getBarcode());
 	viewHolder.delete.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			deleteBarcode(listModel);
+			deleteBarcode(viewHolder);
 		}
 	});
-viewHolder.plus.setOnClickListener(new View.OnClickListener() {
-	@Override public void onClick(View v) {
-		plusQty(1, viewHolder);
-	}
-});
+	viewHolder.plus.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			plusQty(1, viewHolder);
+		}
+	});
 	viewHolder.minus.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			plusQty(-1,viewHolder);
+			plusQty(-1, viewHolder);
 		}
 	});
 
 }
 
-private void plusQty(int amount,ViewHolder viewHolder) {
+private void plusQty(int amount, ViewHolder viewHolder) {
 
-	final StocktakeresultModel listModel = viewHolder.listModel;
-	int newQty = Integer.parseInt(listModel.getQty())+amount;
+	final StocktakeresultModel listModel = viewHolder.model;
+	int newQty = Integer.parseInt(listModel.getQty()) + amount;
 	String newQtyString = String.valueOf(newQty);
 	listModel.setQty(newQtyString);
-viewHolder.getQty().setText(newQtyString);
+	viewHolder.getQty().setText(newQtyString);
 
 
 }
 
-void deleteBarcode(StocktakeresultModel stocktakeresultModel){
+void deleteBarcode(ViewHolder viewHolder) {
+//viewHolder.itemView.setVisibility(View.GONE);
+//delete then update recycleView
 
+	ConfirmDialog.show(mContext,viewHolder.model.Barcode,getConfirmListener(viewHolder),"s");
+
+}
+
+@NonNull private ConfirmDialog.ConfirmListener getConfirmListener(final ViewHolder viewHolder) {
+	return new ConfirmDialog.ConfirmListener() {
+		@Override public void onConfirm(String key) {
+			StocktakeresultSelection where = new StocktakeresultSelection ();
+			where.id ( Long.parseLong ( viewHolder.model.id ) );
+			where.delete(mContext);
+			RecycleUtil.setUpRecycleFragment(viewStockTakeResultActivity.thisSavedInstanceState,viewStockTakeResultActivity
+					.thisActivity, ModelType.STOCK_RESULT);
+		}
+	};
 }
 
 
