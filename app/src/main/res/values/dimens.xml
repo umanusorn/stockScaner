@@ -3,5 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="header_text_size">17sp</dimen>
+    <dimen name="header_text_size">19sp</dimen>
+    <dimen name="qty_aqay_from_action">30dp</dimen>
 </resources>
