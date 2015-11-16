@@ -6,9 +6,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class CoreActivity extends AppCompatActivity {
 public static AppCompatActivity thisActivity;
@@ -48,6 +50,12 @@ public boolean onOptionsItemSelected(MenuItem item) {
 	}
 
 	return super.onOptionsItemSelected(item);
+}
+
+public void onClickFab(View view){
+
+	IntentCaller.start(thisActivity);
+
 }
 
 }

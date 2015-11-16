@@ -70,7 +70,7 @@
 
         </RelativeLayout>
 
-<include layout="@layout/list_row_stocktake_result_header"
+<include layout="@layout/header_list_row_stocktake_result"
          android:id="@+id/include2"></include>
     <FrameLayout
             android:id="@+id/recycle_content_fragment"
