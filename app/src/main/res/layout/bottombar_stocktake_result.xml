@@ -26,28 +26,22 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true">
 
-                <TextView
+                <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="SAVE"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:background="@drawable/list_bg"
                         android:id="@+id/save"
                         android:layout_centerVertical="true"
                         android:clickable="true"
                         android:layout_toStartOf="@+id/cancel"
                         android:layout_marginEnd="17dp"/>
 
-                <TextView
+                <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="CANCEL"
-                        android:background="@drawable/list_bg"
                         android:gravity="center"
-                        android:padding="5dp"
                         android:clickable="true"
                         android:id="@+id/cancel"
                         android:layout_alignTop="@+id/save"

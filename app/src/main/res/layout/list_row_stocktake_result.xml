@@ -5,7 +5,7 @@
              android:gravity="center_vertical">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/md_listitem_height"
                 android:padding="0dp"
                 android:layout_margin="0dp"
                 android:id="@+id/row_list_comment_root_view"
@@ -14,85 +14,62 @@
                 android:layout_alignParentStart="true"
                 android:backgroundTintMode="src_atop">
 
+
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:padding="0dp"
-            android:layout_margin="5dp"
-            android:id="@+id/rowBg"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/md_listitem_margin_left"
+            android:layout_centerHorizontal="true">
 
-
-        <RelativeLayout
-                android:orientation="vertical"
+        <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/plusBtn"
+                android:src="@drawable/ic_add_circle_green_300_36dp"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/minusBtn"/>
 
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_centerVertical="true">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/minusBtn"
+                android:src="@drawable/ic_remove_circle_red_300_36dp"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/deleteBtn"/>
 
-            <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/deleteBtn"
+                android:src="@android:drawable/ic_delete"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"/>
 
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/plusBtn"
-                        android:src="@drawable/ic_add_circle_green_300_36dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_toStartOf="@+id/minusBtn"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Qty"
+                android:id="@+id/qty"
+                android:padding="2dp"
+                android:textSize="@dimen/textsizeBody"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
 
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/minusBtn"
-                        android:src="@drawable/ic_remove_circle_red_300_36dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_toStartOf="@+id/deleteBtn"/>
-
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/deleteBtn"
-                        android:src="@android:drawable/ic_delete"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="Qty"
-                        android:id="@+id/qty"
-                        android:padding="2dp"
-                        android:textSize="15sp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true"/>
-
-            </RelativeLayout>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:text="Barcode"
-                    android:textColor="@color/black"
-                    android:singleLine="true"
-                    android:id="@+id/barcode"
-                    android:textSize="15sp"
-                    android:maxLines="5"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@+id/qty"/>
-
-        </RelativeLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="Barcode"
+                android:textColor="@color/black"
+                android:singleLine="true"
+                android:id="@+id/barcode"
+                android:textSize="@dimen/textsizeBody"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/qty"/>
 
     </RelativeLayout>
 </RelativeLayout>
