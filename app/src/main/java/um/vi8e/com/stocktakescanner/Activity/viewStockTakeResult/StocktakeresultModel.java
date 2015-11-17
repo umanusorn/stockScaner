@@ -25,7 +25,7 @@ String Barcode;
 String Qty;
 String DatetimeScannned;
 
-public StocktakeresultModel(String stocktakeId, String barcode, String qty, String datetimeScannned) {
+public  StocktakeresultModel(String stocktakeId, String barcode, String qty, String datetimeScannned) {
 	StocktakeId = stocktakeId;
 	Barcode = barcode;
 	Qty = qty;

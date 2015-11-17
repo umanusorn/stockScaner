@@ -1,6 +1,7 @@
 package um.vi8e.com.stocktakescanner.utils;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 import um.vi8e.com.stocktakescanner.Activity.BarcodeActivity;
 import um.vi8e.com.stocktakescanner.Activity.DeveloperActivity;
@@ -30,9 +31,18 @@ void developer ( Activity activity ) {
 }
 
 public static
-void start ( Activity activity ) {
+void startTake(Activity activity) {
 	Intent intent = new Intent ( activity, StartStockTakeActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
+}
+
+public static
+void startTakeFromBarCode ( Activity activity,Bundle bundle) {
+	Intent intent = new Intent ( activity, StartStockTakeActivity.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	intent.putExtras(bundle);
 	activity.startActivity ( intent );
 
 }

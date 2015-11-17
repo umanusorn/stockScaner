@@ -41,6 +41,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	ActivityUi.setToolBar(this, toolbar, "START STOCKTAKE");
 
 
+
 	cardView = (CardView) findViewById(R.id.card_viewSetDate);
 	cardView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
@@ -55,6 +56,12 @@ protected void onCreate(Bundle savedInstanceState) {
 			IntentCaller.simpleScanner(thisActivity);
 		}
 	});
+
+	Bundle extras= getIntent().getExtras();
+	if(extras!=null){
+		setDateTv.setText(extras.getString(StocktakeColumns.DATETIME_STARTED));
+		locationEditText.setText(extras.getString(StocktakeColumns.LOCATION));
+	}
 
 
 }

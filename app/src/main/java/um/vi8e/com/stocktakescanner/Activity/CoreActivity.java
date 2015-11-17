@@ -54,7 +54,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 public void onClickFab(View view){
 
-	IntentCaller.start(thisActivity);
+	IntentCaller.startTake(thisActivity);
 
 }
 

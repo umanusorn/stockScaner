@@ -13,19 +13,21 @@ import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
+import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class StockResultActivity extends CoreActivity {
 public static String currentStockTakeId;
 public static Bundle thisSavedInstanceState;
-
+StocktakeresultModel mStocktakeresultModel;
+Bundle extras;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_view_stocktake_result);
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
-	Bundle extras = getIntent().getExtras();
+	extras = getIntent().getExtras();
 	ActivityUi.setToolBar(thisActivity,
 	                      toolbar,
 	                      extras.getString(StocktakeColumns.DATETIME_STARTED) +
@@ -40,7 +42,12 @@ protected void onCreate(Bundle savedInstanceState) {
 	currentStockTakeId = extras.getString(StocktakeColumns._ID);
 	TextView location, date, status, save, cancel;
 
-
+	mStocktakeresultModel =
+			new StocktakeresultModel(extras.getString(StocktakeresultColumns._ID),
+			                         extras.getString(StocktakeresultColumns.BARCODE),
+			                         extras.getString(StocktakeresultColumns.QTY),
+			                         extras.getString(StocktakeresultColumns
+					                                          .DATETIME_SCANNNED));
 	location = (TextView) findViewById(R.id.locationTitle);
 	date = (TextView) findViewById(R.id.dateTitle);
 	status = (TextView) findViewById(R.id.statusTitle);
@@ -73,4 +80,10 @@ protected void onCreate(Bundle savedInstanceState) {
 	});
 }
 
+@Override
+public void onClickFab(View view) {
+
+	IntentCaller.startTakeFromBarCode(thisActivity, extras);
+
+}
 }

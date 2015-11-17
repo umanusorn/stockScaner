@@ -29,7 +29,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	start.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			IntentCaller.start(thisActivity);
+			IntentCaller.startTake(thisActivity);
 		}
 	});
 
