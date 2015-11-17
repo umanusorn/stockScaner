@@ -7,15 +7,13 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:background="@color/blue_300"
+            android:layout_height="wrap_content"
             android:id="@+id/rootLayout"
-
             >
 
         <include
                 layout="@layout/header_list_row_stocktake"
-                android:id="@+id/include3"
+
                 >
 
         </include>
