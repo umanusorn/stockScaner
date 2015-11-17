@@ -26,15 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/plusBtn"
-                android:src="@drawable/ic_add_circle_green_300_36dp"
+                android:src="@drawable/ic_add_circle_teal_500_36dp"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/minusBtn"/>
 
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/minusBtn"
-                android:src="@drawable/ic_remove_circle_red_300_36dp"
+                android:id="@+id/minusBtn" android:src="@drawable/ic_remove_circle_red_300_36dp"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/deleteBtn"/>
 

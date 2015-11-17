@@ -136,7 +136,7 @@
         <item name="android:windowAnimationStyle">@style/MD_WindowAnimation</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
-    <style name="MD_Light" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="MD_Light" parent="@android:style/Theme.Material.Light">
         <item name="md_divider">@color/md_divider_black</item>
         <item name="md_list_selector">@drawable/md_selector</item>
         <item name="md_btn_stacked_selector">@drawable/md_selector</item>
