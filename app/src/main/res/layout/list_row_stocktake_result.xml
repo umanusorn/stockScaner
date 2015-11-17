@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/deleteBtn"
-                android:src="@android:drawable/ic_delete"
+                android:src="@drawable/ic_delete_grey_600_36dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"/>
 
