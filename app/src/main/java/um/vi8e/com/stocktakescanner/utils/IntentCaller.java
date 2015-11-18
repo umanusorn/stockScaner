@@ -66,15 +66,24 @@ void barcode ( Activity activity,StocktakeresultModel stocktakeresultModel) {
 public static
  void viewStockTake ( Activity activity ) {
 	Intent intent = new Intent ( activity, viewStockTakeActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	activity.startActivity ( intent );
+
+}
+
+public static
+void scanner(Activity activity) {
+	Intent intent = new Intent ( activity, ScannerActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	activity.startActivity ( intent );
 
 }
 
 public static
-void simpleScanner ( Activity activity ) {
+void scannerFromBarCode ( Activity activity,Bundle bundle) {
 	Intent intent = new Intent ( activity, ScannerActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	intent.putExtras(bundle);
 	activity.startActivity ( intent );
 
 }

@@ -38,7 +38,6 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
-
 	currentStockTakeId = extras.getString(StocktakeColumns._ID);
 	TextView location, date, status, save, cancel;
 
@@ -84,6 +83,15 @@ protected void onCreate(Bundle savedInstanceState) {
 public void onClickFab(View view) {
 
 	IntentCaller.startTakeFromBarCode(thisActivity, extras);
+
+}
+
+
+
+@Override
+protected void  onResumeFragments(){
+	super.onResumeFragments();
+	RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
 }
 }

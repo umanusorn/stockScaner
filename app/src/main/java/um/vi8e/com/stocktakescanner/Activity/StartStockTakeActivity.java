@@ -57,14 +57,14 @@ protected void onCreate(Bundle savedInstanceState) {
 	if (mExtras != null) {
 		setDateTv.setText(mExtras.getString(StocktakeColumns.DATETIME_STARTED));
 		locationEditText.setText(mExtras.getString(StocktakeColumns.LOCATION));
-		startScan();
+		IntentCaller.scannerFromBarCode(thisActivity,mExtras);
 	}
 
 
 }
 
 private void startScan() {
-	IntentCaller.simpleScanner(thisActivity);
+	IntentCaller.scanner(thisActivity);
 }
 
 @Override protected void onResume(){

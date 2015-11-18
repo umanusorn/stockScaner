@@ -30,11 +30,20 @@ private ZXingScannerView mScannerView;
 public void handleResult(Result rawResult) {
   /*  Toast.makeText(this, "Contents = " + rawResult.getText() +
                          ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();*/
+  Bundle extras;
+  String stocktakeId;
+  try{
+    extras=getIntent().getExtras();
+    stocktakeId= extras.getString(StocktakeColumns._ID);
+  }catch (NullPointerException e){
+    stocktakeId=null;
+  }
+
     Toast.makeText(this,"Scanned",Toast.LENGTH_SHORT).show();
     mScannerView.startCamera();
-    StocktakeresultModel stocktakeresultModel=saveToDB(getApplicationContext(), rawResult.getText());
+    StocktakeresultModel stocktakeresultModel=saveToDB(getApplicationContext(), rawResult.getText(),stocktakeId);
     IntentCaller.barcode(this,stocktakeresultModel);
-  StartStockTakeActivity.isFinished=true;
+    StartStockTakeActivity.isFinished=true;
     finish();
 }
 
@@ -63,22 +72,36 @@ public void onPause() {
     mScannerView.stopCamera();
 }
 
-public static StocktakeresultModel saveToDB(Context context, String barcode) {
+public static StocktakeresultModel saveToDB(Context context, String barcode, String stocktakeId) {
 	String location = StartStockTakeActivity.locationEditText.getText().toString();
-
 	String dateScanned = StartStockTakeActivity.setDateTv.getText().toString();
+  StocktakeModel stocktakeModel;
 
-	StocktakeModel stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", "completed", location, "User Um",
-	                                                   "DeviceDetail");
-	Uri uri = context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+  StocktakeresultModel
+      stocktakeresultModel;
+  if(stocktakeId==null){
+    stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", "completed", location, "User Um",
+                                                       "DeviceDetail");
+     Uri uri= context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+    stocktakeresultModel =
+        new StocktakeresultModel(uri.getPathSegments().get(1),
+                                 barcode,
+                                 "1",
+                                 dateScanned);
+    context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+  }else {
 
-	StocktakeresultModel
-			stocktakeresultModel =
-			new StocktakeresultModel(uri.getPathSegments().get(1),
-			                         barcode,
-			                         "1",
-			                         dateScanned);
-	context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+    stocktakeresultModel =
+        new StocktakeresultModel(stocktakeId,
+                                 barcode,
+                                 "1",
+                                 dateScanned);
+    context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+
+  }
+
+
+
 	return stocktakeresultModel;
 }
 
