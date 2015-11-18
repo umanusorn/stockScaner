@@ -2,12 +2,11 @@ package um.vi8e.com.stocktakescanner.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,20 +16,19 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 
-import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
-import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
-import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.DateTimeHelper;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class StartStockTakeActivity extends CoreActivity {
-static CardView cardView;
-static TextView setDateTv;
-static EditText locationEditText;
-static Date selectedDate;
+static        CardView cardView;
+static        TextView setDateTv;
+static        EditText locationEditText;
+static        Date     selectedDate;
+private       Bundle   mExtras;
+public static boolean  isFinished=false;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +37,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 	ActivityUi.setToolBar(this, toolbar, "START STOCKTAKE");
-
-
 
 	cardView = (CardView) findViewById(R.id.card_viewSetDate);
 	cardView.setOnClickListener(new View.OnClickListener() {
@@ -53,20 +49,37 @@ protected void onCreate(Bundle savedInstanceState) {
 	Button startNow = (Button) findViewById(R.id.startNow);
 	startNow.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			IntentCaller.simpleScanner(thisActivity);
+			startScan();
 		}
 	});
 
-	Bundle extras= getIntent().getExtras();
-	if(extras!=null){
-		setDateTv.setText(extras.getString(StocktakeColumns.DATETIME_STARTED));
-		locationEditText.setText(extras.getString(StocktakeColumns.LOCATION));
+	mExtras = getIntent().getExtras();
+	if (mExtras != null) {
+		setDateTv.setText(mExtras.getString(StocktakeColumns.DATETIME_STARTED));
+		locationEditText.setText(mExtras.getString(StocktakeColumns.LOCATION));
+		startScan();
 	}
 
 
 }
 
+private void startScan() {
+	IntentCaller.simpleScanner(thisActivity);
+}
 
+@Override protected void onResume(){
+	super.onResume();
+	if(isFinished){
+	Log.d(TAG,"onResume");
+		finish();
+	}
+
+	if(mExtras!=null){
+		//call from result, or from barcode
+		finish();
+	}
+
+}
 /*public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 	if (requestCode == 0) {
 		if (resultCode == RESULT_OK) {
@@ -78,24 +91,6 @@ protected void onCreate(Bundle savedInstanceState) {
 		}
 	}
 }*/
-
-public static void saveToDB(Context context, String barcode) {
-	String location = locationEditText.getText().toString();
-
-	String dateScanned = setDateTv.getText().toString();
-
-	StocktakeModel stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", "completed", location, "User Um",
-	                                                   "DeviceDetail");
-	Uri uri = context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
-
-	StocktakeresultModel
-			stocktakeresultModel =
-			new StocktakeresultModel(uri.getPathSegments().get(1),
-			                         barcode,
-			                         "1",
-			                         dateScanned);
-	context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
-}
 
 public void showDatePickerDialog(View v) {
 	DialogFragment newFragment = new DatePickerFragment();

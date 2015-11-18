@@ -3,7 +3,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import um.vi8e.com.stocktakescanner.Activity.BarcodeActivity;
+import um.vi8e.com.stocktakescanner.Activity.BarcodeDetailActivity;
 import um.vi8e.com.stocktakescanner.Activity.DeveloperActivity;
 import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
 import um.vi8e.com.stocktakescanner.Activity.StartStockTakeActivity;
@@ -34,6 +34,7 @@ public static
 void startTake(Activity activity) {
 	Intent intent = new Intent ( activity, StartStockTakeActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	StartStockTakeActivity.isFinished=false;
 	activity.startActivity ( intent );
 
 }
@@ -42,6 +43,7 @@ public static
 void startTakeFromBarCode ( Activity activity,Bundle bundle) {
 	Intent intent = new Intent ( activity, StartStockTakeActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	StartStockTakeActivity.isFinished=false;
 	intent.putExtras(bundle);
 	activity.startActivity ( intent );
 
@@ -49,7 +51,7 @@ void startTakeFromBarCode ( Activity activity,Bundle bundle) {
 
 public static
 void barcode ( Activity activity,StocktakeresultModel stocktakeresultModel) {
-	Intent intent = new Intent ( activity, BarcodeActivity.class);
+	Intent intent = new Intent ( activity, BarcodeDetailActivity.class);
 	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	intent.putExtra(StocktakeresultColumns._ID, stocktakeresultModel.getId());
 	intent.putExtra(StocktakeresultColumns.BARCODE, stocktakeresultModel.getBarcode());

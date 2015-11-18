@@ -56,7 +56,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Activity.BarcodeActivity"
+            android:name=".Activity.BarcodeDetailActivity"
             android:label="@string/title_activity_barcode"
             android:parentActivityName=".Activity.CoreActivity"
             android:theme="@style/AppTheme.NoActionBar" >

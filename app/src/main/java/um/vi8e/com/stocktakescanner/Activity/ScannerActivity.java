@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
@@ -16,6 +17,11 @@ import com.google.zxing.Result;
 import me.dm7.barcodescanner.core.IViewFinder;
 import me.dm7.barcodescanner.core.ViewFinderView;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
+import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class ScannerActivity extends ActionBarActivity implements ZXingScannerView.ResultHandler {
 private ZXingScannerView mScannerView;
@@ -26,7 +32,9 @@ public void handleResult(Result rawResult) {
                          ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();*/
     Toast.makeText(this,"Scanned",Toast.LENGTH_SHORT).show();
     mScannerView.startCamera();
-    StartStockTakeActivity.saveToDB(getApplicationContext(), rawResult.getText());
+    StocktakeresultModel stocktakeresultModel=saveToDB(getApplicationContext(), rawResult.getText());
+    IntentCaller.barcode(this,stocktakeresultModel);
+  StartStockTakeActivity.isFinished=true;
     finish();
 }
 
@@ -55,9 +63,27 @@ public void onPause() {
     mScannerView.stopCamera();
 }
 
+public static StocktakeresultModel saveToDB(Context context, String barcode) {
+	String location = StartStockTakeActivity.locationEditText.getText().toString();
+
+	String dateScanned = StartStockTakeActivity.setDateTv.getText().toString();
+
+	StocktakeModel stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", "completed", location, "User Um",
+	                                                   "DeviceDetail");
+	Uri uri = context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+
+	StocktakeresultModel
+			stocktakeresultModel =
+			new StocktakeresultModel(uri.getPathSegments().get(1),
+			                         barcode,
+			                         "1",
+			                         dateScanned);
+	context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+	return stocktakeresultModel;
+}
 
 
-    private static class CustomViewFinderView extends ViewFinderView {
+private static class CustomViewFinderView extends ViewFinderView {
         public static final String TRADE_MARK_TEXT = " ";
         public static final int TRADE_MARK_TEXT_SIZE_SP = 40;
         public final Paint PAINT = new Paint();
