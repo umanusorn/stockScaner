@@ -2,6 +2,7 @@ package um.vi8e.com.stocktakescanner.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
-public class CoreActivity extends AppCompatActivity {
+public class CoreActivity extends AppCompatActivity implements  ActionMode.Callback  {
 public static AppCompatActivity thisActivity;
 
 protected final String TAG = this.getClass().getSimpleName();
@@ -26,6 +27,22 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	thisActivity = this;
 	Log.d(TAG, "enter " + TAG);
+
+}
+
+@Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+	return false;
+}
+
+@Override public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+	return false;
+}
+
+@Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+	return false;
+}
+
+@Override public void onDestroyActionMode(ActionMode mode) {
 
 }
 

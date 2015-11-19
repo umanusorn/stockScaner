@@ -97,6 +97,7 @@ public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 			IntentCaller.barcode(StockResultActivity.thisActivity,listModel);
 		}
 	});
+
 	viewHolder.qty.setText(listModel.getQty());
 	viewHolder.barCode.setText(listModel.getBarcode());
 	viewHolder.delete.setOnClickListener(new View.OnClickListener() {

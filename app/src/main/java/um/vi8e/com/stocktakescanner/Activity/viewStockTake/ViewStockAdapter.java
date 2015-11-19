@@ -17,9 +17,13 @@
 package um.vi8e.com.stocktakescanner.Activity.viewStockTake;
 
 import android.content.Context;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,6 +43,44 @@ private static final String TAG = "ViewStockResultAdapter";
 private ArrayList<StocktakeModel> mDataSet;
 private Context                   mContext;
 
+private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+
+	// Called when the action mode is created; startActionMode() was called
+	@Override
+	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		// Inflate a menu resource providing context menu items
+		MenuInflater inflater = mode.getMenuInflater();
+		inflater.inflate(R.menu.menu_viewstock, menu);
+		return true;
+	}
+
+	// Called each time the action mode is shown. Always called after onCreateActionMode, but
+	// may be called multiple times if the mode is invalidated.
+	@Override
+	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		return false; // Return false if nothing is done
+	}
+
+	// Called when the user selects a contextual menu item
+	@Override
+	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_save:
+				//shareCurrentItem();
+				mode.finish(); // Action picked, so close the CAB
+				return true;
+			default:
+				return false;
+		}
+	}
+
+	// Called when the user exits the action mode
+	@Override
+	public void onDestroyActionMode(ActionMode mode) {
+	//	mActionMode = null;
+	}
+};
+
 // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
 
 /**
@@ -46,7 +88,7 @@ private Context                   mContext;
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
 
-TextView dateTieme,location,status,qty;
+	TextView dateTieme, location, status, qty;
 
 	public ViewHolder(View view) {
 		super(view);
@@ -59,10 +101,10 @@ TextView dateTieme,location,status,qty;
 			}
 		});
 
-		dateTieme = (TextView)view.findViewById(R.id.datetime);
-		location = (TextView)view.findViewById(R.id.location);
-		status = (TextView)view.findViewById(R.id.status);
-		qty = (TextView)view.findViewById(R.id.stocktake_qty);
+		dateTieme = (TextView) view.findViewById(R.id.datetime);
+		location = (TextView) view.findViewById(R.id.location);
+		status = (TextView) view.findViewById(R.id.status);
+		qty = (TextView) view.findViewById(R.id.stocktake_qty);
 	}
 
 }
@@ -96,6 +138,15 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 			IntentCaller.viewStockTakeResult(viewStockTakeActivity.thisActivity, listModel);
 		}
 	});
+
+	viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+		@Override public boolean onLongClick(View v) {
+			Log.d(TAG,"onLongClick");
+			viewStockTakeActivity.thisActivity.startSupportActionMode(mActionModeCallback);
+			return false;
+		}
+	});
+
 	viewHolder.dateTieme.setText(listModel.getDatetimeStarted());
 	viewHolder.location.setText(listModel.getLocation());
 	viewHolder.status.setText(listModel.getStatus());

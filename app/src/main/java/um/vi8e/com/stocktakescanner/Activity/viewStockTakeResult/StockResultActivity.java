@@ -2,7 +2,11 @@ package um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +25,15 @@ public static String currentStockTakeId;
 public static Bundle thisSavedInstanceState;
 StocktakeresultModel mStocktakeresultModel;
 Bundle extras;
+
+@Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+	MenuInflater inflater = mode.getMenuInflater();
+	inflater.inflate(R.menu.menu_viewstock, menu);
+	return false;
+}
+@Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+	return false;
+}
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
