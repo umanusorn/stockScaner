@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
+import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -45,7 +46,7 @@ private Context                   mContext;
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
 
-TextView dateTieme,location,status;
+TextView dateTieme,location,status,qty;
 
 	public ViewHolder(View view) {
 		super(view);
@@ -61,6 +62,7 @@ TextView dateTieme,location,status;
 		dateTieme = (TextView)view.findViewById(R.id.datetime);
 		location = (TextView)view.findViewById(R.id.location);
 		status = (TextView)view.findViewById(R.id.status);
+		qty = (TextView)view.findViewById(R.id.stocktake_qty);
 	}
 
 }
@@ -80,7 +82,7 @@ public ViewStockAdapter(ArrayList<StocktakeModel> dataSet, Context context) {
 public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 	// Create a new view.
 	View v = LayoutInflater.from(viewGroup.getContext())
-	                       .inflate(R.layout.recycle_stocktake, viewGroup, false);
+	                       .inflate(R.layout.list_row_stocktake, viewGroup, false);
 	return new ViewHolder(v);
 }
 
@@ -91,12 +93,13 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	final StocktakeModel listModel = mDataSet.get(position);
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			IntentCaller.viewStockTakeResult(viewStockTakeActivity.thisActivity,listModel);
+			IntentCaller.viewStockTakeResult(viewStockTakeActivity.thisActivity, listModel);
 		}
 	});
 	viewHolder.dateTieme.setText(listModel.getDatetimeStarted());
 	viewHolder.location.setText(listModel.getLocation());
 	viewHolder.status.setText(listModel.getStatus());
+  viewHolder.qty.setText(String.valueOf(QueryHelper.getQtyCount(listModel, mContext)));
 
 }
 

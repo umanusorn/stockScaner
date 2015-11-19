@@ -29,17 +29,6 @@
                 android:layout_marginStart="@dimen/md_listitem_margin_left"
                 android:layout_centerVertical="true">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:textColor="@color/black"
-                    android:text="Status"
-                    android:textSize="@dimen/textsizeSubHeading"
-                    android:id="@+id/status"
-
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="22dp"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -55,6 +44,19 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:text="Qty"
+                    android:textSize="@dimen/textsizeBody"
+                    android:id="@+id/stocktake_qty"
+
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/location"
+                    android:layout_marginEnd="20dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Location"
                     android:id="@+id/location"
@@ -64,6 +66,17 @@
                     android:layout_alignTop="@+id/status"
                     android:layout_centerHorizontal="true"/>
 
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:text="Status"
+                    android:textSize="@dimen/textsizeSubHeading"
+                    android:id="@+id/status"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="22dp"/>
         </RelativeLayout>
 
     </RelativeLayout>

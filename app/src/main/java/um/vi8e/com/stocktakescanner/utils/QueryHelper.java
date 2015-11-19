@@ -13,6 +13,7 @@ import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
+import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultSelection;
 
 
 /**
@@ -33,6 +34,23 @@ void deleteAllListValues ( Context context ) {
 	ListSelection listSelection = new ListSelection ();
 	listSelection.delete ( context.getContentResolver () );
 }*/
+
+public static int getQtyCount(StocktakeModel listModel, Context context) {
+	//Log.d ( TAG, "getCurrentTaskCount" );
+	StocktakeresultSelection where = new StocktakeresultSelection();
+	where.stocktakeId(listModel.getId());
+	Cursor cursor = where.query(context.getContentResolver());
+//	cursor.moveToFirst();
+	int sum = 0;
+
+	while (cursor.moveToNext()) {
+		int qtyIndex = cursor.getColumnIndex(StocktakeresultColumns.QTY);
+		sum += cursor.getInt(qtyIndex);
+	}
+	int count = where.count(context.getContentResolver());
+	Log.d("getCurrentTaskCount", "listid=" + listModel.getId() + " count=" + count);
+	return sum;
+}
 
 
 public static List<ContentValues> getValuesFromCursor(Cursor c, String[] ALL_COLUMNS) {
