@@ -4,13 +4,13 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -23,12 +23,12 @@ import um.vi8e.com.stocktakescanner.utils.DateTimeHelper;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class StartStockTakeActivity extends CoreActivity {
-static        CardView cardView;
-static        TextView setDateTv;
-static        EditText locationEditText;
-static        Date     selectedDate;
-private       Bundle   mExtras;
-public static boolean  isFinished=false;
+static  RelativeLayout cardView;
+static  TextView       setDateTv;
+static  EditText       locationEditText;
+static  Date           selectedDate;
+private Bundle         mExtras;
+public static boolean isFinished = false;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	setSupportActionBar(toolbar);
 	ActivityUi.setToolBar(this, toolbar, "START STOCKTAKE");
 
-	cardView = (CardView) findViewById(R.id.card_viewSetDate);
+	cardView = (RelativeLayout) findViewById(R.id.viewSetDate);
 	cardView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			showDatePickerDialog(v);

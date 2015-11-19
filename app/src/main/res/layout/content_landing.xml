@@ -13,16 +13,6 @@
         tools:showIn="@layout/activity_landing"
         tools:context=".LandingActivity">
 
-
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="START STOCKTAKE"
-                android:id="@+id/startStockTakebtn"
-                android:layout_above="@+id/viewStockTake"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="34dp"/>
-
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -12,7 +12,7 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 
 public class LandingActivity extends CoreActivity {
 
-Button start,viewStockTake;
+Button viewStockTake;
 
 
 @Override
@@ -23,15 +23,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	setSupportActionBar(toolbar);
 	ActivityUi.setToolBar(this, toolbar, "Stocktake Scanner");
 
-
-	start=(Button)findViewById(R.id.startStockTakebtn);
 	viewStockTake=(Button)findViewById(R.id.viewStockTake);
-
-	start.setOnClickListener(new View.OnClickListener() {
-		@Override public void onClick(View v) {
-			IntentCaller.startTake(thisActivity);
-		}
-	});
 
 	viewStockTake.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
