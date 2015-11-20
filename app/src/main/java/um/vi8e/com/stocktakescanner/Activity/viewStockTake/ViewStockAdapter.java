@@ -153,9 +153,9 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 			}
 
 			// Start the CAB
-			//mActionMode=viewStockTakeActivity.toolbar.startActionMode(mActionModeCallback);
+			//mActionMode=viewStockTakeActivity.mToolbar.startActionMode(mActionModeCallback);
 			mActionMode=viewStockTakeActivity.thisActivity.startSupportActionMode(mActionModeCallback);
-			//viewStockTakeActivity.toolbar.start
+			//viewStockTakeActivity.mToolbar.start
 			view.setSelected(true);
 
 			//viewStockTakeActivity.thisActivity.getSupportActionBar().hide();

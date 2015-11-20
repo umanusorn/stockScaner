@@ -5,8 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -49,7 +47,7 @@ void setToolBar ( final AppCompatActivity activity, Toolbar toolbar, String titl
 public static
 void setActiveToolBar (AppCompatActivity thisActivity,Toolbar toolbar,String title,Context context) {
 
-	//toolbar
+	//mToolbar
 	thisActivity.getSupportActionBar ().setTitle ( title );
 	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.blue_400 ) ) );
 }

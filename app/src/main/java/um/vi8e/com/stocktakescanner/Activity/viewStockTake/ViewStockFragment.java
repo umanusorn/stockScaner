@@ -35,6 +35,7 @@ import java.util.List;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeSelection;
+import um.vi8e.com.stocktakescanner.utils.HidingScrollListener;
 import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 
 /**
@@ -99,6 +100,19 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
 	mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+  mRecyclerView.addOnScrollListener(new HidingScrollListener() {
+
+
+	@Override public void onHide() {
+		viewStockTakeActivity.hideViews();
+	}
+
+	@Override public void onShow() {
+  viewStockTakeActivity.showViews();
+	}
+});
+
+
 
 	// LinearLayoutManager is used here, this will layout the elements in a similar fashion
 	// to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
@@ -123,6 +137,9 @@ public void setRecyclerViewLayoutManager() {
 	mRecyclerView.setLayoutManager(mLayoutManager);
 	mRecyclerView.scrollToPosition(scrollPosition);
 }
+
+
+
 
 @Override
 public void onSaveInstanceState(Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package um.vi8e.com.stocktakescanner.Activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
 import um.vi8e.com.stocktakescanner.R;
@@ -17,15 +20,17 @@ public class CoreActivity extends AppCompatActivity implements  ActionMode.Callb
 public static AppCompatActivity thisActivity;
 
 protected final String TAG = this.getClass().getSimpleName();
-public static Toolbar toolbar;
+public static Toolbar   mToolbar;
+public static ActionBar mActionbar;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_core);
-	toolbar = (Toolbar) findViewById(R.id.toolbar);
-	setSupportActionBar(toolbar);
-	//setActionBar(toolbar);
+	mToolbar = (Toolbar) findViewById(R.id.toolbar);
+	setSupportActionBar(mToolbar);
+	mActionbar = getSupportActionBar();
+	//setActionBar(mToolbar);
 
 	thisActivity = this;
 	Log.d(TAG, "enter " + TAG);
@@ -76,5 +81,21 @@ public void onClickFab(View view){
 	IntentCaller.startTake(thisActivity);
 
 }
+
+public static void hideViews() {
+	Log.d("", "hideView");
+	mToolbar.animate().translationY(mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+
+//	FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFabButton.getLayoutParams();
+//	int fabBottomMargin = lp.bottomMargin;
+//	mFabButton.animate().translationY(mFabButton.getHeight()+fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
+}
+
+public static void showViews() {
+	Log.d("","showView");
+	mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+//	mFabButton.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+}
+
 
 }
