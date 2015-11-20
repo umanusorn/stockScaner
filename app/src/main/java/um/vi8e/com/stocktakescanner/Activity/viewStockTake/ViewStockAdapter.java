@@ -39,11 +39,11 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
  */
 public class ViewStockAdapter extends RecyclerView.Adapter<ViewStockAdapter.ViewHolder> {
 private static final String TAG = "ViewStockResultAdapter";
+public static ActionMode                mActionMode;
+private       ArrayList<StocktakeModel> mDataSet;
+private       Context                   mContext;
 
-private ArrayList<StocktakeModel> mDataSet;
-private Context                   mContext;
-
-private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+static public ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
 	// Called when the action mode is created; startActionMode() was called
 	@Override
@@ -77,7 +77,10 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 	// Called when the user exits the action mode
 	@Override
 	public void onDestroyActionMode(ActionMode mode) {
-	//	mActionMode = null;
+		mActionMode = null;
+		//	mActionModeCallback=null;
+		//	viewStockTakeActivity.thisActivity.getSupportActionBar().show();
+
 	}
 };
 
@@ -132,6 +135,7 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 @Override
 public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
+
 	final StocktakeModel listModel = mDataSet.get(position);
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
@@ -140,10 +144,22 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	});
 
 	viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-		@Override public boolean onLongClick(View v) {
-			Log.d(TAG,"onLongClick");
-			viewStockTakeActivity.thisActivity.startSupportActionMode(mActionModeCallback);
-			return false;
+		@Override public boolean onLongClick(View view) {
+			Log.d(TAG, "onLongClick");
+
+
+			if (mActionMode != null) {
+				return false;
+			}
+
+			// Start the CAB
+			//mActionMode=viewStockTakeActivity.toolbar.startActionMode(mActionModeCallback);
+			mActionMode=viewStockTakeActivity.thisActivity.startSupportActionMode(mActionModeCallback);
+			//viewStockTakeActivity.toolbar.start
+			view.setSelected(true);
+
+			//viewStockTakeActivity.thisActivity.getSupportActionBar().hide();
+			return true;
 		}
 	});
 

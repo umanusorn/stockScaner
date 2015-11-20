@@ -17,13 +17,15 @@ public class CoreActivity extends AppCompatActivity implements  ActionMode.Callb
 public static AppCompatActivity thisActivity;
 
 protected final String TAG = this.getClass().getSimpleName();
+public static Toolbar toolbar;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_core);
-	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+	toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
+	//setActionBar(toolbar);
 
 	thisActivity = this;
 	Log.d(TAG, "enter " + TAG);
