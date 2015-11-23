@@ -10,17 +10,19 @@ import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class viewStockTakeActivity extends CoreActivity {
-
+ViewStockFragment viewStockFragment;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_view_stocktake);
-	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-	setSupportActionBar(toolbar);
-
-	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_TAKE);
-	ActivityUi.setToolBar(thisActivity,toolbar,"VIEW STOCKTAKE");
-
+	mToolbar= (Toolbar) findViewById(R.id.toolbar);
+	setSupportActionBar(mToolbar);
+	ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
+viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
+	                                                                                           thisActivity, ModelType
+			                                                                                           .STOCK_TAKE);
 }
+
+
 
 }

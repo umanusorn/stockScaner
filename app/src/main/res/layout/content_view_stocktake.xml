@@ -1,35 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout
+        android:id="@+id/recycle_content_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:padding="0dp"
+        android:layout_margin="0dp"
 
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rootLayout"
-            >
-
-        <include
-                layout="@layout/header_list_row_stocktake"
-
-                >
-
-        </include>
-    </RelativeLayout>
-
-    <FrameLayout
-            android:id="@+id/recycle_content_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scrollbars="none"
-            android:padding="0dp"
-            android:layout_margin="0dp"
-
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/rootLayout"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/rootLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        xmlns:app="http://schemas.android.com/apk/res-auto"/>
 
 
-</RelativeLayout>

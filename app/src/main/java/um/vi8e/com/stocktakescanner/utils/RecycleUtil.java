@@ -17,13 +17,14 @@ import um.vi8e.com.stocktakescanner.R;
 public class RecycleUtil {
 
 private static final String TAG = RecycleUtil.class.getSimpleName ();
-public static void setUpRecycleFragment(Bundle savedInstanceState, AppCompatActivity activity, String
+public static Fragment setUpRecycleFragment(Bundle savedInstanceState, AppCompatActivity activity, String
 		modelType)
 {
+	Fragment fragment = null;
 	if (savedInstanceState == null) {
 		FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
 
-		Fragment fragment = null;
+
 		switch (modelType) {
 			case ModelType.STOCK_RESULT:
 				fragment = new ViewStockResultFragment();
@@ -43,6 +44,10 @@ public static void setUpRecycleFragment(Bundle savedInstanceState, AppCompatActi
 		}
 		transaction.replace(R.id.recycle_content_fragment, fragment);
 		transaction.commit();
+
+
 	}
+
+	return fragment;
 }
 }

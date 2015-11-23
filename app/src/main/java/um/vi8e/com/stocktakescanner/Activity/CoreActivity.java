@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
 import um.vi8e.com.stocktakescanner.R;
@@ -29,7 +27,8 @@ protected void onCreate(Bundle savedInstanceState) {
 	setContentView(R.layout.activity_core);
 	mToolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(mToolbar);
-	mActionbar = getSupportActionBar();
+
+	//mActionbar = getSupportActionBar();
 	//setActionBar(mToolbar);
 
 	thisActivity = this;
@@ -77,25 +76,40 @@ public boolean onOptionsItemSelected(MenuItem item) {
 }
 
 public void onClickFab(View view){
-
 	IntentCaller.startTake(thisActivity);
-
 }
 
-public static void hideViews() {
-	Log.d("", "hideView");
-	mToolbar.animate().translationY(mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
-
+/*public void hideViews() {
+	Log.d("CoreActivity", "hideView");
+	//mToolbar.animate().translationY(mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+	mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+	mToolbar.setCollapsible(true);
+	mToolbar.collapseActionView();
 //	FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFabButton.getLayoutParams();
 //	int fabBottomMargin = lp.bottomMargin;
 //	mFabButton.animate().translationY(mFabButton.getHeight()+fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
 }
 
-public static void showViews() {
-	Log.d("","showView");
+public void showViews() {
+	Log.d("CoreActivity","showView");
 	mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+
 //	mFabButton.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
 }
 
+@NonNull public HidingScrollListener getOnScroll() {
+	return new HidingScrollListener() {
+
+
+		@Override public void onHide() {
+			hideViews();
+		}
+
+		@Override public void onShow() {
+			Log.d(TAG, "onShow");
+			showViews();
+		}
+	};
+}*/
 
 }

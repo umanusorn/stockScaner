@@ -35,7 +35,6 @@ import java.util.List;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeSelection;
-import um.vi8e.com.stocktakescanner.utils.HidingScrollListener;
 import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 
 /**
@@ -50,12 +49,33 @@ protected ViewStockAdapter           mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
 public static ArrayList<StocktakeModel>  mDataSet;
 
+public RecyclerView getRecyclerView() {
+	return mRecyclerView;
+}
+
 @Override
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	initDataSet(getContext());
 }
 
+
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState)
+{Log.d(TAG,"onCreateView");
+	View rootView = inflater.inflate(R.layout.recycler_view_frag, container, false);
+	rootView.setTag(TAG);
+	setView(savedInstanceState, rootView);
+
+	//todo change
+	mAdapter = new ViewStockAdapter(mDataSet, getContext());
+	// Set ViewStockResultAdapter as the adapter for RecyclerView.
+	mRecyclerView.setAdapter(mAdapter);
+
+	return rootView;
+}
 /**
  * Generates Strings for RecyclerView's adapter. This data would usually come
  * from a local content provider or remote server.
@@ -80,39 +100,11 @@ private void initDataSet(Context context) {
 		mDataSet.add(new StocktakeModel(commentValue));
 	}
 }
-
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                         Bundle savedInstanceState)
-{
-	View rootView = inflater.inflate(R.layout.recycler_view_frag, container, false);
-	rootView.setTag(TAG);
-	setView(savedInstanceState, rootView);
-
-	//todo change
-	mAdapter = new ViewStockAdapter(mDataSet, getContext());
-	// Set ViewStockResultAdapter as the adapter for RecyclerView.
-	mRecyclerView.setAdapter(mAdapter);
-
-	return rootView;
-}
-
 private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
+	Log.d(TAG,"setView");
 	mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-  mRecyclerView.addOnScrollListener(new HidingScrollListener() {
-
-
-	@Override public void onHide() {
-		viewStockTakeActivity.hideViews();
-	}
-
-	@Override public void onShow() {
-  viewStockTakeActivity.showViews();
-	}
-});
-
-
+  //mRecyclerView.addOnScrollListener(viewStockTakeActivity.getOnScroll());
 
 	// LinearLayoutManager is used here, this will layout the elements in a similar fashion
 	// to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
@@ -124,6 +116,8 @@ private void setView(Bundle savedInstanceState, View rootView) {
 	}
 	setRecyclerViewLayoutManager();
 }
+
+
 
 public void setRecyclerViewLayoutManager() {
 	int scrollPosition = 0;
@@ -137,9 +131,6 @@ public void setRecyclerViewLayoutManager() {
 	mRecyclerView.setLayoutManager(mLayoutManager);
 	mRecyclerView.scrollToPosition(scrollPosition);
 }
-
-
-
 
 @Override
 public void onSaveInstanceState(Bundle savedInstanceState) {
