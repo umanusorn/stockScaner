@@ -23,19 +23,18 @@ protected void onCreate(Bundle savedInstanceState) {
 	setSupportActionBar(mToolbar);
 	ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
 	QueryHelper.genListAndTask(getApplicationContext());
-viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
+  viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
 	                                                                                           thisActivity, ModelType
 			                                                                                           .STOCK_TAKE);
-
-	TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-
-
+	tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 	tabLayout.addTab(tabLayout.newTab().setText("TIME"));
 	tabLayout.addTab(tabLayout.newTab().setText("QTY"));
 	tabLayout.addTab(tabLayout.newTab().setText("LOCATION"));
 	tabLayout.addTab(tabLayout.newTab().setText("STATUS"));
 	tabLayout.setClickable(false);
 	tabLayout.setEnabled(false);
+
+
 }
 
 

@@ -9,4 +9,6 @@
 
     <include layout="@layout/content_start_stocktake"/>
 
+        <include layout="@layout/floating_plus"/>
+
 </android.support.design.widget.CoordinatorLayout>

@@ -3,6 +3,7 @@ package um.vi8e.com.stocktakescanner.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -37,6 +38,8 @@ protected void onCreate(Bundle savedInstanceState) {
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 	ActivityUi.setToolBar(this, toolbar, "START STOCKTAKE");
+	tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+	tabLayout.setVisibility(View.GONE);
 
 	cardView = (RelativeLayout) findViewById(R.id.viewSetDate);
 	cardView.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +64,12 @@ protected void onCreate(Bundle savedInstanceState) {
 	}
 
 
+
+}
+
+@Override
+public void onClickFab(View view){
+	startScan();
 }
 
 private void startScan() {
