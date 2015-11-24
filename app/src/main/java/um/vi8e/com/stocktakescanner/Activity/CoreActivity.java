@@ -32,9 +32,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	mToolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(mToolbar);
 
-	//mActionbar = getSupportActionBar();
-	//setActionBar(mToolbar);
-
 	thisActivity = this;
 	ActivityUi.setStatusBar(thisActivity);
 	Log.d(TAG, "enter " + TAG);

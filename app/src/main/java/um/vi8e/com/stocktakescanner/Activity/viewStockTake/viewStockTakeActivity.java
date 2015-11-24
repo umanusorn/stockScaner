@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
-import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
@@ -26,11 +25,17 @@ protected void onCreate(Bundle savedInstanceState) {
 	setContentView(R.layout.activity_view_stocktake);
 	mToolbar= (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(mToolbar);
-	ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
+	//ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
 	QueryHelper.genListAndTask(getApplicationContext());
   viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
 	                                                                                           thisActivity, ModelType
 			                                                                                           .STOCK_TAKE);
+
+	final ActionBar ab = getSupportActionBar();
+	ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+	ab.setDisplayHomeAsUpEnabled(true);
+
+
 	tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 	tabLayout.addTab(tabLayout.newTab().setText("TIME"));
 	tabLayout.addTab(tabLayout.newTab().setText("QTY"));
