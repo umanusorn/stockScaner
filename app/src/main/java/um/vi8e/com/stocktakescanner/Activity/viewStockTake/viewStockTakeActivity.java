@@ -7,6 +7,7 @@ import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
+import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class viewStockTakeActivity extends CoreActivity {
@@ -18,6 +19,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	mToolbar= (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(mToolbar);
 	ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
+	QueryHelper.genListAndTask(getApplicationContext());
 viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
 	                                                                                           thisActivity, ModelType
 			                                                                                           .STOCK_TAKE);
