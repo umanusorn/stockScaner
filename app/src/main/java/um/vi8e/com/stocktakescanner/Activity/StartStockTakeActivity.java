@@ -38,6 +38,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 	ActivityUi.setToolBar(this, toolbar, "START STOCKTAKE");
+
 	tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 	tabLayout.setVisibility(View.GONE);
 
