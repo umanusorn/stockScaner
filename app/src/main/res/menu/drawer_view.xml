@@ -16,30 +16,42 @@
   -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+            android:id="@+id/g1"
+            android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_dashboard"
-            android:title="Home" />
+                android:id="@+id/nav_home"
+                android:icon="@drawable/ic_home_grey_600_36dp"
+                android:title="Home"/>
         <item
-            android:id="@+id/nav_messages"
-            android:icon="@drawable/ic_event"
-            android:title="Messages" />
+                android:id="@+id/nav_update_profile"
+                android:icon="@drawable/ic_account_circle_grey_600_36dp"
+                android:title="Update Profile"/>
+
         <item
-                android:icon="@drawable/ic_forum"
-                android:title="Logout" />
+                android:id="@+id/nav_change_pass"
+                android:icon="@drawable/ic_security_grey_600_36dp"
+                android:title="Change Password"/>
+
+        <item android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_settings_power_grey_600_36dp"
+                android:title="Logout"/>
+
     </group>
 
-    <item android:title="Sub items">
+    <group
+            android:id="@+id/g2"
+            android:checkableBehavior="none">
         <menu>
             <item
-                android:icon="@drawable/ic_dashboard"
-                android:title="Settings" />
+                    android:icon="@drawable/ic_settings_grey_600_36dp"
+                    android:title="Settings"/>
 
             <item
-                    android:icon="@drawable/ic_forum"
-                    android:title="Help &amp; feedback" />
+                    android:icon="@drawable/ic_security_grey_600_36dp"
+                    android:title="Help &amp; feedback"/>
         </menu>
-    </item>
+    </group>
+
 
 </menu>
