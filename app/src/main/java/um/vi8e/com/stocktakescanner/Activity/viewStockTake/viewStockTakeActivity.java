@@ -1,6 +1,9 @@
 package um.vi8e.com.stocktakescanner.Activity.viewStockTake;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
@@ -10,7 +13,7 @@ import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
-public class viewStockTakeActivity extends CoreActivity {
+public class viewStockTakeActivity extends CoreActivity implements ActionBar.TabListener{
 ViewStockFragment viewStockFragment;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,28 @@ protected void onCreate(Bundle savedInstanceState) {
 viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
 	                                                                                           thisActivity, ModelType
 			                                                                                           .STOCK_TAKE);
+
+	TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+
+	tabLayout.addTab(tabLayout.newTab().setText("TIME"));
+	tabLayout.addTab(tabLayout.newTab().setText("QTY"));
+	tabLayout.addTab(tabLayout.newTab().setText("LOCATION"));
+	tabLayout.addTab(tabLayout.newTab().setText("STATUS"));
+	tabLayout.setClickable(false);
+	tabLayout.setEnabled(false);
 }
 
 
+@Override public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
+}
+
+@Override public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+}
+
+@Override public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+}
 }
