@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -99,11 +100,11 @@ public void onClickFab(View view) {
 
 }
 
-
-
 @Override
 protected void  onResumeFragments(){
 	super.onResumeFragments();
+	Log.d(TAG,"onResumeFragment");
+
 	RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
 }

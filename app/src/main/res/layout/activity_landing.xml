@@ -10,7 +10,7 @@
         <include layout="@layout/core_toolbar"/>
 
     <include layout="@layout/content_landing"/>
-<include layout="@layout/floating_plus"/>
+<include layout="@layout/floating_camera"/>
     <!--<android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"

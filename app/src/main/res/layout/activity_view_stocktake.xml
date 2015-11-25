@@ -24,7 +24,7 @@
                 layout="@layout/core_toolbar"
                 android:id="@+id/include4"/>
 
-        <include layout="@layout/floating_plus"/>
+        <include layout="@layout/floating_camera"/>
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

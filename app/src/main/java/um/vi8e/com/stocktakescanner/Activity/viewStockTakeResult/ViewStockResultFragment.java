@@ -118,7 +118,6 @@ public void setRecyclerViewLayoutManager() {
 		scrollPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager())
 				.findFirstCompletelyVisibleItemPosition();
 	}
-
 	mLayoutManager = new LinearLayoutManager(getActivity());
 	mRecyclerView.setLayoutManager(mLayoutManager);
 	mRecyclerView.scrollToPosition(scrollPosition);

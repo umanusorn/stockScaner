@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -107,6 +108,9 @@ public void showDatePickerDialog(View v) {
 	newFragment.show(getSupportFragmentManager(), "datePicker");
 }
 
+
+
+
 public static class DatePickerFragment extends DialogFragment
 		implements DatePickerDialog.OnDateSetListener {
 
@@ -131,4 +135,12 @@ public static class DatePickerFragment extends DialogFragment
 	}
 
 }
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+	// Inflate the menu; this adds items to the action bar if it is present.
+	getMenuInflater().inflate(R.menu.menu_start_scan, menu);
+	return true;
+}
+
 }
