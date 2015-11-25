@@ -2,7 +2,6 @@ package um.vi8e.com.stocktakescanner.Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
@@ -18,10 +17,8 @@ import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class CoreActivity extends AppCompatActivity implements  ActionMode.Callback  {
 public static AppCompatActivity thisActivity;
-
 protected final String TAG = this.getClass().getSimpleName();
 public static Toolbar   mToolbar;
-public static ActionBar mActionbar;
 public TabLayout tabLayout ;
 
 

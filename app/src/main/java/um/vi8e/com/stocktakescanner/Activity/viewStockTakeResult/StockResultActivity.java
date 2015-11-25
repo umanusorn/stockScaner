@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
@@ -82,6 +83,7 @@ protected void onCreate(Bundle savedInstanceState) {
 			}
 
 			Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+			viewStockTakeActivity.viewStockFragment.setFragmentAdaptor();
 			finish();
 		}
 	});
@@ -103,9 +105,9 @@ public void onClickFab(View view) {
 @Override
 protected void  onResumeFragments(){
 	super.onResumeFragments();
-	Log.d(TAG,"onResumeFragment");
+	Log.d(TAG, "onResumeFragment");
 
-	RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_RESULT);
+//	RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
 }
 }

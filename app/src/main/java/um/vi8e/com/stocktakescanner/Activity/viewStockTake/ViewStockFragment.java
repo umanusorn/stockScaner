@@ -70,11 +70,15 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	setView(savedInstanceState, rootView);
 
 	//todo change
+setFragmentAdaptor();
+
+	return rootView;
+}
+
+public void setFragmentAdaptor(){
 	mAdapter = new ViewStockAdapter(mDataSet, getContext());
 	// Set ViewStockResultAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
-
-	return rootView;
 }
 /**
  * Generates Strings for RecyclerView's adapter. This data would usually come

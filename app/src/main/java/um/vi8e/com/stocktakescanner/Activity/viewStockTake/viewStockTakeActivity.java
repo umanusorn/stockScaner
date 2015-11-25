@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,23 +21,25 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class viewStockTakeActivity extends CoreActivity implements ActionBar.TabListener{
-ViewStockFragment viewStockFragment;
+public static ViewStockFragment viewStockFragment;
 private DrawerLayout mDrawerLayout;
 LinearLayout searchContainer;
 EditText toolbarSearchView;
 ImageView searchClearButton;
+
+Bundle thisSavedInstanceState;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_view_stocktake);
 	mToolbar= (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(mToolbar);
+	thisSavedInstanceState=savedInstanceState;
 	//ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
 	QueryHelper.genListAndTask(getApplicationContext());
   viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
 	                                                                                           thisActivity, ModelType
 			                                                                                           .STOCK_TAKE);
-
 	final ActionBar ab = getSupportActionBar();
 	ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 	ab.setDisplayHomeAsUpEnabled(true);
@@ -93,6 +96,16 @@ public boolean onOptionsItemSelected(MenuItem item) {
 			return true;
 	}
 	return super.onOptionsItemSelected(item);
+}
+
+@Override
+protected void  onResumeFragments(){
+	super.onResumeFragments();
+	Log.d(TAG, "onResumeFragment");
+
+
+//RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_TAKE);
+
 }
 
 
