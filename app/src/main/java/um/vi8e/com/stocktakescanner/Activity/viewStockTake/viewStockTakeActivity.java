@@ -9,6 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import um.vi8e.com.stocktakescanner.Activity.CoreActivity;
 import um.vi8e.com.stocktakescanner.Model.ModelType;
@@ -19,6 +22,9 @@ import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 public class viewStockTakeActivity extends CoreActivity implements ActionBar.TabListener{
 ViewStockFragment viewStockFragment;
 private DrawerLayout mDrawerLayout;
+LinearLayout searchContainer;
+EditText toolbarSearchView;
+ImageView searchClearButton;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -50,7 +56,10 @@ protected void onCreate(Bundle savedInstanceState) {
 	if (navigationView != null) {
 		setupDrawerContent(navigationView);
 	}
+
+
 }
+
 
 private void setupDrawerContent(NavigationView navigationView) {
 	navigationView.setNavigationItemSelectedListener(
@@ -85,4 +94,6 @@ public boolean onOptionsItemSelected(MenuItem item) {
 	}
 	return super.onOptionsItemSelected(item);
 }
+
+
 }

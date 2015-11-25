@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StocktakeScanner</string>
+    <string name="app_name">Stock take</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_core">CoreActivity</string>
     <string name="title_activity_simple_scanner">SimpleScannerActivity</string>
