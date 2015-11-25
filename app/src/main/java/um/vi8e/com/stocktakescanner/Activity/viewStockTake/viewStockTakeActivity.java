@@ -2,7 +2,6 @@ package um.vi8e.com.stocktakescanner.Activity.viewStockTake;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,38 +19,34 @@ import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
-public class viewStockTakeActivity extends CoreActivity implements ActionBar.TabListener{
+public class viewStockTakeActivity extends CoreActivity implements ActionBar.TabListener {
 public static ViewStockFragment viewStockFragment;
-private DrawerLayout mDrawerLayout;
+private       DrawerLayout      mDrawerLayout;
 LinearLayout searchContainer;
-EditText toolbarSearchView;
-ImageView searchClearButton;
+EditText     toolbarSearchView;
+ImageView    searchClearButton;
 
 Bundle thisSavedInstanceState;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_view_stocktake);
-	mToolbar= (Toolbar) findViewById(R.id.toolbar);
+	mToolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(mToolbar);
-	thisSavedInstanceState=savedInstanceState;
+	thisSavedInstanceState = savedInstanceState;
 	//ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
 	QueryHelper.genListAndTask(getApplicationContext());
-  viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
-	                                                                                           thisActivity, ModelType
-			                                                                                           .STOCK_TAKE);
+	viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
+	                                                                         thisActivity, ModelType
+			                                                                         .STOCK_TAKE);
 	final ActionBar ab = getSupportActionBar();
 	ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 	ab.setDisplayHomeAsUpEnabled(true);
 
 
-	tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-	tabLayout.addTab(tabLayout.newTab().setText("TIME"));
-	tabLayout.addTab(tabLayout.newTab().setText("QTY"));
-	tabLayout.addTab(tabLayout.newTab().setText("LOCATION"));
-	tabLayout.addTab(tabLayout.newTab().setText("STATUS"));
-	tabLayout.setClickable(false);
-	tabLayout.setEnabled(false);
+	String[] tabTitles={"TIME","QTY","LOCATION","STATUS"};
+	setTabLayout(tabTitles);
 
 	mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -62,6 +57,8 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
 }
+
+
 
 
 private void setupDrawerContent(NavigationView navigationView) {
@@ -99,7 +96,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 }
 
 @Override
-protected void  onResumeFragments(){
+protected void onResumeFragments() {
 	super.onResumeFragments();
 	Log.d(TAG, "onResumeFragment");
 

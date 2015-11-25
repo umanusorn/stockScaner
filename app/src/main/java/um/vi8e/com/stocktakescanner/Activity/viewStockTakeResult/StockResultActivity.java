@@ -27,7 +27,7 @@ public static String currentStockTakeId;
 public static Bundle thisSavedInstanceState;
 StocktakeresultModel mStocktakeresultModel;
 Bundle extras;
-
+TextView location, date, status, save, cancel;
 @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 	MenuInflater inflater = mode.getMenuInflater();
 	inflater.inflate(R.menu.menu_viewstock, menu);
@@ -40,6 +40,7 @@ Bundle extras;
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_view_stocktake_result);
+	thisSavedInstanceState = savedInstanceState;
 	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
 	extras = getIntent().getExtras();
@@ -49,12 +50,9 @@ protected void onCreate(Bundle savedInstanceState) {
 	                      " " +
 	                      extras.getString(StocktakeColumns.LOCATION));
 
-	thisSavedInstanceState = savedInstanceState;
 
-	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
 	currentStockTakeId = extras.getString(StocktakeColumns._ID);
-	TextView location, date, status, save, cancel;
 
 	mStocktakeresultModel =
 			new StocktakeresultModel(extras.getString(StocktakeresultColumns._ID),
@@ -62,6 +60,17 @@ protected void onCreate(Bundle savedInstanceState) {
 			                         extras.getString(StocktakeresultColumns.QTY),
 			                         extras.getString(StocktakeresultColumns
 					                                          .DATETIME_SCANNNED));
+
+	String[] tabTitles={"Barcode","QTY","Action"};
+	setTabLayout(tabTitles);
+
+
+	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_RESULT);
+
+	setView();
+}
+
+private void setView() {
 	location = (TextView) findViewById(R.id.locationTitle);
 	date = (TextView) findViewById(R.id.dateTitle);
 	status = (TextView) findViewById(R.id.statusTitle);

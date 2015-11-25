@@ -35,6 +35,18 @@ protected void onCreate(Bundle savedInstanceState) {
 
 }
 
+public void setTabLayout(String[] tabTitles) {
+	tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+	for (String tabTitle :
+			tabTitles) {
+		tabLayout.addTab(tabLayout.newTab().setText(tabTitle));
+	}
+
+	tabLayout.setClickable(false);
+	tabLayout.setEnabled(false);
+}
+
 @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 	return false;
 }
