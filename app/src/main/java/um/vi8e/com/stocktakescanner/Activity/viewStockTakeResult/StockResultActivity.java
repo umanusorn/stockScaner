@@ -74,26 +74,16 @@ private void setView() {
 	location = (TextView) findViewById(R.id.locationTitle);
 	date = (TextView) findViewById(R.id.dateTitle);
 	status = (TextView) findViewById(R.id.statusTitle);
-	save = (TextView) findViewById(R.id.save);
-	cancel = (TextView) findViewById(R.id.cancel);
+	/*save = (TextView) findViewById(R.id.save);
+	cancel = (TextView) findViewById(R.id.cancel);*/
 
 	location.setText(extras.getString(StocktakeColumns.LOCATION));
 	date.setText(extras.getString(StocktakeColumns.DATETIME_STARTED));
 	status.setText(extras.getString(StocktakeColumns.STATUS));
 
-	save.setOnClickListener(new View.OnClickListener() {
+	/*save.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			ViewStockResultFragment.mDataSet.get(0);
-			for (StocktakeresultModel stocktakeresultModel :
-					ViewStockResultFragment.mDataSet) {
-				String id = stocktakeresultModel.getId();
-				Uri uri = Uri.parse(String.valueOf(StocktakeresultColumns.CONTENT_URI) + "/" + id);
-				thisActivity.getContentResolver().update(uri, stocktakeresultModel.getValues(), null, null);
-			}
-
-			Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
-			viewStockTakeActivity.viewStockFragment.setFragmentAdaptor();
-			finish();
+			saveResult();
 		}
 	});
 
@@ -101,7 +91,38 @@ private void setView() {
 		@Override public void onClick(View v) {
 			finish();
 		}
-	});
+	});*/
+}
+
+@Override public boolean onOptionsItemSelected(MenuItem item) {
+
+
+	switch (item.getItemId()){
+		case R.id.action_save_result: saveResult();break;
+
+	}
+	return super.onOptionsItemSelected(item);
+}
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+	// Inflate the menu; this adds items to the action bar if it is present.
+	getMenuInflater().inflate(R.menu.menu_result, menu);
+	return true;
+}
+
+private void saveResult() {
+	ViewStockResultFragment.mDataSet.get(0);
+	for (StocktakeresultModel stocktakeresultModel :
+			ViewStockResultFragment.mDataSet) {
+		String id = stocktakeresultModel.getId();
+		Uri uri = Uri.parse(String.valueOf(StocktakeresultColumns.CONTENT_URI) + "/" + id);
+		thisActivity.getContentResolver().update(uri, stocktakeresultModel.getValues(), null, null);
+	}
+
+	Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+	viewStockTakeActivity.viewStockFragment.setFragmentAdaptor();
+	finish();
 }
 
 @Override

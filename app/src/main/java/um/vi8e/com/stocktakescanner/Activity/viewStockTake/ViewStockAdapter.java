@@ -65,7 +65,7 @@ static public ActionMode.Callback mActionModeCallback = new ActionMode.Callback(
 	@Override
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.action_save:
+			case R.id.action_delete:
 				//shareCurrentItem();
 				mode.finish(); // Action picked, so close the CAB
 				return true;
