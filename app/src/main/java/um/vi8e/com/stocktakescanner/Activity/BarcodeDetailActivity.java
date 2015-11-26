@@ -13,6 +13,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
@@ -54,12 +55,9 @@ protected void onCreate(Bundle savedInstanceState) {
 		//dateTimeScanned.setText("You are NOT conncted");
 	}
 
-
-	String banner = "CS";
-
 	String test3 = "http://staging.uobapi.vi9e.com/product/CS/121/5156441/686686/7b04dbce9373f29617eb53d1bb38463e";
 	String test1 = "http://hmkcode.appspot.com/rest/controller/get.json";
-	new HttpAsyncTaskGET(this).execute(test3);
+	new HttpAsyncTaskGET().execute(test3);
 
 }
 
@@ -67,6 +65,13 @@ void setViewFromJson(HashMap<String, String> productInfo){
 	barcode.setText(productInfo.get(ProductApiKey.BARCODE));
 	price.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
 	desc.setText(productInfo.get(ProductApiKey.DESCRIPTION));
+
+	String fulldetail="";
+	for (Map.Entry<String, String> entry : productInfo.entrySet())
+	{
+		fulldetail+= entry.getKey() + ":\t\t" + entry.getValue()+"\n";
+	}
+	fullDetail.setText(fulldetail);
 }
 
 public boolean isConnected() {
@@ -79,7 +84,6 @@ public boolean isConnected() {
 }
 
 public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
-	private BarcodeDetailActivity mBarcodeDetailActivity;
 
 	public String getResult() {
 		return result;
@@ -87,8 +91,7 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 
 	String result;
 
-	public HttpAsyncTaskGET(BarcodeDetailActivity barcodeDetailActivity) {
-		mBarcodeDetailActivity = barcodeDetailActivity;
+	public HttpAsyncTaskGET() {
 	}
 
 	@Override
@@ -111,7 +114,6 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 		}
 
 	}
-
 
 }
 

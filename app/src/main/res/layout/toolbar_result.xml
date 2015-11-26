@@ -14,26 +14,14 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="16dp"
-            app:expandedTitleMarginEnd="1dp"
+            app:layout_collapseParallaxMultiplier="0.2"
             android:fitsSystemWindows="true">
-
-        <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-
-                android:collapseContentDescription="@string/app_name"
-                android:background="?attr/colorPrimary"
-                app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
 
-                android:layout_marginTop="70dp"
                 android:layout_marginBottom="70dp"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -44,6 +32,7 @@
 
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -53,17 +42,17 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="48dp"/>
 
-           <!-- <TextView
+            <!-- <TextView
 
-                    android:fitsSystemWindows="true"
-                    app:layout_collapseMode="parallax"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Started On: "
-                    android:id="@+id/startedOn"
-                    android:layout_alignTop="@+id/dateTitle"
-                    android:layout_alignStart="@+id/locationTitle"/>-->
+                     android:fitsSystemWindows="true"
+                     app:layout_collapseMode="parallax"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:text="Started On: "
+                     android:id="@+id/startedOn"
+                     android:layout_alignTop="@+id/dateTitle"
+                     android:layout_alignStart="@+id/locationTitle"/>-->
 
             <TextView
                     app:layout_collapseMode="parallax"
@@ -74,7 +63,7 @@
                     android:id="@+id/dateTitle"
                     android:layout_below="@+id/locationTitle"
                     android:visibility="gone"
-                  />
+                    />
             <!--  android:layout_toEndOf="@+id/startedOn"-->
 
             <TextView
@@ -87,10 +76,20 @@
                     android:layout_below="@+id/locationTitle"
                     android:layout_alignStart="@+id/locationTitle"/>
         </RelativeLayout>
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+
+                android:collapseContentDescription="@string/app_name"
+                android:background="?attr/colorPrimary"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"/>
+
     </android.support.design.widget.CollapsingToolbarLayout>
+
     <!--app:tabMode="scrollable"-->
-
-
     <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
 
