@@ -9,5 +9,5 @@
 
 
     <include layout="@layout/content_core"/>
-    <include layout="@layout/core_toolbar"/>
+    <include layout="@layout/toolbar_core"/>
 </android.support.design.widget.CoordinatorLayout>

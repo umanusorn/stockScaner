@@ -7,7 +7,7 @@
         android:fitsSystemWindows="true"
         tools:context="um.vi8e.com.stocktakescanner.Activity.BarcodeDetailActivity">
 
-        <include layout="@layout/core_toolbar"/>
+        <include layout="@layout/toolbar_core"/>
 
     <include layout="@layout/content_barcode"/>
 

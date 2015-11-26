@@ -7,7 +7,7 @@
         android:fitsSystemWindows="true"
         tools:context=".LandingActivity">
 
-        <include layout="@layout/core_toolbar"/>
+        <include layout="@layout/toolbar_core"/>
 
     <include layout="@layout/content_landing"/>
 <include layout="@layout/floating_camera"/>

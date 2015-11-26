@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <include layout="@layout/core_toolbar"/>
+        <include layout="@layout/toolbar_core"/>
 
     <include layout="@layout/content_start_stocktake"/>
 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+
+
+    <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="16dp"
+            app:expandedTitleMarginEnd="1dp"
+            android:fitsSystemWindows="true">
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+
+                android:collapseContentDescription="@string/app_name"
+                android:background="?attr/colorPrimary"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="70dp"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:layout_collapseMode="parallax"
+                android:id="@+id/relativeLayout">
+
+            <TextView
+
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="parallax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Location"
+                    android:paddingTop="60dp"
+                    android:id="@+id/locationTitle"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="48dp"/>
+
+           <!-- <TextView
+
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="parallax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Started On: "
+                    android:id="@+id/startedOn"
+                    android:layout_alignTop="@+id/dateTitle"
+                    android:layout_alignStart="@+id/locationTitle"/>-->
+
+            <TextView
+                    app:layout_collapseMode="parallax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="12 Nov 2015"
+                    android:id="@+id/dateTitle"
+                    android:layout_below="@+id/locationTitle"
+                    android:visibility="gone"
+                  />
+            <!--  android:layout_toEndOf="@+id/startedOn"-->
+
+            <TextView
+                    app:layout_collapseMode="parallax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Completed"
+                    android:id="@+id/statusTitle"
+                    android:layout_below="@+id/locationTitle"
+                    android:layout_alignStart="@+id/locationTitle"/>
+        </RelativeLayout>
+    </android.support.design.widget.CollapsingToolbarLayout>
+    <!--app:tabMode="scrollable"-->
+
+
+    <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextColor="@android:color/white"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorHeight="6dp"/>
+</android.support.design.widget.AppBarLayout>
