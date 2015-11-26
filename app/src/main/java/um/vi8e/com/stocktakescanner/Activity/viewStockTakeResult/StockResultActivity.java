@@ -46,9 +46,9 @@ protected void onCreate(Bundle savedInstanceState) {
 	extras = getIntent().getExtras();
 	ActivityUi.setToolBar(thisActivity,
 	                      toolbar,
-	                      extras.getString(StocktakeColumns.DATETIME_STARTED) +
+	                      extras.getString(StocktakeColumns.DATETIME_STARTED)/* +
 	                      " " +
-	                      extras.getString(StocktakeColumns.LOCATION));
+	                      extras.getString(StocktakeColumns.LOCATION)*/);
 
 
 

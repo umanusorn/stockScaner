@@ -17,22 +17,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Barcode detail"
-                android:id="@+id/barcode_detail"
-                android:singleLine="false"
-                android:elevation="1dp"
-                android:layout_below="@+id/textView4"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="162dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="dateTimeScanned"
                 android:id="@+id/dateTimeScanned"
+                android:visibility="gone"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"/>
 
@@ -40,8 +27,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Barcode detail"
+                android:id="@+id/barcode_detail"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView4"
+                android:layout_alignParentStart="true"/>
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Qty:"
                 android:id="@+id/textView4"
+                android:layout_marginTop="20dp"
                 android:layout_below="@+id/dateTimeScanned"
                 android:layout_alignParentStart="true"/>
 
@@ -51,6 +51,49 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="1"
                 android:id="@+id/qty"
-                android:layout_below="@+id/dateTimeScanned"
-                android:layout_toEndOf="@+id/textView4"/>
+                android:layout_above="@+id/barcode_detail"
+                android:layout_toEndOf="@+id/textView4"
+                android:layout_marginStart="19dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="desc"
+                android:id="@+id/desc"
+                android:layout_below="@+id/barcode_detail"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Regular Price"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/desc"
+                android:layout_alignParentStart="true"/>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="11.25"
+                android:id="@+id/price"
+                android:layout_alignTop="@+id/textView3"
+                android:layout_toEndOf="@+id/textView3"
+                android:layout_marginStart="24dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Barcode detail"
+                android:id="@+id/fulldetail"
+                android:singleLine="false"
+                android:layout_marginTop="40dp"
+                android:layout_below="@+id/textView3"
+                android:layout_alignParentStart="true"/>
 </RelativeLayout>
