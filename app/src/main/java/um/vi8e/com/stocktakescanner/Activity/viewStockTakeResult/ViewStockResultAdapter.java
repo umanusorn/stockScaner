@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -94,7 +95,7 @@ public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 	viewHolder.model = listModel;
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			IntentCaller.barcode(StockResultActivity.thisActivity,listModel);
+			IntentCaller.barcode(StockResultActivity.thisActivity, listModel);
 		}
 	});
 
@@ -110,18 +111,37 @@ public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 			plusQty(1, viewHolder);
 		}
 	});
+
 	viewHolder.minus.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			plusQty(-1, viewHolder);
 		}
 	});
+	final int currentQty = Integer.parseInt(listModel.getQty());
+	if(currentQty<=1)
+		viewHolder.minus.setEnabled(false);
+
+
 
 }
 
 private void plusQty(int amount, ViewHolder viewHolder) {
 
 	final StocktakeresultModel listModel = viewHolder.model;
-	int newQty = Integer.parseInt(listModel.getQty()) + amount;
+	final int currentQty = Integer.parseInt(listModel.getQty());
+	int newQty = currentQty + amount;
+	if (newQty <= 1) {
+		viewHolder.minus.setEnabled(false);
+
+		if(newQty<1){
+			Toast.makeText(mContext, "Please press delete", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+	}
+	else{
+		viewHolder.minus.setEnabled(true);
+	}
 	String newQtyString = String.valueOf(newQty);
 	listModel.setQty(newQtyString);
 	viewHolder.getQty().setText(newQtyString);
@@ -133,14 +153,14 @@ void deleteBarcode(ViewHolder viewHolder) {
 //viewHolder.itemView.setVisibility(View.GONE);
 //delete then update recycleView
 
-	ConfirmDialog.show(mContext,viewHolder.model.Barcode,getConfirmListener(viewHolder),"s");
+	ConfirmDialog.show(mContext, viewHolder.model.Barcode, getConfirmListener(viewHolder), "s");
 
 }
 
 @NonNull private ConfirmDialog.ConfirmListener getConfirmListener(final ViewHolder viewHolder) {
 	return new ConfirmDialog.ConfirmListener() {
 		@Override public void onConfirm(String key) {
-			StocktakeresultSelection where = new StocktakeresultSelection ();
+			StocktakeresultSelection where = new StocktakeresultSelection();
 			where.id(Long.parseLong(viewHolder.model.id));
 			where.delete(mContext);
 			RecycleUtil.setUpRecycleFragment(StockResultActivity.thisSavedInstanceState, StockResultActivity

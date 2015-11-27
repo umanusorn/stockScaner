@@ -33,7 +33,7 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/minusBtn" android:src="@drawable/ic_remove_circle_red_300_36dp"
+                android:id="@+id/minusBtn" android:src="@drawable/custom_minus_btn"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/deleteBtn"/>
 
