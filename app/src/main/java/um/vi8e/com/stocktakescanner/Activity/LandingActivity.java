@@ -34,6 +34,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	QueryHelper.genListAndTask(getApplicationContext());
 
 
+
 }
 
 

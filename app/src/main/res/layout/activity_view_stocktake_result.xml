@@ -31,7 +31,6 @@
 
                 />
 
-
         <!--<include
                 app:layout_anchor="@id/rootCoordinate"
                 layout="@layout/bottombar_stocktake_result"
@@ -40,6 +39,5 @@
                 android:layout_width="match_parent"
                 app:layout_anchorGravity="bottom"
                 />-->
-
         <include layout="@layout/floating_plus"/>
 </android.support.design.widget.CoordinatorLayout>

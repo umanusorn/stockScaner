@@ -35,7 +35,17 @@ void deleteAllListValues ( Context context ) {
 	listSelection.delete ( context.getContentResolver () );
 }*/
 
-public static int getQtyCount(StocktakeModel listModel, Context context) {
+
+public static int getQtyTotalDistinct(StocktakeModel listModel, Context context) {
+	//Log.d ( TAG, "getCurrentTaskCount" );
+	StocktakeresultSelection where = new StocktakeresultSelection();
+	where.stocktakeId(listModel.getId());
+	Cursor cursor = where.query(context.getContentResolver());
+	return cursor.getCount();
+}
+
+
+public static int getQtyTotal(StocktakeModel listModel, Context context) {
 	//Log.d ( TAG, "getCurrentTaskCount" );
 	StocktakeresultSelection where = new StocktakeresultSelection();
 	where.stocktakeId(listModel.getId());
@@ -86,11 +96,11 @@ public static void genListAndTask(Context context) {
 		                                                   "DeviceDetail");
 		Uri uri = context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
 
-		for (int k = 0; k < 50; k++) {
+		for (int k = 0; k < 10; k++) {
 			StocktakeresultModel
 					stocktakeresultModel =
 					new StocktakeresultModel(uri.getPathSegments().get(1),
-					                         "dummyBarCode" + k + "," + uri.getPathSegments().get(1),
+					                         "14789" + k + "00" + uri.getPathSegments().get(1),
 					                         "1",
 					                         "dummyDate");
 			context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());

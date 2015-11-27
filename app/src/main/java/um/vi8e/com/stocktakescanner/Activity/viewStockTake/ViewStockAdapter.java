@@ -154,7 +154,7 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
 			// Start the CAB
 			//mActionMode=viewStockTakeActivity.mToolbar.startActionMode(mActionModeCallback);
-			mActionMode=viewStockTakeActivity.thisActivity.startSupportActionMode(mActionModeCallback);
+			mActionMode = viewStockTakeActivity.thisActivity.startSupportActionMode(mActionModeCallback);
 			//viewStockTakeActivity.mToolbar.start
 			view.setSelected(true);
 
@@ -166,7 +166,11 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	viewHolder.dateTieme.setText(listModel.getDatetimeStarted());
 	viewHolder.location.setText(listModel.getLocation());
 	viewHolder.status.setText(listModel.getStatus());
-  viewHolder.qty.setText(String.valueOf(QueryHelper.getQtyCount(listModel, mContext)));
+
+	final String totalQty = String.valueOf(QueryHelper.getQtyTotal(listModel, mContext));
+	final String totalQtyDistinct = String.valueOf(QueryHelper.getQtyTotalDistinct(listModel, mContext));
+
+	viewHolder.qty.setText(totalQtyDistinct+"|"+totalQty);
 
 }
 
