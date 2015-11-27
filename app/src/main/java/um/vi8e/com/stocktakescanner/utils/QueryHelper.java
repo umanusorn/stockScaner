@@ -92,7 +92,14 @@ public static void genListAndTask(Context context) {
 
 	for (int i = 0; i < 10; i++) {
 
-		StocktakeModel stocktakeModel = new StocktakeModel("12 Nov 2015", "timeEnd", "Pending", "location " + i, "Um",
+		final String status;
+		if(i%2==0)
+		status= Const.Status.PENDING;
+		else
+		status=Const.Status.COMPLETED;
+
+		StocktakeModel stocktakeModel = new StocktakeModel("12 Nov 2015", "timeEnd",
+		                                                   status, "location " + i, "Um",
 		                                                   "DeviceDetail");
 		Uri uri = context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
 

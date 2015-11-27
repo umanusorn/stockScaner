@@ -2,6 +2,7 @@ package um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,6 +20,7 @@ import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
+import um.vi8e.com.stocktakescanner.utils.Const;
 import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
@@ -26,16 +28,20 @@ public class StockResultActivity extends CoreActivity {
 public static String currentStockTakeId;
 public static Bundle thisSavedInstanceState;
 StocktakeresultModel mStocktakeresultModel;
-Bundle extras;
-TextView location, date, status, save, cancel;
+FloatingActionButton fab;
+Bundle               extras;
+TextView             location, date, status, save, cancel;
+
 @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 	MenuInflater inflater = mode.getMenuInflater();
 	inflater.inflate(R.menu.menu_viewstock, menu);
 	return false;
 }
+
 @Override public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 	return false;
 }
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -50,8 +56,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	                      " " +
 	                      extras.getString(StocktakeColumns.LOCATION)*/);
 
-
-
 	currentStockTakeId = extras.getString(StocktakeColumns._ID);
 
 	mStocktakeresultModel =
@@ -63,7 +67,6 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	String[] tabTitles={"Barcode","QTY","Action"};
 	setTabLayout(tabTitles);
-
 
 	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
@@ -79,7 +82,15 @@ private void setView() {
 
 	location.setText(extras.getString(StocktakeColumns.LOCATION));
 	date.setText(extras.getString(StocktakeColumns.DATETIME_STARTED));
-	status.setText(extras.getString(StocktakeColumns.STATUS));
+	final String statusValue = extras.getString(StocktakeColumns.STATUS);
+	status.setText(statusValue);
+
+
+	if(!statusValue.equals(Const.Status.PENDING)){
+		Log.d(TAG,"is not pending so dont show fab");
+		fab =(FloatingActionButton)findViewById(R.id.fab);
+		fab.setVisibility(View.GONE);
+	}
 
 	/*save.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
