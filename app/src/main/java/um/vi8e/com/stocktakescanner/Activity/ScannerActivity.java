@@ -21,11 +21,10 @@ import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
-import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 
 public class ScannerActivity extends ActionBarActivity implements ZXingScannerView.ResultHandler {
 private ZXingScannerView mScannerView;
-
+int i =1;
 @Override
 public void handleResult(Result rawResult) {
   /*  Toast.makeText(this, "Contents = " + rawResult.getText() +
@@ -39,12 +38,14 @@ public void handleResult(Result rawResult) {
     stocktakeId=null;
   }
 
-    Toast.makeText(this,"Scanned",Toast.LENGTH_SHORT).show();
+    Toast.makeText(this,"Scanned "+i+":"+rawResult.getText(),Toast.LENGTH_SHORT).show();
+    i++;
     mScannerView.startCamera();
     StocktakeresultModel stocktakeresultModel=saveToDB(getApplicationContext(), rawResult.getText(),stocktakeId);
-    IntentCaller.barcode(this, stocktakeresultModel);
+    //IntentCaller.barcode(this, stocktakeresultModel);
     StartStockTakeActivity.isFinished=true;
-    finish();
+
+    //finish();
 }
 
 @Override
@@ -58,6 +59,9 @@ public void onCreate(Bundle state) {
     };
 
     setContentView(mScannerView);
+  //mScannerView.startCamera(mCameraId);
+  //mScannerView.setFlash(mFlash);
+  mScannerView.setAutoFocus(true);
 }
 
 

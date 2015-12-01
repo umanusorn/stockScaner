@@ -10,6 +10,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,9 @@ import java.util.List;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
+import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 
 public class ZBarScannerActivity extends ActionBarActivity implements MessageDialogFragment.MessageDialogListener,
         ZBarScannerView.ResultHandler, FormatSelectorDialogFragment.FormatSelectorDialogListener,
@@ -136,12 +139,27 @@ public class ZBarScannerActivity extends ActionBarActivity implements MessageDia
 
     @Override
     public void handleResult(Result rawResult) {
+
+        Bundle extras;
+        String stocktakeId;
+        try{
+            extras=getIntent().getExtras();
+            stocktakeId= extras.getString(StocktakeColumns._ID);
+        }catch (NullPointerException e){
+            stocktakeId=null;
+        }
+
+
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
             r.play();
         } catch (Exception e) {}
-        showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat().getName());
+        /*showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
+                                                                                              .getName());*/
+
+        ScannerActivity.saveToDB(this,rawResult.getContents(),stocktakeId);
+        Toast.makeText(this, "Scanned " + rawResult.getContents(), Toast.LENGTH_SHORT).show();
     }
 
     public void showMessageDialog(String message) {
