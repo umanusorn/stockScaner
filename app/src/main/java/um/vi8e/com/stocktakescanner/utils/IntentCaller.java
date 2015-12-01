@@ -11,6 +11,7 @@ import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StockResultActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
+import um.vi8e.com.stocktakescanner.Comment.ZBarScannerActivity;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 
@@ -74,6 +75,14 @@ public static
 public static
 void scanner(Activity activity) {
 	Intent intent = new Intent ( activity, ScannerActivity.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
+}
+
+public static
+void zBarscanner(Activity activity) {
+	Intent intent = new Intent ( activity, ZBarScannerActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	activity.startActivity ( intent );
 

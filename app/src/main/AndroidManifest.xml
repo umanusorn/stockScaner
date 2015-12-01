@@ -47,6 +47,10 @@
             android:name=".Activity.StartStockTakeActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+                android:name=".Comment.ZBarScannerActivity"
+                android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
 
         <activity
             android:name=".Activity.viewStockTakeResult.StockResultActivity"

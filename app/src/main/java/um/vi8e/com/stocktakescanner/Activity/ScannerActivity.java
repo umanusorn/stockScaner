@@ -42,7 +42,7 @@ public void handleResult(Result rawResult) {
     Toast.makeText(this,"Scanned",Toast.LENGTH_SHORT).show();
     mScannerView.startCamera();
     StocktakeresultModel stocktakeresultModel=saveToDB(getApplicationContext(), rawResult.getText(),stocktakeId);
-    IntentCaller.barcode(this,stocktakeresultModel);
+    IntentCaller.barcode(this, stocktakeresultModel);
     StartStockTakeActivity.isFinished=true;
     finish();
 }
@@ -56,8 +56,10 @@ public void onCreate(Bundle state) {
             return new CustomViewFinderView(context);
         }
     };
+
     setContentView(mScannerView);
 }
+
 
 @Override
 public void onResume() {

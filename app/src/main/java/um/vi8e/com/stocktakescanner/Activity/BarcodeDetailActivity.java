@@ -62,7 +62,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 
 void setViewFromJson(HashMap<String, String> productInfo){
-	barcode.setText(productInfo.get(ProductApiKey.BARCODE));
+	//barcode.setText(productInfo.get(ProductApiKey.BARCODE));
 	price.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
 	desc.setText(productInfo.get(ProductApiKey.DESCRIPTION));
 
