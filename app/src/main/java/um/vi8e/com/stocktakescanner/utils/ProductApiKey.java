@@ -16,4 +16,10 @@ public static final String DEPARTMENT_LINK="deparmentLink";
 public static final String IS_CONSIGMENT="isConsignment";
 public static final String STATUS ="status";
 public static final String ERROR_MSG = "errorMessage";
+
+public static final String ERROR_MSG_INVALID_BARCODE = "Error Invalid Barcode";
+
+
+/*AS = successful EI  = Error Invalid Item ES = Error Store Code EB = Error Invalid Banner EC = Error Invalid Bar*/
+
 }

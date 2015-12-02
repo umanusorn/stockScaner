@@ -23,7 +23,7 @@ import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
 public class BarcodeDetailActivity extends CoreActivity {
 
-TextView barcode, dateTimeScanned, qty,price,desc, fullDetail;
+TextView barcodeTv, dateTimeScannedTv, qty, priceTv, descTv, fullDetailTv;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -37,41 +37,55 @@ protected void onCreate(Bundle savedInstanceState) {
 	Bundle extras = getIntent().getExtras();
 
 
-	dateTimeScanned = (TextView) findViewById(R.id.dateTimeScanned);
-	price =(TextView)findViewById(R.id.price);
-	desc = (TextView)findViewById(R.id.desc);
-	fullDetail=(TextView)findViewById(R.id.fulldetail);
-	dateTimeScanned.setText(extras.getString(StocktakeresultColumns.DATETIME_SCANNNED));
-	barcode = (TextView) findViewById(R.id.barcode_detail);
-	barcode.setText(extras.getString(StocktakeresultColumns.BARCODE));
+	final String barcode = extras.getString(StocktakeresultColumns.BARCODE);
+	final String dateTime = extras.getString(StocktakeresultColumns.DATETIME_SCANNNED);
+
+	dateTimeScannedTv = (TextView) findViewById(R.id.dateTimeScanned);
+	priceTv = (TextView) findViewById(R.id.price);
+	descTv = (TextView) findViewById(R.id.desc);
+	fullDetailTv = (TextView) findViewById(R.id.fulldetail);
+	barcodeTv = (TextView) findViewById(R.id.barcode_detail);
+
+	barcodeTv.setText(barcode);
+	dateTimeScannedTv.setText(dateTime);
 
 
 	// check if you are connected or not
 	if (isConnected()) {
-		//dateTimeScanned.setBackgroundColor(0xFF00CC00);
-		//dateTimeScanned.setText("You are conncted");
+		//dateTimeScannedTv.setBackgroundColor(0xFF00CC00);
+		//dateTimeScannedTv.setText("You are conncted");
 	}
 	else {
-		//dateTimeScanned.setText("You are NOT conncted");
+		//dateTimeScannedTv.setText("You are NOT conncted");
 	}
 
-	String test3 = "http://staging.uobapi.vi9e.com/product/CS/121/5156441/686686/7b04dbce9373f29617eb53d1bb38463e";
+	//686686
+
+	String test3 = "http://staging.uobapi.vi9e.com/product/CS/121/5156441/"+barcode+"/7b04dbce9373f29617eb53d1bb38463e";
 	String test1 = "http://hmkcode.appspot.com/rest/controller/get.json";
 	new HttpAsyncTaskGET().execute(test3);
 
 }
 
 void setViewFromJson(HashMap<String, String> productInfo){
-	//barcode.setText(productInfo.get(ProductApiKey.BARCODE));
-	price.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
-	desc.setText(productInfo.get(ProductApiKey.DESCRIPTION));
+	//barcodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
+
 
 	String fulldetail="";
 	for (Map.Entry<String, String> entry : productInfo.entrySet())
 	{
 		fulldetail+= entry.getKey() + ":\t\t" + entry.getValue()+"\n";
 	}
-	fullDetail.setText(fulldetail);
+	fullDetailTv.setText(fulldetail);
+
+	if(productInfo.get(ProductApiKey.STATUS).equals("AS")){
+		priceTv.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
+		descTv.setText(productInfo.get(ProductApiKey.DESCRIPTION));
+	}
+	else{
+		priceTv.setText("-");
+		descTv.setText("-");
+	}
 }
 
 public boolean isConnected() {

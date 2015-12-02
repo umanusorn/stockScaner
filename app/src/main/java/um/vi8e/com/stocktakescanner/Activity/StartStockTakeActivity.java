@@ -65,8 +65,6 @@ protected void onCreate(Bundle savedInstanceState) {
 		IntentCaller.scannerFromBarCode(thisActivity,mExtras);
 	}
 
-
-
 }
 
 @Override
@@ -75,8 +73,8 @@ public void onClickFab(View view){
 }
 
 private void startScan() {
-	IntentCaller.scanner(thisActivity);
-	//IntentCaller.zBarscanner(thisActivity);
+	//IntentCaller.scanner(thisActivity);
+	IntentCaller.zBarscanner(thisActivity);
 }
 
 @Override protected void onResume(){
@@ -87,7 +85,7 @@ private void startScan() {
 	}
 
 	if(mExtras!=null){
-		//call from result, or from barcode
+		//call from result, or from barcodeTv
 		finish();
 	}
 

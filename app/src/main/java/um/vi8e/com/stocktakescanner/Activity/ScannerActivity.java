@@ -42,7 +42,7 @@ public void handleResult(Result rawResult) {
     i++;
     mScannerView.startCamera();
     StocktakeresultModel stocktakeresultModel=saveToDB(getApplicationContext(), rawResult.getText(),stocktakeId);
-    //IntentCaller.barcode(this, stocktakeresultModel);
+    //IntentCaller.barcodeTv(this, stocktakeresultModel);
     StartStockTakeActivity.isFinished=true;
 
     //finish();
