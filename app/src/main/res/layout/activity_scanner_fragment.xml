@@ -7,12 +7,6 @@
               android:layout_height="match_parent">
 
 
-    <fragment android:name="um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.ViewStockResultFragment"
-              android:id="@+id/headlines_fragment"
-              android:layout_weight="1"
-              android:layout_width="match_parent"
-              android:layout_height="0dp"
-              tools:layout="@layout/recycler_view_frag"/>
 
 
     <fragment android:name="um.vi8e.com.stocktakescanner.zbar.ScannerFragment"
@@ -21,4 +15,10 @@
               android:layout_width="match_parent"
               android:layout_height="0dip"/>
 
+    <fragment android:name="um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.ViewStockResultFragment"
+              android:id="@+id/headlines_fragment"
+              android:layout_weight="1"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              tools:layout="@layout/recycler_view_frag"/>
 </LinearLayout>

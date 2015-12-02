@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,6 +34,8 @@ private boolean            mFlash;
 private boolean            mAutoFocus;
 private ArrayList<Integer> mSelectedIndices;
 private int mCameraId = -1;
+Menu mMenu;
+MenuInflater mMenuInflater;
 
 @Override
 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
@@ -65,8 +66,10 @@ public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     super.onCreateOptionsMenu(menu, inflater);
 
     MenuItem menuItem;
+    mMenu=menu;
+    mMenuInflater=inflater;
 
-    if (mFlash) {
+    /*if (mFlash) {
         menuItem = menu.add(Menu.NONE, R.id.menu_flash, 0, R.string.flash_on);
         } else {
             menuItem = menu.add(Menu.NONE, R.id.menu_flash, 0, R.string.flash_off);
@@ -85,7 +88,9 @@ public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItemCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         menuItem = menu.add(Menu.NONE, R.id.menu_camera_selector, 0, R.string.select_camera);
-        MenuItemCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_ALWAYS);
+        MenuItemCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_ALWAYS);*/
+
+    //menuItem = menu.add(Menu.NONE,1234,0,"Barcode");
     }
 
     @Override
@@ -150,6 +155,7 @@ public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             r.play();
         } catch (Exception e) {}
         showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat().getName());
+        getActivity().setTitle(rawResult.getContents());
     }
 
     public void showMessageDialog(String message) {
