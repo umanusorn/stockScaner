@@ -48,7 +48,12 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-                android:name=".Comment.ZBarScannerActivity"
+                android:name=".zbar.ZBarScannerActivity"
+                android:theme="@style/ThemeZBar.AppOverlayTheme" >
+        </activity>
+
+        <activity
+                android:name=".zbar.ScannerFragmentActivity"
                 android:theme="@style/ThemeZBar.AppOverlayTheme" >
         </activity>
 

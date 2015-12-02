@@ -74,7 +74,8 @@ public void onClickFab(View view){
 
 private void startScan() {
 	//IntentCaller.scanner(thisActivity);
-	IntentCaller.zBarscanner(thisActivity);
+	//IntentCaller.zBarscanner(thisActivity);
+	IntentCaller.zBarscannerFragment(thisActivity);
 }
 
 @Override protected void onResume(){

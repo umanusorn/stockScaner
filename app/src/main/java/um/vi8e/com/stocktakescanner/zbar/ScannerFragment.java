@@ -1,16 +1,19 @@
-package um.vi8e.com.stocktakescanner.Comment;
+package um.vi8e.com.stocktakescanner.zbar;
 
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,67 +21,53 @@ import java.util.List;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
-import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
 import um.vi8e.com.stocktakescanner.R;
-import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 
-public class ZBarScannerActivity extends ActionBarActivity implements MessageDialogFragment.MessageDialogListener,
+public class ScannerFragment extends Fragment implements MessageDialogFragment.MessageDialogListener,
         ZBarScannerView.ResultHandler, FormatSelectorDialogFragment.FormatSelectorDialogListener,
         CameraSelectorDialogFragment.CameraSelectorDialogListener {
-    private static final String FLASH_STATE = "FLASH_STATE";
-    private static final String AUTO_FOCUS_STATE = "AUTO_FOCUS_STATE";
-    private static final String SELECTED_FORMATS = "SELECTED_FORMATS";
-    private static final String CAMERA_ID = "CAMERA_ID";
-    private ZBarScannerView mScannerView;
-    private boolean mFlash;
-    private boolean mAutoFocus;
-    private ArrayList<Integer> mSelectedIndices;
-    private int mCameraId = -1;
+private static final String FLASH_STATE      = "FLASH_STATE";
+private static final String AUTO_FOCUS_STATE = "AUTO_FOCUS_STATE";
+private static final String SELECTED_FORMATS = "SELECTED_FORMATS";
+private static final String CAMERA_ID        = "CAMERA_ID";
+private ZBarScannerView    mScannerView;
+private boolean            mFlash;
+private boolean            mAutoFocus;
+private ArrayList<Integer> mSelectedIndices;
+private int mCameraId = -1;
 
-    @Override
-    public void onCreate(Bundle state) {
-        super.onCreate(state);
-        if(state != null) {
-            mFlash = state.getBoolean(FLASH_STATE, false);
-            mAutoFocus = state.getBoolean(AUTO_FOCUS_STATE, true);
-            mSelectedIndices = state.getIntegerArrayList(SELECTED_FORMATS);
-            mCameraId = state.getInt(CAMERA_ID, -1);
-        } else {
-            mFlash = false;
-            mAutoFocus = true;
-            mSelectedIndices = null;
-            mCameraId = -1;
-        }
-
-        mScannerView = new ZBarScannerView(this);
-        setupFormats();
-        setContentView(mScannerView);
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
+    mScannerView = new ZBarScannerView(getActivity());
+    if (state != null) {
+        mFlash = state.getBoolean(FLASH_STATE, false);
+        mAutoFocus = state.getBoolean(AUTO_FOCUS_STATE, true);
+        mSelectedIndices = state.getIntegerArrayList(SELECTED_FORMATS);
+        mCameraId = state.getInt(CAMERA_ID, -1);
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera(mCameraId);
-        mScannerView.setFlash(mFlash);
-        mScannerView.setAutoFocus(mAutoFocus);
+    else {
+        mFlash = false;
+        mAutoFocus = true;
+        mSelectedIndices = null;
+        mCameraId = -1;
     }
+    setupFormats();
+    return mScannerView;
+}
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(FLASH_STATE, mFlash);
-        outState.putBoolean(AUTO_FOCUS_STATE, mAutoFocus);
-        outState.putIntegerArrayList(SELECTED_FORMATS, mSelectedIndices);
-        outState.putInt(CAMERA_ID, mCameraId);
-    }
+@Override
+public void onCreate(Bundle state) {
+    super.onCreate(state);
+    setHasOptionsMenu(true);
+}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem menuItem;
+public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    super.onCreateOptionsMenu(menu, inflater);
 
-        if(mFlash) {
-            menuItem = menu.add(Menu.NONE, R.id.menu_flash, 0, R.string.flash_on);
+    MenuItem menuItem;
+
+    if (mFlash) {
+        menuItem = menu.add(Menu.NONE, R.id.menu_flash, 0, R.string.flash_on);
         } else {
             menuItem = menu.add(Menu.NONE, R.id.menu_flash, 0, R.string.flash_off);
         }
@@ -97,8 +86,6 @@ public class ZBarScannerActivity extends ActionBarActivity implements MessageDia
 
         menuItem = menu.add(Menu.NONE, R.id.menu_camera_selector, 0, R.string.select_camera);
         MenuItemCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_ALWAYS);
-
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -125,12 +112,12 @@ public class ZBarScannerActivity extends ActionBarActivity implements MessageDia
                 return true;
             case R.id.menu_formats:
                 DialogFragment fragment = FormatSelectorDialogFragment.newInstance(this, mSelectedIndices);
-                fragment.show(getSupportFragmentManager(), "format_selector");
+                fragment.show(getActivity().getSupportFragmentManager(), "format_selector");
                 return true;
             case R.id.menu_camera_selector:
                 mScannerView.stopCamera();
                 DialogFragment cFragment = CameraSelectorDialogFragment.newInstance(this, mCameraId);
-                cFragment.show(getSupportFragmentManager(), "camera_selector");
+                cFragment.show(getActivity().getSupportFragmentManager(), "camera_selector");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -138,33 +125,36 @@ public class ZBarScannerActivity extends ActionBarActivity implements MessageDia
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this);
+        mScannerView.startCamera(mCameraId);
+        mScannerView.setFlash(mFlash);
+        mScannerView.setAutoFocus(mAutoFocus);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(FLASH_STATE, mFlash);
+        outState.putBoolean(AUTO_FOCUS_STATE, mAutoFocus);
+        outState.putIntegerArrayList(SELECTED_FORMATS, mSelectedIndices);
+        outState.putInt(CAMERA_ID, mCameraId);
+    }
+
+    @Override
     public void handleResult(Result rawResult) {
-
-        Bundle extras;
-        String stocktakeId;
-        try{
-            extras=getIntent().getExtras();
-            stocktakeId= extras.getString(StocktakeColumns._ID);
-        }catch (NullPointerException e){
-            stocktakeId=null;
-        }
-
-
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
             r.play();
         } catch (Exception e) {}
-        /*showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
-                                                                                              .getName());*/
-
-        ScannerActivity.saveToDB(this,rawResult.getContents(),stocktakeId);
-        Toast.makeText(this, "Scanned " + rawResult.getContents(), Toast.LENGTH_SHORT).show();
+        showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat().getName());
     }
 
     public void showMessageDialog(String message) {
         DialogFragment fragment = MessageDialogFragment.newInstance("Scan Results", message, this);
-        fragment.show(getSupportFragmentManager(), "scan_results");
+        fragment.show(getActivity().getSupportFragmentManager(), "scan_results");
     }
 
     public void closeMessageDialog() {
@@ -176,7 +166,7 @@ public class ZBarScannerActivity extends ActionBarActivity implements MessageDia
     }
 
     public void closeDialog(String dialogName) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         DialogFragment fragment = (DialogFragment) fragmentManager.findFragmentByTag(dialogName);
         if(fragment != null) {
             fragment.dismiss();
@@ -204,7 +194,6 @@ public class ZBarScannerActivity extends ActionBarActivity implements MessageDia
         mScannerView.setFlash(mFlash);
         mScannerView.setAutoFocus(mAutoFocus);
     }
-
 
     public void setupFormats() {
         List<BarcodeFormat> formats = new ArrayList<BarcodeFormat>();

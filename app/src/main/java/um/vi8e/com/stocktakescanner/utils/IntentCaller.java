@@ -1,4 +1,5 @@
 package um.vi8e.com.stocktakescanner.utils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +12,10 @@ import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StockResultActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
-import um.vi8e.com.stocktakescanner.Comment.ZBarScannerActivity;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
+import um.vi8e.com.stocktakescanner.zbar.ScannerFragmentActivity;
+import um.vi8e.com.stocktakescanner.zbar.ZBarScannerActivity;
 
 
 /**
@@ -83,6 +85,14 @@ void scanner(Activity activity) {
 public static
 void zBarscanner(Activity activity) {
 	Intent intent = new Intent ( activity, ZBarScannerActivity.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
+}
+
+public static
+void zBarscannerFragment(Activity activity) {
+	Intent intent = new Intent ( activity, ScannerFragmentActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	activity.startActivity ( intent );
 

@@ -20,8 +20,10 @@
         <item name="android:backgroundSplit">#99000000</item>
     </style>
 
+    <!--@android:style/TextAppearance.Holo.Widget.ActionBar.Title-->
     <style name="ThemeZBar.ActionBarStyle.Transparent.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:windowTitleSize">@dimen/textsizeSubHeading</item>
     </style>
 
 </resources>
