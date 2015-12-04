@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +30,15 @@ private static final String FLASH_STATE      = "FLASH_STATE";
 private static final String AUTO_FOCUS_STATE = "AUTO_FOCUS_STATE";
 private static final String SELECTED_FORMATS = "SELECTED_FORMATS";
 private static final String CAMERA_ID        = "CAMERA_ID";
-private ZBarScannerView    mScannerView;
+public  ZBarScannerView    mScannerView;
 private boolean            mFlash;
 private boolean            mAutoFocus;
 private ArrayList<Integer> mSelectedIndices;
 private int mCameraId = -1;
 Menu         mMenu;
 MenuInflater mMenuInflater;
+private boolean isScan=false;
+
 
 @Override
 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
@@ -53,7 +56,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle st
 		mCameraId = -1;
 	}
 	setupFormats();
-	mScannerView.setEnabled(false);
+	//mScannerView.setEnabled(false);
+	//mScannerView.setVisibility(View.GONE);
 	return mScannerView;
 }
 
@@ -139,6 +143,7 @@ public void onResume() {
 	mScannerView.startCamera(mCameraId);
 	mScannerView.setFlash(mFlash);
 	mScannerView.setAutoFocus(mAutoFocus);
+	setIsScan(false);
 }
 
 @Override
@@ -150,18 +155,33 @@ public void onSaveInstanceState(Bundle outState) {
 	outState.putInt(CAMERA_ID, mCameraId);
 }
 
+public boolean isScan() {
+	return isScan;
+}
+
+public void setIsScan(boolean isScan) {
+	this.isScan = isScan;
+}
+
 @Override
 public void handleResult(Result rawResult) {
-	try {
-		Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-		Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
-		r.play();
-	}
-	catch (Exception e) {
-	}
+
+	if(isScan){
+		try {
+			Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+			Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+			r.play();
+		}
+		catch (Exception e) {
+		}
 	     /* showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
                                                                                               .getName());*/
-	getActivity().setTitle(rawResult.getContents());
+		getActivity().setTitle(rawResult.getContents());
+	}
+	else {
+		Toast.makeText(getContext(),"isScan=false this result will be ignored"+rawResult.getContents(),Toast.LENGTH_SHORT).show();
+	}
+
 }
 
 public void showMessageDialog(String message) {

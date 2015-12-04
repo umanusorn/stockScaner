@@ -25,11 +25,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import java.util.ArrayList;
-
-import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
-import um.vi8e.com.stocktakescanner.Activity.viewStockTake.ViewStockAdapter;
 import um.vi8e.com.stocktakescanner.R;
 
 /**
@@ -38,15 +35,9 @@ import um.vi8e.com.stocktakescanner.R;
  */
 public class ZBarBtnFragment extends Fragment {
 
-private static final String TAG = "ViewStockResultFragment";
-protected RecyclerView               mRecyclerView;
-protected ViewStockAdapter           mAdapter;
+private static final String TAG = "ZBar";
 protected RecyclerView.LayoutManager mLayoutManager;
-public static ArrayList<StocktakeModel>  mDataSet;
-
-public RecyclerView getRecyclerView() {
-	return mRecyclerView;
-}
+public ImageView mZbarBtn;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +48,8 @@ public void onCreate(Bundle savedInstanceState) {
 @Override
 public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState)
-{Log.d(TAG,"onCreateView");
+{
+	Log.d(TAG, "onCreateView");
 	View rootView = inflater.inflate(R.layout.zbar_btn, container, false);
 	rootView.setTag(TAG);
 	setView(savedInstanceState, rootView);
@@ -69,14 +61,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
 private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
-	Log.d(TAG,"setView");
-	//mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-  //mRecyclerView.addOnScrollListener(viewStockTakeActivity.getOnScroll());
-
-	// LinearLayoutManager is used here, this will layout the elements in a similar fashion
-	// to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
-	// elements are laid out.
-	mLayoutManager = new LinearLayoutManager(getActivity());
+	Log.d(TAG, "setView");
+	mZbarBtn = (ImageView) rootView.findViewById(R.id.zbarBtn);
 
 }
 
