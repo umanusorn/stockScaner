@@ -53,6 +53,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle st
         mCameraId = -1;
     }
     setupFormats();
+    mScannerView.setEnabled(false);
     return mScannerView;
 }
 
@@ -154,7 +155,8 @@ public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
             r.play();
         } catch (Exception e) {}
-        showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat().getName());
+       /* showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
+                                                                                              .getName());*/
         getActivity().setTitle(rawResult.getContents());
     }
 
