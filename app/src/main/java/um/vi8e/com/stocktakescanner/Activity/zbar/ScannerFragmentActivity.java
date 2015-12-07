@@ -28,6 +28,7 @@ import java.util.List;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
+import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.utils.Const;
 import um.vi8e.com.stocktakescanner.utils.networkUtil;
@@ -260,13 +261,14 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 			}
 	     /* showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
                                                                                               .getName());*/
-			getActivity().setTitle("Last Scanned: " + rawResult.getContents());
-			setZBarBtnTopInfo(rawResult.getContents());
-			//getActivity().
+			final String barcode = rawResult.getContents();
+			getActivity().setTitle("Last Scanned: " + barcode);
+			setZBarBtnTopInfo(barcode);
+			ScannerActivity.saveToDB(getContext(),barcode,null);
 		}
 		else {
 			getActivity().setTitle("Detected : press button to scan "/*+rawResult.getContents()*/);
-		/*Toast.makeText(getContext(),"isScan=false this result will be ignored"+rawResult.getContents(),Toast.LENGTH_SHORT).show();*/
+
 		}
 
 		mScannerView.startCamera();

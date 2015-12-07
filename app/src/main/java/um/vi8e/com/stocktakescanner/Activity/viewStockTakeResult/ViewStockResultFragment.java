@@ -72,7 +72,7 @@ private void initDataSet(Context context) {
 	Log.d("setUpAdapter", String.valueOf(c.getCount()));
 
 	//todo change
-	List<ContentValues> allCommentValues = QueryHelper.getValuesFromCursor(c, StocktakeresultColumns.ALL_COLUMNS);
+	List<ContentValues> allCommentValues = QueryHelper.getValuesFromCursorDesc(c, StocktakeresultColumns.ALL_COLUMNS);
 	mDataSet = new ArrayList<>();
 	for (ContentValues commentValue : allCommentValues) {
 		//todo change

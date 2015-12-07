@@ -88,6 +88,33 @@ public static List<ContentValues> getValuesFromCursor(Cursor c, String[] ALL_COL
 
 	return values;
 }
+
+public static List<ContentValues> getValuesFromCursorDesc(Cursor c, String[] ALL_COLUMNS) {
+	List<ContentValues> values = new ArrayList<ContentValues>();
+	int i = 0;
+	String key;
+	int index;
+	c.moveToLast();
+	if (c.getCount() > 0) {
+		do {
+			ContentValues value = new ContentValues();
+			//Log.d ( "InWhile cursor=", c.getCount () + "  Values=" + values.size () );
+			for (int j = 0; j < c.getColumnCount(); j++) {
+				key = ALL_COLUMNS[j];
+				index = c.getColumnIndex(key);
+				//Log.d ( "InFor",key+">>"+index );
+				value.put(key, c.getString(index));
+			}
+			i++;
+			values.add(value);
+		}
+		while (c.moveToPrevious());
+	}
+	Log.d("getCount cursor=", c.getCount() + "  Values=" + values.size());
+
+	return values;
+}
+
 public static void genListAndTask(Context context) {
 
 	for (int i = 0; i < 10; i++) {

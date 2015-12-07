@@ -88,10 +88,16 @@ public void setViewFromJson(HashMap<String, String> productInfo){
 	if(productInfo.get(ProductApiKey.STATUS).equals("AS")){
 		//priceTv.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
 		titleTv.setText(productInfo.get(ProductApiKey.DESCRIPTION));
+		barCodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
+		itemCodeTv.setText(productInfo.get(ProductApiKey.ITEM_CODE));
+		descriptionTv.setText("-");
 	}
 	else{
 
 		titleTv.setText("-");
+		barCodeTv.setText("-");
+		itemCodeTv.setText("-");
+		descriptionTv.setText("-");
 	}
 }
 
