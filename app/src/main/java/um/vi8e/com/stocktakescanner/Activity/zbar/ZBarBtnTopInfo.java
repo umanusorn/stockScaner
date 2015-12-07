@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package um.vi8e.com.stocktakescanner.zbar;
+package um.vi8e.com.stocktakescanner.Activity.zbar;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,7 +25,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import um.vi8e.com.stocktakescanner.R;
 
@@ -33,11 +32,9 @@ import um.vi8e.com.stocktakescanner.R;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class ZBarBtnFragment extends Fragment {
+public class ZBarBtnTopInfo extends Fragment {
 
 private static final String TAG = "ZBar";
-protected RecyclerView.LayoutManager mLayoutManager;
-public ImageView mZbarBtn;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState)
 {
 	Log.d(TAG, "onCreateView");
-	View rootView = inflater.inflate(R.layout.zbar_btn, container, false);
+	View rootView = inflater.inflate(R.layout.zbar_topinfo, container, false);
 	rootView.setTag(TAG);
 	setView(savedInstanceState, rootView);
 
@@ -62,7 +59,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
 	Log.d(TAG, "setView");
-	mZbarBtn = (ImageView) rootView.findViewById(R.id.zbarBtn);
+	//mZbarBtn = (ToggleButton) rootView.findViewById(R.id.zbarBtn);
 
 }
 

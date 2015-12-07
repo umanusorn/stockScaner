@@ -1,4 +1,4 @@
-package um.vi8e.com.stocktakescanner.zbar;
+package um.vi8e.com.stocktakescanner.Activity.zbar;
 
 import android.media.Ringtone;
 import android.media.RingtoneManager;

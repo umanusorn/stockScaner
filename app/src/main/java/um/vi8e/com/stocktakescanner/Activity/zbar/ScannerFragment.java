@@ -1,4 +1,4 @@
-package um.vi8e.com.stocktakescanner.zbar;
+package um.vi8e.com.stocktakescanner.Activity.zbar;
 
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +42,7 @@ private boolean isScan=false;
 @Override
 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
 	mScannerView = new ZBarScannerView(getActivity());
+	mScannerView.setAutoFocus(true);
 	if (state != null) {
 		mFlash = state.getBoolean(FLASH_STATE, false);
 		mAutoFocus = state.getBoolean(AUTO_FOCUS_STATE, true);
@@ -176,12 +176,15 @@ public void handleResult(Result rawResult) {
 		}
 	     /* showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
                                                                                               .getName());*/
-		getActivity().setTitle(rawResult.getContents());
+		getActivity().setTitle("Last Scanned: "+rawResult.getContents());
 	}
 	else {
-		Toast.makeText(getContext(),"isScan=false this result will be ignored"+rawResult.getContents(),Toast.LENGTH_SHORT).show();
+		getActivity().setTitle("Detected : press button to scan "/*+rawResult.getContents()*/);
+		/*Toast.makeText(getContext(),"isScan=false this result will be ignored"+rawResult.getContents(),Toast.LENGTH_SHORT).show();*/
 	}
 
+	mScannerView.startCamera();
+	//StartStockTakeActivity.isFinished=true;
 }
 
 public void showMessageDialog(String message) {

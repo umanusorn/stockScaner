@@ -9,7 +9,7 @@
 
 
 
-<!--    <fragment android:name="um.vi8e.com.stocktakescanner.zbar.ScannerFragment"
+<!--    <fragment android:name="um.vi8e.com.stocktakescanner.Activity.zbar.ScannerFragment"
               android:id="@+id/scanner_fragment"
               android:layout_weight="0.9"
               android:layout_width="match_parent"
@@ -17,18 +17,24 @@
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:id="@+id/zbarTopInfo"
+            android:layout_weight="0.4"
+            />
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:id="@+id/scannerFrame"
-            android:layout_weight="0.9"
+            android:layout_weight="0.4"
             />
 
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/zbarBtnFrame"
-            android:layout_weight="0.1"
+            android:layout_weight="0.2"
             />
 <!--
-    <fragment android:name="um.vi8e.com.stocktakescanner.zbar.ZBarBtnFragment"
+    <fragment android:name="um.vi8e.com.stocktakescanner.Activity.zbar.ZBarBtnFragment"
               android:id="@+id/zbar_btn_fragment"
               android:layout_weight="0.1"
               android:layout_width="match_parent"

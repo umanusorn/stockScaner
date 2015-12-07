@@ -52,14 +52,13 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-                android:name=".zbar.ZBarScannerActivity"
+                android:name=".Activity.zbar.ZBarScannerActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/ThemeZBar.AppOverlayTheme" >
         </activity>
 
         <activity
-                android:name=".zbar.ScannerFragmentActivity"
-                android:screenOrientation="portrait"
+                android:name=".Activity.zbar.ScannerFragmentActivity"
                 android:theme="@style/ThemeZBar.AppOverlayTheme" >
         </activity>
 

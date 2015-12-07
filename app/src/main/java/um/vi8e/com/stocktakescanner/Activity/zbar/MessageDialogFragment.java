@@ -1,4 +1,4 @@
-package um.vi8e.com.stocktakescanner.zbar;
+package um.vi8e.com.stocktakescanner.Activity.zbar;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

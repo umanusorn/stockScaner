@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:shape="oval">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- When selected, use grey -->
+    <item android:drawable="@drawable/zbar_btn_click"
+          android:state_checked="true"/>
+    <!-- When not selected, use white-->
+    <item android:drawable="@drawable/zbar_btn_unclick"
+          android:state_checked="false"/>
 
-    <solid
-            android:color="@color/white"/>
-
-    <size
-            android:width="48dp"
-            android:height="48dp"/>
-</shape>
+</selector>

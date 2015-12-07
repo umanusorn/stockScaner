@@ -12,10 +12,10 @@ import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.viewStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StockResultActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
+import um.vi8e.com.stocktakescanner.Activity.zbar.ScannerFragmentActivity;
+import um.vi8e.com.stocktakescanner.Activity.zbar.ZBarScannerActivity;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
-import um.vi8e.com.stocktakescanner.zbar.ScannerFragmentActivity;
-import um.vi8e.com.stocktakescanner.zbar.ZBarScannerActivity;
 
 
 /**

@@ -1,4 +1,4 @@
-package um.vi8e.com.stocktakescanner.zbar;
+package um.vi8e.com.stocktakescanner.Activity.zbar;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +12,7 @@ public class ScannerFragmentActivity extends AppCompatActivity {
 
 private ScannerFragment mScannerFragment;
 ZBarBtnFragment mZBarBtnFragment;
+ZBarBtnTopInfo mZBarBtnTopInfo;
 
 @Override
     public void onCreate(Bundle state) {
@@ -25,6 +26,8 @@ ZBarBtnFragment mZBarBtnFragment;
         fragmentTransaction.add(R.id.scannerFrame, mScannerFragment);
     mZBarBtnFragment=new ZBarBtnFragment();
         fragmentTransaction.add(R.id.zbarBtnFrame, mZBarBtnFragment);
+    mZBarBtnTopInfo=new ZBarBtnTopInfo();
+    fragmentTransaction.add(R.id.zbarTopInfo,mZBarBtnTopInfo);
         fragmentTransaction.commit();
 
 
