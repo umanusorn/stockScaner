@@ -177,6 +177,8 @@ public void handleResult(Result rawResult) {
 	     /* showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
                                                                                               .getName());*/
 		getActivity().setTitle("Last Scanned: "+rawResult.getContents());
+
+		//getActivity().
 	}
 	else {
 		getActivity().setTitle("Detected : press button to scan "/*+rawResult.getContents()*/);

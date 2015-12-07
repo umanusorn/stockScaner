@@ -25,8 +25,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.utils.ProductApiKey;
 
 /**
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
@@ -35,6 +40,8 @@ import um.vi8e.com.stocktakescanner.R;
 public class ZBarBtnTopInfo extends Fragment {
 
 private static final String TAG = "ZBar";
+
+public TextView itemCodeTv, barCodeTv, titleTv, descriptionTv;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,32 @@ private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
 	Log.d(TAG, "setView");
 	//mZbarBtn = (ToggleButton) rootView.findViewById(R.id.zbarBtn);
+	itemCodeTv = (TextView) rootView.findViewById(R.id.itemcodeValue);
+	barCodeTv = (TextView) rootView.findViewById(R.id.barcodeValue);
+	titleTv = (TextView) rootView.findViewById(R.id.titleTv);
+	descriptionTv = (TextView) rootView.findViewById(R.id.descriptionTv);
 
+}
+
+public void setViewFromJson(HashMap<String, String> productInfo){
+	//barcodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
+
+
+	String fulldetail="";
+	for (Map.Entry<String, String> entry : productInfo.entrySet())
+	{
+		fulldetail+= entry.getKey() + ":\t\t" + entry.getValue()+"\n";
+	}
+	//fullDetailTv.setText(fulldetail);
+
+	if(productInfo.get(ProductApiKey.STATUS).equals("AS")){
+		//priceTv.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
+		titleTv.setText(productInfo.get(ProductApiKey.DESCRIPTION));
+	}
+	else{
+
+		titleTv.setText("-");
+	}
 }
 
 @Override

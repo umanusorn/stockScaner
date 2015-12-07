@@ -1,91 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:background="@color/black"
                 android:paddingTop="?actionBarSize"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="10dp"
-              android:layout_height="match_parent">
+                android:layout_height="match_parent">
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:background="@color/white"
-                    android:padding="10dp"
+                    android:background="@color/black"
+                    android:paddingTop="5dp"
                     android:layout_height="match_parent">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Scanned Item:"
-            android:id="@+id/textView8"
-            />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:background="@color/white"
+                        android:padding="10dp"
+                        android:layout_height="match_parent">
 
-    <ImageView
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:src="@drawable/no_img_available"
-            android:id="@+id/imageView"
-            android:layout_below="@+id/textView8"
-            android:layout_alignParentStart="true"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scanned Item:"
+                    android:id="@+id/textView8"
+                    />
 
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView">
+            <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/no_img_available"
+                    android:id="@+id/imageView"
+                    android:layout_below="@+id/textView8"
+                    android:layout_alignParentStart="true"/>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/header_text_size"
-                android:text="Medium Text"
-                android:id="@+id/textView7"/>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:layout_alignTop="@+id/imageView"
+                    android:layout_toEndOf="@+id/imageView">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Medium Text"
-                android:id="@+id/textView9"
-                android:layout_below="@+id/textView7"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ITEM CODE"
-                android:textSize="10sp"
-                android:paddingTop="15dp"
-                android:id="@+id/textView10"
-                android:layout_below="@+id/textView9"
-                android:layout_alignStart="@+id/textView9"/>
+                        android:id="@+id/titleTv"
+                        android:text="Medium Text"
+                        android:textColor="@color/black"/>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="itemcodeValue"
-                android:id="@+id/itemcodeValue"
-                android:layout_below="@+id/textView10"
-                android:layout_alignStart="@+id/textView10"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medium Text"
+                        android:textSize="10sp"
+                        android:id="@+id/descriptionTv"
+                        android:layout_below="@+id/titleTv"/>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:textSize="10sp"
-                android:text="BARCODE"
-                android:id="@+id/textView12"
-                android:layout_below="@+id/itemcodeValue"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ITEM CODE"
+                        android:textSize="8sp"
+                        android:paddingTop="10dp"
+                        android:id="@+id/textView10"
+                        android:layout_below="@+id/descriptionTv"
+                        android:layout_alignStart="@+id/descriptionTv"/>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="barcodeValue"
-                android:id="@+id/barcodeValue"
-                android:layout_below="@+id/textView12"
-                android:layout_alignStart="@+id/textView12"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="itemcodeValue"
+                        android:id="@+id/itemcodeValue"
+                        android:layout_below="@+id/textView10"
+                        android:layout_alignStart="@+id/textView10"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:textSize="8sp"
+                        android:text="BARCODE"
+                        android:id="@+id/textView12"
+                        android:layout_below="@+id/itemcodeValue"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="barcodeValue"
+                        android:id="@+id/barcodeValue"
+                        android:layout_below="@+id/textView12"
+                        android:layout_alignStart="@+id/textView12"/>
+            </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
 </RelativeLayout>

@@ -11,4 +11,9 @@ public class Status {
 	public static final String COMPLETED = "Completed";
 	public static final String DELETED   = "Deleted";
 }
+
+public static String getApiUrl(String barcode){
+return  "http://staging.uobapi.vi9e.com/product/CS/121/5156441/"+barcode+"/7b04dbce9373f29617eb53d1bb38463e";
+}
+
 }

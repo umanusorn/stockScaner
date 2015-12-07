@@ -18,6 +18,7 @@ import java.util.Map;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
+import um.vi8e.com.stocktakescanner.utils.Const;
 import um.vi8e.com.stocktakescanner.utils.ProductApiKey;
 import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
@@ -61,7 +62,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	//686686
 
-	String test3 = "http://staging.uobapi.vi9e.com/product/CS/121/5156441/"+barcode+"/7b04dbce9373f29617eb53d1bb38463e";
+	String test3 = Const.getApiUrl(barcode);
 	String test1 = "http://hmkcode.appspot.com/rest/controller/get.json";
 	new HttpAsyncTaskGET().execute(test3);
 

@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import um.vi8e.com.stocktakescanner.R;
@@ -38,6 +39,7 @@ public class ZBarBtnFragment extends Fragment {
 private static final String TAG = "ZBar";
 protected RecyclerView.LayoutManager mLayoutManager;
 public    ToggleButton               mZbarBtn;
+public    TextView                   mAddItemTv, mCancelTv;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	rootView.setTag(TAG);
 	setView(savedInstanceState, rootView);
 
-
 	return rootView;
 }
 
@@ -63,7 +64,8 @@ private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
 	Log.d(TAG, "setView");
 	mZbarBtn = (ToggleButton) rootView.findViewById(R.id.zbarBtn);
-
+	mAddItemTv = (TextView) rootView.findViewById(R.id.addItemTv);
+	mCancelTv = (TextView) rootView.findViewById(R.id.cancelAddItemTv);
 }
 
 @Override
