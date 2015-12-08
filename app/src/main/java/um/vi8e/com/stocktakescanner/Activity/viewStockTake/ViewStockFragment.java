@@ -84,7 +84,7 @@ public void setFragmentAdaptor(){
  * Generates Strings for RecyclerView's adapter. This data would usually come
  * from a local content provider or remote server.
  */
-private void initDataSet(Context context) {
+public void initDataSet(Context context) {
 	//todo change
 	StocktakeSelection where = new StocktakeSelection();
 	//where.taskId(TaskActivity.currentTask.getId());

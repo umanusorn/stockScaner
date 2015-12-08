@@ -20,7 +20,7 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 import um.vi8e.com.stocktakescanner.utils.RecycleUtil;
 
 public class viewStockTakeActivity extends CoreActivity implements ActionBar.TabListener {
-public static ViewStockFragment viewStockFragment;
+public static ViewStockFragment recycleFragment;
 private       DrawerLayout      mDrawerLayout;
 LinearLayout searchContainer;
 EditText     toolbarSearchView;
@@ -37,15 +37,15 @@ protected void onCreate(Bundle savedInstanceState) {
 	thisSavedInstanceState = savedInstanceState;
 	//ActivityUi.setToolBar(thisActivity, mToolbar, "VIEW STOCKTAKE");
 	QueryHelper.genListAndTask(getApplicationContext());
-	viewStockFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
-	                                                                         thisActivity, ModelType
-			                                                                         .STOCK_TAKE);
+	recycleFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
+	                                                                       thisActivity, ModelType
+			                                                                       .STOCK_TAKE);
 	final ActionBar ab = getSupportActionBar();
 	ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 	ab.setDisplayHomeAsUpEnabled(true);
 
 
-	String[] tabTitles={"TIME","QTY","LOCATION","STATUS"};
+	String[] tabTitles = {"TIME", "QTY", "LOCATION", "STATUS"};
 	setTabLayout(tabTitles);
 
 	mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -99,7 +99,8 @@ public boolean onOptionsItemSelected(MenuItem item) {
 protected void onResumeFragments() {
 	super.onResumeFragments();
 	Log.d(TAG, "onResumeFragment");
-
+	recycleFragment.initDataSet(getApplicationContext());
+recycleFragment.setFragmentAdaptor();
 
 //RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_TAKE);
 

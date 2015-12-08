@@ -44,9 +44,9 @@ import um.vi8e.com.stocktakescanner.utils.QueryHelper;
 public class ViewStockResultFragment extends Fragment {
 
 private static final String TAG = "ViewStockResultFragment";
-protected RecyclerView                    mRecyclerView;
-protected ViewStockResultAdapter          mAdapter;
-protected RecyclerView.LayoutManager      mLayoutManager;
+protected     RecyclerView                    mRecyclerView;
+protected     ViewStockResultAdapter          mAdapter;
+protected     RecyclerView.LayoutManager      mLayoutManager;
 public static ArrayList<StocktakeresultModel> mDataSet;
 
 @Override
@@ -59,7 +59,7 @@ public void onCreate(Bundle savedInstanceState) {
  * Generates Strings for RecyclerView's adapter. This data would usually come
  * from a local content provider or remote server.
  */
-private void initDataSet(Context context) {
+public void initDataSet(Context context) {
 	//todo change
 	StocktakeresultSelection where = new StocktakeresultSelection();
 	where.stocktakeId(StockResultActivity.currentStockTakeId);
@@ -88,12 +88,14 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	rootView.setTag(TAG);
 	setView(savedInstanceState, rootView);
 
-	//todo change
+	setFragmentAdaptor();
+	return rootView;
+}
+
+public void setFragmentAdaptor() {
 	mAdapter = new ViewStockResultAdapter(mDataSet, getContext());
 	// Set ViewStockResultAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
-
-	return rootView;
 }
 
 private void setView(Bundle savedInstanceState, View rootView) {

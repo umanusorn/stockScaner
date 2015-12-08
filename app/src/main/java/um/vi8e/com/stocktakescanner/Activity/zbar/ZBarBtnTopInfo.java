@@ -42,6 +42,7 @@ public class ZBarBtnTopInfo extends Fragment {
 private static final String TAG = "ZBar";
 
 public TextView itemCodeTv, barCodeTv, titleTv, descriptionTv;
+private View mRootView;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -54,15 +55,21 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState)
 {
 	Log.d(TAG, "onCreateView");
-	View rootView = inflater.inflate(R.layout.zbar_topinfo, container, false);
-	rootView.setTag(TAG);
-	setView(savedInstanceState, rootView);
+	mRootView = inflater.inflate(R.layout.zbar_topinfo, container, false);
+	mRootView.setTag(TAG);
+	setView(savedInstanceState, mRootView);
 
 
-	return rootView;
+	return mRootView;
 }
 
+public void hidTopInfo(){
+	mRootView.setVisibility(View.INVISIBLE);
+}
 
+public  void showTopInfo(){
+	mRootView.setVisibility(View.VISIBLE);
+}
 private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
 	Log.d(TAG, "setView");
@@ -74,31 +81,38 @@ private void setView(Bundle savedInstanceState, View rootView) {
 
 }
 
-public void setViewFromJson(HashMap<String, String> productInfo){
+public void setViewFromJson(HashMap<String, String> productInfo) {
 	//barcodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
 
 
-	String fulldetail="";
-	for (Map.Entry<String, String> entry : productInfo.entrySet())
-	{
-		fulldetail+= entry.getKey() + ":\t\t" + entry.getValue()+"\n";
+	String fulldetail = "";
+	for (Map.Entry<String, String> entry : productInfo.entrySet()) {
+		fulldetail += entry.getKey() + ":\t\t" + entry.getValue() + "\n";
 	}
 	//fullDetailTv.setText(fulldetail);
 
-	if(productInfo.get(ProductApiKey.STATUS).equals("AS")){
+	if (productInfo.get(ProductApiKey.STATUS).equals("AS")) {
 		//priceTv.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
 		titleTv.setText(productInfo.get(ProductApiKey.DESCRIPTION));
 		barCodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
 		itemCodeTv.setText(productInfo.get(ProductApiKey.ITEM_CODE));
 		descriptionTv.setText("-");
 	}
-	else{
-
-		titleTv.setText("-");
-		barCodeTv.setText("-");
-		itemCodeTv.setText("-");
-		descriptionTv.setText("-");
+	else {
+		setEmptyText(null);
 	}
+}
+
+public void setEmptyText(String barcode) {
+	titleTv.setText("-");
+	if (barcode != null) {
+		barCodeTv.setText(barcode);
+	}
+	else {
+		barCodeTv.setText("-");
+	}
+	itemCodeTv.setText("-");
+	descriptionTv.setText("-");
 }
 
 @Override

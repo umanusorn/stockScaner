@@ -51,11 +51,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity
-                android:name=".Activity.zbar.ZBarScannerActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/ThemeZBar.AppOverlayTheme" >
-        </activity>
 
         <activity
                 android:name=".Activity.zbar.ScannerFragmentActivity"

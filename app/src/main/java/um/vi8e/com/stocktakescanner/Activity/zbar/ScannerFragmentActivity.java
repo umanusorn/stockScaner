@@ -56,6 +56,7 @@ public void onCreate(Bundle state) {
 	fragmentTransaction.commit();
 
 
+
 }
 
 @Override protected void onResumeFragments() {
@@ -63,6 +64,7 @@ public void onCreate(Bundle state) {
     mScannerFragment.mScannerView.stopCamera();
     mScannerFragment.mScannerView.startCamera();*/
 	// mScannerFragment.mScannerView.setVisibility(View.INVISIBLE);
+	hideTopInfo();
 
 	mZBarBtnFragment.mAddItemTv.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
@@ -76,8 +78,18 @@ public void onCreate(Bundle state) {
 	});
 }
 
+public void hideTopInfo(){
+
+	mZBarBtnTopInfo.hidTopInfo();
+}
+
+public void showTopInfo(){
+	mZBarBtnTopInfo.showTopInfo();
+}
+
 public void setZBarBtnTopInfo(String barcode) {
 	//mZBarBtnTopInfo.
+	mZBarBtnTopInfo.setEmptyText(barcode);
 	new HttpAsyncTaskGET().execute(Const.getApiUrl(barcode));
 }
 
@@ -263,11 +275,13 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
                                                                                               .getName());*/
 			final String barcode = rawResult.getContents();
 			getActivity().setTitle("Last Scanned: " + barcode);
+			showTopInfo();
 			setZBarBtnTopInfo(barcode);
 			ScannerActivity.saveToDB(getContext(),barcode,null);
 		}
 		else {
-			getActivity().setTitle("Detected : press button to scan "/*+rawResult.getContents()*/);
+			hideTopInfo();
+			//getActivity().setTitle("Detected : press button to scan "/*+rawResult.getContents()*/);
 
 		}
 

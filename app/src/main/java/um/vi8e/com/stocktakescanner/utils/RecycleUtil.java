@@ -42,7 +42,11 @@ public static Fragment setUpRecycleFragment(Bundle savedInstanceState, AppCompat
 			default:
 				Log.e(TAG, "ModelType ERROR:" + modelType);
 		}
+
+		if(!transaction.isEmpty())
+			transaction.remove(fragment);
 		transaction.replace(R.id.recycle_content_fragment, fragment);
+
 		transaction.commit();
 
 

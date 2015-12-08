@@ -31,6 +31,7 @@ StocktakeresultModel mStocktakeresultModel;
 FloatingActionButton fab;
 Bundle               extras;
 TextView             location, date, status, save, cancel;
+private ViewStockResultFragment recycleFragment;
 
 @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 	MenuInflater inflater = mode.getMenuInflater();
@@ -65,10 +66,13 @@ protected void onCreate(Bundle savedInstanceState) {
 			                         extras.getString(StocktakeresultColumns
 					                                          .DATETIME_SCANNNED));
 
-	String[] tabTitles={"Barcode","QTY","Action"};
+	String[] tabTitles = {"Barcode", "QTY", "Action"};
 	setTabLayout(tabTitles);
 
-	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.STOCK_RESULT);
+	recycleFragment =
+			(ViewStockResultFragment) RecycleUtil.setUpRecycleFragment(savedInstanceState,
+			                                                           thisActivity,
+			                                                           ModelType.STOCK_RESULT);
 
 	setView();
 }
@@ -86,9 +90,9 @@ private void setView() {
 	status.setText(statusValue);
 
 
-	if(!statusValue.equals(Const.Status.PENDING)){
-		Log.d(TAG,"is not pending so dont show fab");
-		fab =(FloatingActionButton)findViewById(R.id.fab);
+	if (!statusValue.equals(Const.Status.PENDING)) {
+		Log.d(TAG, "is not pending so dont show fab");
+		fab = (FloatingActionButton) findViewById(R.id.fab);
 		fab.setVisibility(View.GONE);
 	}
 
@@ -108,8 +112,10 @@ private void setView() {
 @Override public boolean onOptionsItemSelected(MenuItem item) {
 
 
-	switch (item.getItemId()){
-		case R.id.action_save_result: saveResult();break;
+	switch (item.getItemId()) {
+		case R.id.action_save_result:
+			saveResult();
+			break;
 
 	}
 	return super.onOptionsItemSelected(item);
@@ -132,7 +138,7 @@ private void saveResult() {
 	}
 
 	Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
-	viewStockTakeActivity.viewStockFragment.setFragmentAdaptor();
+	viewStockTakeActivity.recycleFragment.setFragmentAdaptor();
 	finish();
 }
 
@@ -144,9 +150,11 @@ public void onClickFab(View view) {
 }
 
 @Override
-protected void  onResumeFragments(){
+protected void onResumeFragments() {
 	super.onResumeFragments();
 	Log.d(TAG, "onResumeFragment");
+	recycleFragment.initDataSet(getApplicationContext());
+	recycleFragment.setFragmentAdaptor();
 
 //	RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_RESULT);
 
