@@ -71,7 +71,6 @@ protected void onCreate(Bundle savedInstanceState) {
 void setViewFromJson(HashMap<String, String> productInfo){
 	//barcodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
 
-
 	String fulldetail="";
 	for (Map.Entry<String, String> entry : productInfo.entrySet())
 	{

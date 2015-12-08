@@ -44,7 +44,7 @@ void startTake(Activity activity) {
 public static
 void startTakeFromBarCode ( Activity activity,Bundle bundle) {
 	Intent intent = new Intent ( activity, StartStockTakeActivity.class);
-	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	StartStockTakeActivity.isFinished=false;
 	intent.putExtras(bundle);
 	activity.startActivity ( intent );
@@ -99,7 +99,8 @@ void zBarscannerFragment(Activity activity) {
 
 public static
 void scannerFromBarCode ( Activity activity,Bundle bundle) {
-	Intent intent = new Intent ( activity, ScannerActivity.class);
+	Intent intent = new Intent ( activity, ScannerFragmentActivity.class);
+	//Intent intent = new Intent ( activity, ScannerActivity.class);
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	intent.putExtras(bundle);
 	activity.startActivity ( intent );

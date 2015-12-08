@@ -1,11 +1,8 @@
 package um.vi8e.com.stocktakescanner.Activity.zbar;
 
 import android.app.Activity;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -19,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -30,6 +28,7 @@ import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.utils.Const;
 import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
@@ -38,6 +37,8 @@ public class ScannerFragmentActivity extends AppCompatActivity {
 private ScannerFragment mScannerFragment;
 ZBarBtnFragment mZBarBtnFragment;
 public ZBarBtnTopInfo mZBarBtnTopInfo;
+String barcode;
+private String mStocktakeId;
 
 @Override
 public void onCreate(Bundle state) {
@@ -55,20 +56,27 @@ public void onCreate(Bundle state) {
 	fragmentTransaction.add(R.id.zbarTopInfo, mZBarBtnTopInfo);
 	fragmentTransaction.commit();
 
-
+	Bundle extras;
+	try {
+		extras = getIntent().getExtras();
+		mStocktakeId = extras.getString(StocktakeColumns._ID);
+	}
+	catch (NullPointerException e) {
+		mStocktakeId = null;
+	}
 
 }
 
 @Override protected void onResumeFragments() {
-	super.onResumeFragments();/*
-    mScannerFragment.mScannerView.stopCamera();
-    mScannerFragment.mScannerView.startCamera();*/
-	// mScannerFragment.mScannerView.setVisibility(View.INVISIBLE);
+	super.onResumeFragments();
 	hideTopInfo();
 
 	mZBarBtnFragment.mAddItemTv.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			mScannerFragment.setIsScan(!mScannerFragment.isScan());
+			//mScannerFragment.setIsScan(!mScannerFragment.isScan());
+
+			ScannerActivity.saveToDB(getApplicationContext(), barcode, mStocktakeId);
+			Toast.makeText(getApplicationContext(),"saved"+barcode+" to db",Toast.LENGTH_SHORT).show();
 		}
 	});
 	mZBarBtnFragment.mCancelTv.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +138,7 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 		try {
 
 			// setViewFromJson(networkUtil.jsonToMap(result));
-			mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result));
+			mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result), barcode);
 
 		}
 		catch (JSONException e) {
@@ -155,7 +163,7 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 	private int mCameraId = -1;
 	Menu         mMenu;
 	MenuInflater mMenuInflater;
-	private boolean isScan = false;
+	private boolean isScan = true;
 
 
 	@Override
@@ -262,27 +270,22 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 
 	@Override
 	public void handleResult(Result rawResult) {
+		barcode = rawResult.getContents();
+		getActivity().setTitle("Last Scanned: " + barcode);
+		setZBarBtnTopInfo(barcode);
+		showTopInfo();
+
+
 
 		if (isScan) {
-			try {
-				Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-				Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
-				r.play();
-			}
-			catch (Exception e) {
-			}
+
 	     /* showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
                                                                                               .getName());*/
-			final String barcode = rawResult.getContents();
-			getActivity().setTitle("Last Scanned: " + barcode);
-			showTopInfo();
-			setZBarBtnTopInfo(barcode);
-			ScannerActivity.saveToDB(getContext(),barcode,null);
+
 		}
 		else {
-			hideTopInfo();
+			//hideTopInfo();
 			//getActivity().setTitle("Detected : press button to scan "/*+rawResult.getContents()*/);
-
 		}
 
 		mScannerView.startCamera();

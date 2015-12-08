@@ -62,7 +62,9 @@ protected void onCreate(Bundle savedInstanceState) {
 	if (mExtras != null) {
 		setDateTv.setText(mExtras.getString(StocktakeColumns.DATETIME_STARTED));
 		locationEditText.setText(mExtras.getString(StocktakeColumns.LOCATION));
-		IntentCaller.scannerFromBarCode(thisActivity,mExtras);
+		IntentCaller.scannerFromBarCode(thisActivity, mExtras);
+
+		//IntentCaller.zBarscannerFragment(thisActivity);
 	}
 
 }
