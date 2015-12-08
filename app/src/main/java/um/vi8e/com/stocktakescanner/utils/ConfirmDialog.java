@@ -29,9 +29,6 @@ public static void show(Context context,String msg,final ConfirmListener listene
 	builder.show();
 }
 
-
-
-
 public interface ConfirmListener {
 	void onConfirm(String key);
 }

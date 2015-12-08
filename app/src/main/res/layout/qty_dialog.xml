@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+                android:padding="15dp"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:paddingBottom="10dp"
+            android:id="@+id/relativeLayout3">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textView7"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="X"
+                android:id="@+id/textView9"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Item Quantity:"
+            android:id="@+id/textView11"
+            android:padding="10dp"
+            android:layout_below="@+id/relativeLayout3"
+            android:layout_centerHorizontal="true"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/textView13"
+            android:padding="10dp"
+            android:layout_below="@+id/textView11"
+            android:layout_centerHorizontal="true"/>
+
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plusBtn"
+            android:src="@drawable/ic_add_circle_teal_500_36dp"
+            android:layout_alignBottom="@+id/textView13"
+            android:layout_toEndOf="@+id/textView11"/>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/minusBtn"
+            android:src="@drawable/custom_minus_btn"
+            android:layout_above="@+id/addItemTv"
+            android:layout_toStartOf="@+id/textView11"/>
+
+    <TextView
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="@dimen/md_content_textsize"
+            android:textColor="@color/white"
+            android:background="@color/green_400"
+            android:text="Add Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addItemTv"
+            android:layout_below="@+id/plusBtn"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="19dp"/>
+
+    <LinearLayout
+            android:id="@+id/LL_Seperator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="5dp"
+            android:background="#37000000"
+            android:orientation="horizontal"
+            android:layout_alignTop="@+id/textView11"
+            android:layout_alignParentStart="true">
+    </LinearLayout>
+
+
+</RelativeLayout>
