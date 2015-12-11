@@ -53,7 +53,7 @@ public static void showQtyDialog(final Activity thisContext, final HashMap<Strin
 	});
 
 
-	scoreDialog.findViewById(R.id.addItemTv).setOnClickListener(new View.OnClickListener() {
+	scoreDialog.findViewById(R.id.saveNExit).setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 
 			ScannerActivity.saveToDB(thisContext,productInfo.get(ProductApiKey.BARCODE),stocktakeModel.getId(),stocktakeModel.getLocation(),stocktakeModel.getDatetimeStarted(),qtyTextDialog.getText().toString() );

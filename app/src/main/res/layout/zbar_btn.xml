@@ -28,7 +28,7 @@
             android:text="Add Item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/addItemTv"/>
+            android:id="@+id/saveNExit"/>
     <TextView
             android:padding="10dp"
             android:layout_marginTop="10dp"
@@ -40,6 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cancelAddItemTv"
-            android:layout_below="@+id/addItemTv"
+            android:layout_below="@+id/saveNExit"
             android:layout_alignParentStart="true"/>
 </RelativeLayout>

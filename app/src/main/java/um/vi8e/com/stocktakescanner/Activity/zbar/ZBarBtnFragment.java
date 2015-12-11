@@ -64,7 +64,7 @@ private void setView(Bundle savedInstanceState, View rootView) {
 // BEGIN_INCLUDE(initializeRecyclerView)
 	Log.d(TAG, "setView");
 	mZbarBtn = (ToggleButton) rootView.findViewById(R.id.zbarBtn);
-	mAddItemTv = (TextView) rootView.findViewById(R.id.addItemTv);
+	mAddItemTv = (TextView) rootView.findViewById(R.id.saveNExit);
 	mCancelTv = (TextView) rootView.findViewById(R.id.cancelAddItemTv);
 }
 

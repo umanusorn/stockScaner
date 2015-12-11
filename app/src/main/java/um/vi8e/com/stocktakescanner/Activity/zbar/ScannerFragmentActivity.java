@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,8 +47,11 @@ private String                  mStocktakeId;
 private AppCompatActivity       thisActivity;
 private HashMap<String, String> mProductInfo;
 
-public static String dateScanned;
-public static String location;
+public static String          dateScanned;
+public static String          location;
+public        ZBarScannerView mScannerView;
+private       boolean         isGotData;
+public static boolean isBack = false;
 
 @Override
 public void onCreate(Bundle state) {
@@ -110,6 +114,7 @@ public void onCreate(Bundle state) {
 			finish();
 		}
 	});
+	isGotData = false;
 
 }
 
@@ -128,7 +133,6 @@ public void setZBarBtnTopInfo(String barcode) {
 }
 
 
-
 public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 
 	public String getResult() {
@@ -145,7 +149,6 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 		return networkUtil.GET(urls[0]);
 	}
 
-	// onPostExecute displays the results of the AsyncTask.
 	@Override
 	protected void onPostExecute(String result) {
 		this.result = result;
@@ -153,11 +156,19 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 			mProductInfo = mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result), barcode);
 			Date date = new Date();
 			String timeScanned = DateTimeHelper.getFormatedDate(date);
-			StocktakeresultModel stocktakeresultModel = new StocktakeresultModel(mStocktakeId,barcode,"1",timeScanned);
-			IntentCaller.barcode(thisActivity,stocktakeresultModel);
+
+			StocktakeresultModel stocktakeresultModel = new StocktakeresultModel(mStocktakeId, barcode, "1", timeScanned);
+			mScannerView.stopCamera();
+			isGotData = true;
+			IntentCaller.barcode(thisActivity, stocktakeresultModel, location);
+
 		}
 		catch (JSONException e) {
+
 			e.printStackTrace();
+			Log.d("async", "wrong url");
+			Toast.makeText(getApplicationContext(), "Not found product info from this barcode", Toast.LENGTH_SHORT).show();
+			mScannerView.startCamera();
 		}
 
 	}
@@ -171,7 +182,7 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 	private static final String AUTO_FOCUS_STATE = "AUTO_FOCUS_STATE";
 	private static final String SELECTED_FORMATS = "SELECTED_FORMATS";
 	private static final String CAMERA_ID        = "CAMERA_ID";
-	public  ZBarScannerView    mScannerView;
+
 	private boolean            mFlash;
 	private boolean            mAutoFocus;
 	private ArrayList<Integer> mSelectedIndices;
@@ -223,7 +234,6 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 			case R.id.menu_flash:
 				mFlash = !mFlash;
@@ -266,7 +276,12 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 		mScannerView.startCamera(mCameraId);
 		mScannerView.setFlash(mFlash);
 		mScannerView.setAutoFocus(mAutoFocus);
+		if (isBack) {
+			isBack=false;
+			finish();
+		}
 		setIsScan(false);
+
 	}
 
 	@Override
@@ -288,13 +303,17 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 
 	@Override
 	public void handleResult(Result rawResult) {
-		barcode = rawResult.getContents();
-		getActivity().setTitle("Last Scanned: " + barcode);
-		setZBarBtnTopInfo(barcode);
-		showTopInfo();
-		//mScannerView.startCamera();
-		isScan=true;
-		StartStockTakeActivity.isFinished=true;
+		isScan = true;
+		if (!isGotData) {
+			barcode = rawResult.getContents();
+			getActivity().setTitle("Last Scanned: " + barcode);
+
+			setZBarBtnTopInfo(barcode);
+			showTopInfo();
+			StartStockTakeActivity.isFinished = true;
+
+
+		}
 
 		//StartStockTakeActivity.isFinished=true;
 	}

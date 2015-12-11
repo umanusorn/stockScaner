@@ -60,11 +60,21 @@ void barcode ( Activity activity,StocktakeresultModel stocktakeresultModel) {
 	intent.putExtra(StocktakeresultColumns.DATETIME_SCANNNED, stocktakeresultModel.getDatetimeScannned());
 	intent.putExtra(StocktakeresultColumns.QTY, stocktakeresultModel.getQty());
 	intent.putExtra(StocktakeresultColumns.STOCKTAKE_ID, stocktakeresultModel.getStocktakeId());
-
 	activity.startActivity ( intent );
-
 }
 
+public static
+void barcode ( Activity activity,StocktakeresultModel stocktakeresultModel,String location) {
+	Intent intent = new Intent ( activity, BarcodeDetailActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	intent.putExtra(StocktakeresultColumns._ID, stocktakeresultModel.getId());
+	intent.putExtra(StocktakeresultColumns.BARCODE, stocktakeresultModel.getBarcode());
+	intent.putExtra(StocktakeresultColumns.DATETIME_SCANNNED, stocktakeresultModel.getDatetimeScannned());
+	intent.putExtra(StocktakeresultColumns.QTY, stocktakeresultModel.getQty());
+	intent.putExtra(StocktakeresultColumns.STOCKTAKE_ID, stocktakeresultModel.getStocktakeId());
+	intent.putExtra(StocktakeColumns.LOCATION, location);
+	activity.startActivity ( intent );
+}
 public static
  void viewStockTake ( Activity activity ) {
 	Intent intent = new Intent ( activity, viewStockTakeActivity.class);

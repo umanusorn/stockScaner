@@ -29,7 +29,7 @@
                     android:text="Save &amp; Continue"
                     android:textAllCaps="true"
                     android:id="@+id/saveNContinue"
-                    android:layout_above="@+id/addItemTv"
+                    android:layout_above="@+id/saveNExit"
                     android:layout_marginBottom="10dp"/>
         <TextView
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:background="@color/green"
                 android:text="Save &amp; Exit"
                 android:textAllCaps="true"
-                android:id="@+id/addItemTv"
+                android:id="@+id/saveNExit"
                 android:layout_above="@+id/cancel"
                 android:layout_marginBottom="10dp"/>
 

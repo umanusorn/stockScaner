@@ -9,13 +9,16 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import um.vi8e.com.stocktakescanner.Activity.zbar.ScannerFragmentActivity;
 import um.vi8e.com.stocktakescanner.R;
+import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.Const;
@@ -24,7 +27,7 @@ import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
 public class BarcodeDetailActivity extends CoreActivity {
 
-TextView barcodeTv, dateTimeScannedTv, qty, priceTv, descTv, fullDetailTv,cancel;
+TextView barcodeTv, dateTimeScannedTv, qty, priceTv, descTv, fullDetailTv,cancel,saveNExit;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	final String barcode = extras.getString(StocktakeresultColumns.BARCODE);
 	final String dateTime = extras.getString(StocktakeresultColumns.DATETIME_SCANNNED);
+	final String stockId=extras.getString(StocktakeresultColumns.STOCKTAKE_ID);
+	final String location = extras.getString(StocktakeColumns.LOCATION);
 
 	dateTimeScannedTv = (TextView) findViewById(R.id.dateTimeScanned);
 	priceTv = (TextView) findViewById(R.id.price);
@@ -46,6 +51,16 @@ protected void onCreate(Bundle savedInstanceState) {
 	fullDetailTv = (TextView) findViewById(R.id.fulldetail);
 	barcodeTv = (TextView) findViewById(R.id.barcode_detail);
 	cancel=(TextView)findViewById(R.id.cancel);
+	saveNExit=(TextView)findViewById(R.id.saveNExit);
+
+	saveNExit.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			ScannerActivity.saveToDB(getApplicationContext(),barcode,stockId,location,dateTime,"1");
+			Toast.makeText( getApplicationContext(),"saved",Toast.LENGTH_LONG).show();
+			ScannerFragmentActivity.isBack=true;
+			finish();
+		}
+	});
 
 
 	barcodeTv.setText(barcode);
