@@ -54,7 +54,7 @@
 
         <activity
                 android:name=".Activity.zbar.ScannerFragmentActivity"
-                android:theme="@style/ThemeZBar.AppOverlayTheme" >
+                android:theme="@style/AppFullScreenTheme" >
         </activity>
 
         <activity

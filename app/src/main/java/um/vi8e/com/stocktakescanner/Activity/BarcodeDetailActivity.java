@@ -24,7 +24,7 @@ import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
 public class BarcodeDetailActivity extends CoreActivity {
 
-TextView barcodeTv, dateTimeScannedTv, qty, priceTv, descTv, fullDetailTv;
+TextView barcodeTv, dateTimeScannedTv, qty, priceTv, descTv, fullDetailTv,cancel;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	ActivityUi.setToolBar(this, toolbar, "Barcode Detail");
 	Bundle extras = getIntent().getExtras();
 
-
 	final String barcode = extras.getString(StocktakeresultColumns.BARCODE);
 	final String dateTime = extras.getString(StocktakeresultColumns.DATETIME_SCANNNED);
 
@@ -46,11 +45,17 @@ protected void onCreate(Bundle savedInstanceState) {
 	descTv = (TextView) findViewById(R.id.desc);
 	fullDetailTv = (TextView) findViewById(R.id.fulldetail);
 	barcodeTv = (TextView) findViewById(R.id.barcode_detail);
+	cancel=(TextView)findViewById(R.id.cancel);
+
 
 	barcodeTv.setText(barcode);
 	dateTimeScannedTv.setText(dateTime);
 
-
+cancel.setOnClickListener(new View.OnClickListener() {
+	@Override public void onClick(View v) {
+		finish();
+	}
+});
 	// check if you are connected or not
 	if (isConnected()) {
 		//dateTimeScannedTv.setBackgroundColor(0xFF00CC00);

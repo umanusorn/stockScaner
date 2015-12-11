@@ -1,8 +1,5 @@
 package um.vi8e.com.stocktakescanner.Activity.zbar;
 
-import android.app.Activity;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -21,17 +18,22 @@ import android.widget.Toast;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
+import um.vi8e.com.stocktakescanner.Activity.StartStockTakeActivity;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.utils.Const;
 import um.vi8e.com.stocktakescanner.utils.CustomDialog;
+import um.vi8e.com.stocktakescanner.utils.DateTimeHelper;
+import um.vi8e.com.stocktakescanner.utils.IntentCaller;
 import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
 public class ScannerFragmentActivity extends AppCompatActivity {
@@ -64,11 +66,12 @@ public void onCreate(Bundle state) {
 	fragmentTransaction.commit();
 
 	Bundle extras;
+	extras = getIntent().getExtras();
+	location = extras.getString(StocktakeColumns.LOCATION);
+	dateScanned = extras.getString(StocktakeColumns.DATETIME_STARTED);
 	try {
-		extras = getIntent().getExtras();
+
 		mStocktakeId = extras.getString(StocktakeColumns._ID);
-		location = extras.getString(StocktakeColumns.LOCATION);
-		dateScanned = extras.getString(StocktakeColumns.DATETIME_STARTED);
 	}
 	catch (NullPointerException e) {
 		mStocktakeId = null;
@@ -125,17 +128,6 @@ public void setZBarBtnTopInfo(String barcode) {
 }
 
 
-public boolean isConnected() {
-	ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-	NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-	if (networkInfo != null && networkInfo.isConnected()) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 
 public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 
@@ -150,7 +142,6 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected String doInBackground(String... urls) {
-
 		return networkUtil.GET(urls[0]);
 	}
 
@@ -160,6 +151,10 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 		this.result = result;
 		try {
 			mProductInfo = mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result), barcode);
+			Date date = new Date();
+			String timeScanned = DateTimeHelper.getFormatedDate(date);
+			StocktakeresultModel stocktakeresultModel = new StocktakeresultModel(mStocktakeId,barcode,"1",timeScanned);
+			IntentCaller.barcode(thisActivity,stocktakeresultModel);
 		}
 		catch (JSONException e) {
 			e.printStackTrace();
@@ -297,7 +292,10 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 		getActivity().setTitle("Last Scanned: " + barcode);
 		setZBarBtnTopInfo(barcode);
 		showTopInfo();
-		mScannerView.startCamera();
+		//mScannerView.startCamera();
+		isScan=true;
+		StartStockTakeActivity.isFinished=true;
+
 		//StartStockTakeActivity.isFinished=true;
 	}
 

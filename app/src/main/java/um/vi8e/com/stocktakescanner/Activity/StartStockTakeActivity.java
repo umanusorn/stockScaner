@@ -52,12 +52,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	setDateTv = (TextView) cardView.findViewById(R.id.setDateTv);
 	locationEditText = (EditText) findViewById(R.id.locationEditText);
 
-
-Calendar calendar=Calendar.getInstance();
-	calendar.getTimeInMillis();
 	Date date = new Date();
-
-
 	setDateTv.setText(DateTimeHelper.getFormatedDate(date));
 
 	Button startNow = (Button) findViewById(R.id.startNow);
@@ -72,8 +67,6 @@ Calendar calendar=Calendar.getInstance();
 		setDateTv.setText(mExtras.getString(StocktakeColumns.DATETIME_STARTED));
 		locationEditText.setText(mExtras.getString(StocktakeColumns.LOCATION));
 		IntentCaller.scannerFromBarCode(thisActivity, mExtras);
-
-		//IntentCaller.zBarscannerFragment(thisActivity);
 	}
 
 }
@@ -84,13 +77,25 @@ public void onClickFab(View view){
 }
 
 
-public void onCancel(){
+public void onCancel(View view){
 	finish();
 }
 private void startScan() {
-	//IntentCaller.scanner(thisActivity);
-	//IntentCaller.zBarscanner(thisActivity);
-	IntentCaller.zBarscannerFragment(thisActivity);
+	/*try{*/
+		//mExtras.clear();
+	String s=setDateTv.getText().toString();
+	if(mExtras==null)
+		mExtras= new Bundle();
+
+		mExtras.putString(StocktakeColumns.DATETIME_STARTED, s);
+		mExtras.putString(StocktakeColumns.LOCATION,locationEditText.getText().toString());
+	/*}catch (NullPointerException e){
+		Toast.makeText(getApplicationContext(),"Please fill location",Toast.LENGTH_LONG).show();
+		return;
+	}*/
+
+	IntentCaller.scannerFromBarCode(thisActivity, mExtras);
+	//IntentCaller.zBarscannerFragment(thisActivity);
 }
 
 @Override protected void onResume(){
