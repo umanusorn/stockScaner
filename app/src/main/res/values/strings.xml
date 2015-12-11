@@ -28,4 +28,5 @@
 
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
+    <string name="qty_dialog_header">Added Item SKU</string>
 </resources>

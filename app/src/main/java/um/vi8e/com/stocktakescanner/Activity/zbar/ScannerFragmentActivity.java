@@ -21,6 +21,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
@@ -30,6 +31,7 @@ import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.utils.Const;
+import um.vi8e.com.stocktakescanner.utils.CustomDialog;
 import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
 public class ScannerFragmentActivity extends AppCompatActivity {
@@ -38,7 +40,9 @@ private ScannerFragment mScannerFragment;
 ZBarBtnFragment mZBarBtnFragment;
 public ZBarBtnTopInfo mZBarBtnTopInfo;
 String barcode;
-private String mStocktakeId;
+private String                  mStocktakeId;
+private AppCompatActivity       thisActivity;
+private HashMap<String, String> mProductInfo;
 
 @Override
 public void onCreate(Bundle state) {
@@ -47,7 +51,7 @@ public void onCreate(Bundle state) {
 	FragmentManager fragmentManager;
 	fragmentManager = getSupportFragmentManager();
 	FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
+	thisActivity = this;
 	mScannerFragment = new ScannerFragment();
 	fragmentTransaction.add(R.id.scannerFrame, mScannerFragment);
 	mZBarBtnFragment = new ZBarBtnFragment();
@@ -75,8 +79,9 @@ public void onCreate(Bundle state) {
 		@Override public void onClick(View v) {
 			//mScannerFragment.setIsScan(!mScannerFragment.isScan());
 
-			ScannerActivity.saveToDB(getApplicationContext(), barcode, mStocktakeId);
-			Toast.makeText(getApplicationContext(),"saved"+barcode+" to db",Toast.LENGTH_SHORT).show();
+			ScannerActivity.saveToDBFromStartStockTake(getApplicationContext(), barcode, mStocktakeId);
+			Toast.makeText(getApplicationContext(), "saved" + barcode + " to db", Toast.LENGTH_SHORT).show();
+			CustomDialog.showQtyDialog(thisActivity, mProductInfo);
 		}
 	});
 	mZBarBtnFragment.mCancelTv.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +89,10 @@ public void onCreate(Bundle state) {
 			finish();
 		}
 	});
+
+
 }
+
 
 public void hideTopInfo(){
 
@@ -138,7 +146,7 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 		try {
 
 			// setViewFromJson(networkUtil.jsonToMap(result));
-			mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result), barcode);
+			mProductInfo=mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result), barcode);
 
 		}
 		catch (JSONException e) {
@@ -185,6 +193,7 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 		setupFormats();
 		//mScannerView.setEnabled(false);
 		//mScannerView.setVisibility(View.GONE);
+		mScannerView.setRotation((float) 90.0);
 		return mScannerView;
 	}
 
@@ -274,20 +283,6 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 		getActivity().setTitle("Last Scanned: " + barcode);
 		setZBarBtnTopInfo(barcode);
 		showTopInfo();
-
-
-
-		if (isScan) {
-
-	     /* showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat()
-                                                                                              .getName());*/
-
-		}
-		else {
-			//hideTopInfo();
-			//getActivity().setTitle("Detected : press button to scan "/*+rawResult.getContents()*/);
-		}
-
 		mScannerView.startCamera();
 		//StartStockTakeActivity.isFinished=true;
 	}

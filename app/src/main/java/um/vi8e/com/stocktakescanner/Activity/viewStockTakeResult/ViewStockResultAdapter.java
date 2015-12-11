@@ -146,7 +146,6 @@ private void plusQty(int amount, ViewHolder viewHolder) {
 	listModel.setQty(newQtyString);
 	viewHolder.getQty().setText(newQtyString);
 
-
 }
 
 void deleteBarcode(ViewHolder viewHolder) {

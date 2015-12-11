@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -21,6 +22,7 @@ import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
+import um.vi8e.com.stocktakescanner.utils.Const;
 
 public class ScannerActivity extends ActionBarActivity implements ZXingScannerView.ResultHandler {
 private ZXingScannerView mScannerView;
@@ -41,7 +43,9 @@ public void handleResult(Result rawResult) {
     Toast.makeText(this,"Scanned "+i+":"+rawResult.getText(),Toast.LENGTH_SHORT).show();
     i++;
     mScannerView.startCamera();
-    StocktakeresultModel stocktakeresultModel=saveToDB(getApplicationContext(), rawResult.getText(),stocktakeId);
+    StocktakeresultModel stocktakeresultModel= saveToDBFromStartStockTake(getApplicationContext(),
+                                                                          rawResult.getText(),
+                                                                          stocktakeId);
     //IntentCaller.barcodeTv(this, stocktakeresultModel);
     StartStockTakeActivity.isFinished=true;
 
@@ -78,15 +82,24 @@ public void onPause() {
     mScannerView.stopCamera();
 }
 
-public static StocktakeresultModel saveToDB(Context context, String barcode, String stocktakeId) {
+public static StocktakeresultModel saveToDBFromStartStockTake(Context context, String barcode, String stocktakeId) {
 	String location = StartStockTakeActivity.locationEditText.getText().toString();
 	String dateScanned = StartStockTakeActivity.setDateTv.getText().toString();
+  return saveToDB(context, barcode, stocktakeId, location, dateScanned);
+}
+
+@NonNull public static StocktakeresultModel saveToDB(Context context,
+                                                      String barcode,
+                                                      String stocktakeId,
+                                                      String location,
+                                                      String dateScanned)
+{
   StocktakeModel stocktakeModel;
 
   StocktakeresultModel
       stocktakeresultModel;
   if(stocktakeId==null){
-    stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", "completed", location, "User Um",
+    stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", Const.Status.COMPLETED, location, "User Um",
                                                        "DeviceDetail");
      Uri uri= context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
     stocktakeresultModel =
@@ -96,19 +109,15 @@ public static StocktakeresultModel saveToDB(Context context, String barcode, Str
                                  dateScanned);
     context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
   }else {
-
     stocktakeresultModel =
         new StocktakeresultModel(stocktakeId,
                                  barcode,
                                  "1",
                                  dateScanned);
     context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
-
   }
 
-
-
-	return stocktakeresultModel;
+  return stocktakeresultModel;
 }
 
 

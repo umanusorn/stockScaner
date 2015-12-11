@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:paddingBottom="10dp"
+            android:id="@+id/relativeLayout3">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsizeSubHeading"
+                android:text="@string/qty_dialog_header"
+                android:textStyle="bold"
+                android:id="@+id/qtyDialogHeader"
+                android:layout_alignBottom="@+id/closeQty"
+                android:layout_alignParentStart="true"/>
+
+        <TextView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:background="@drawable/ic_close_black_24dp"
+                android:id="@+id/closeQty"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Item Quantity:"
+            android:id="@+id/textView11"
+            android:padding="10dp"
+            android:layout_below="@+id/relativeLayout3"
+            android:layout_centerHorizontal="true"/>
+
+
+        <TextView
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="@dimen/md_content_textsize"
+            android:textColor="@color/white"
+            android:background="@color/green"
+            android:text="Add Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addItemTv"
+            android:layout_below="@+id/relativeLayout4"
+            android:layout_alignParentStart="true"/>
+
+    <LinearLayout
+            android:id="@+id/LL_Seperator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="5dp"
+            android:background="#37000000"
+            android:orientation="horizontal"
+            android:layout_alignTop="@+id/textView11"
+            android:layout_alignParentStart="true">
+    </LinearLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView11"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/relativeLayout4">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="1"
+                        android:id="@+id/qtyTextDialog"
+                        android:paddingLeft="25dp"
+                        android:paddingRight="25dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="20dp"
+                        android:layout_centerHorizontal="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/plusBtn"
+                    android:src="@drawable/ic_add_circle_green_36dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/qtyTextDialog"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/minusBtn"
+
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_remove_circle_green_36dp"
+                    android:layout_toStartOf="@+id/qtyTextDialog"/>
+        </RelativeLayout>
+
+
+</RelativeLayout>

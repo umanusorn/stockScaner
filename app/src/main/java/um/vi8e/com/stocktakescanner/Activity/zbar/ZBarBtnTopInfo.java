@@ -81,7 +81,7 @@ private void setView(Bundle savedInstanceState, View rootView) {
 
 }
 
-public void setViewFromJson(HashMap<String, String> productInfo, String barcode) {
+public HashMap<String, String> setViewFromJson(HashMap<String, String> productInfo, String barcode) {
 	//barcodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
 
 
@@ -101,6 +101,7 @@ public void setViewFromJson(HashMap<String, String> productInfo, String barcode)
 	else {
 		setEmptyText(barcode);
 	}
+	return productInfo;
 }
 
 public void setEmptyText(String barcode) {
