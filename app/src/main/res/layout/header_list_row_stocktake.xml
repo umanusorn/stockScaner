@@ -42,9 +42,11 @@
                     android:layout_alignParentTop="true"/>
 
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:text="Qty"
                     android:textSize="@dimen/textsizeBody"
@@ -55,7 +57,7 @@
                     android:layout_marginEnd="20dp"/>
 
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Location"
@@ -63,15 +65,15 @@
                     android:padding="2dp"
                     android:textSize="@dimen/textsizeSubHeading"
                     android:layout_gravity="center_horizontal"
-                    android:layout_alignTop="@+id/status"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/status"/>
 
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:textColor="@color/black"
-                    android:text="Status"
+                    android:text="Complete"
                     android:textSize="@dimen/textsizeSubHeading"
                     android:id="@+id/status"
 

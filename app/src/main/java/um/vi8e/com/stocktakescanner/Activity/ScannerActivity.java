@@ -120,6 +120,38 @@ public static StocktakeresultModel saveToDBFromStartStockTake(Context context, S
   return stocktakeresultModel;
 }
 
+@NonNull public static StocktakeresultModel saveToDB(Context context,
+                                                     String barcode,
+                                                     String stocktakeId,
+                                                     String location,
+                                                     String dateScanned,String qty)
+{
+  StocktakeModel stocktakeModel;
+
+  StocktakeresultModel
+      stocktakeresultModel;
+  if(stocktakeId==null){
+    stocktakeModel = new StocktakeModel(dateScanned, "timeEnd", Const.Status.PENDING, location, "User Um",
+                                        "DeviceDetail");
+    Uri uri= context.getContentResolver().insert(StocktakeColumns.CONTENT_URI, stocktakeModel.getValues());
+    stocktakeresultModel =
+        new StocktakeresultModel(uri.getPathSegments().get(1),
+                                 barcode,
+                                 qty,
+                                 dateScanned);
+    context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+  }else {
+    stocktakeresultModel =
+        new StocktakeresultModel(stocktakeId,
+                                 barcode,
+                                 qty,
+                                 dateScanned);
+    context.getContentResolver().insert(StocktakeresultColumns.CONTENT_URI, stocktakeresultModel.getValues());
+  }
+
+  return stocktakeresultModel;
+}
+
 
 private static class CustomViewFinderView extends ViewFinderView {
         public static final String TRADE_MARK_TEXT = " ";

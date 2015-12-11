@@ -10,6 +10,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.HashMap;
 
 import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.R;
 /**
  * Created by Fixer on 12/8/2015.
@@ -19,8 +20,9 @@ import um.vi8e.com.stocktakescanner.R;
 public class CustomDialog {
 
 public static String qty = "1";
+public String stockId=null;
 
-public static void showQtyDialog(final Activity thisContext, HashMap<String, String> productInfo) {
+public static void showQtyDialog(final Activity thisContext, final HashMap<String, String> productInfo, final StocktakeModel stocktakeModel) {
 
 
 	final MaterialDialog scoreDialog = new MaterialDialog.Builder(thisContext)
@@ -35,6 +37,7 @@ public static void showQtyDialog(final Activity thisContext, HashMap<String, Str
 		} );*/
 
 	TextView itemCode =(TextView)scoreDialog.findViewById(R.id.qtyDialogHeader);
+	final TextView qtyTextDialog=(TextView)scoreDialog.findViewById(R.id.qtyTextDialog);
 	itemCode.setText(thisContext.getString(R.string.qty_dialog_header)+" "+productInfo.get(ProductApiKey.ITEM_CODE));
 
 	scoreDialog.findViewById(R.id.minusBtn).setOnClickListener(new View.OnClickListener() {
@@ -52,7 +55,8 @@ public static void showQtyDialog(final Activity thisContext, HashMap<String, Str
 
 	scoreDialog.findViewById(R.id.addItemTv).setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			ScannerActivity.saveToDB(thisContext, );
+
+			ScannerActivity.saveToDB(thisContext,productInfo.get(ProductApiKey.BARCODE),stocktakeModel.getId(),stocktakeModel.getLocation(),stocktakeModel.getDatetimeStarted(),qtyTextDialog.getText().toString() );
 			scoreDialog.dismiss();
 		}
 	});

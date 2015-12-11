@@ -35,7 +35,7 @@
 
 
             <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
 
@@ -46,45 +46,46 @@
                     android:textSize="@dimen/textsizeBody"
                     android:layout_alignParentTop="true"/>
 
+
+
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Location"
+                    android:id="@+id/location"
+                    android:padding="2dp"
+                    android:paddingStart="35dp"
+                    android:textSize="@dimen/textsizeBody"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/status"
+                    android:layout_marginEnd="10dp"/>
+            <TextView
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:textColor="@color/black"
                     android:text="Status"
                     android:textSize="@dimen/textsizeBody"
                     android:id="@+id/status"
-
+                    android:gravity="center"
                     android:layout_marginEnd="18dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"/>
+
+            <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:text="10|990"
+                    android:textSize="@dimen/textsizeBody"
+                    android:id="@+id/stocktake_qty"
+                    android:gravity="center"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/datetime"/>
         </RelativeLayout>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:textColor="@color/black"
-                android:text="Qty"
-                android:textSize="@dimen/textsizeBody"
-                android:id="@+id/stocktake_qty"
-
-                android:layout_marginStart="100dp"
-                android:layout_alignBottom="@+id/relativeLayout2"
-                android:layout_alignStart="@+id/relativeLayout2"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Location"
-                android:id="@+id/location"
-                android:padding="2dp"
-                android:textSize="@dimen/textsizeBody"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignTop="@+id/stocktake_qty"
-                android:layout_toEndOf="@+id/stocktake_qty"
-                android:layout_marginStart="22dp"/>
 
     </RelativeLayout>
 </RelativeLayout>

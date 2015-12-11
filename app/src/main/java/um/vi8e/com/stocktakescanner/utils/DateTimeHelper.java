@@ -23,8 +23,6 @@ public static
 String getFormatedDate ( Date date ) {
 
 	String format;
-
-
 		//format = "EEE dd MMM yyyy";
 		format = "dd MMM yyyy";
 

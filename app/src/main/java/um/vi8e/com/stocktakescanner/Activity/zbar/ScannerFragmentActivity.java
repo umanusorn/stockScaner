@@ -27,7 +27,7 @@ import java.util.List;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
-import um.vi8e.com.stocktakescanner.Activity.ScannerActivity;
+import um.vi8e.com.stocktakescanner.Activity.viewStockTake.StocktakeModel;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.utils.Const;
@@ -43,6 +43,9 @@ String barcode;
 private String                  mStocktakeId;
 private AppCompatActivity       thisActivity;
 private HashMap<String, String> mProductInfo;
+
+public static String dateScanned;
+public static String location;
 
 @Override
 public void onCreate(Bundle state) {
@@ -64,10 +67,13 @@ public void onCreate(Bundle state) {
 	try {
 		extras = getIntent().getExtras();
 		mStocktakeId = extras.getString(StocktakeColumns._ID);
+		location = extras.getString(StocktakeColumns.LOCATION);
+		dateScanned = extras.getString(StocktakeColumns.DATETIME_STARTED);
 	}
 	catch (NullPointerException e) {
 		mStocktakeId = null;
 	}
+
 
 }
 
@@ -79,9 +85,21 @@ public void onCreate(Bundle state) {
 		@Override public void onClick(View v) {
 			//mScannerFragment.setIsScan(!mScannerFragment.isScan());
 
-			ScannerActivity.saveToDBFromStartStockTake(getApplicationContext(), barcode, mStocktakeId);
-			Toast.makeText(getApplicationContext(), "saved" + barcode + " to db", Toast.LENGTH_SHORT).show();
-			CustomDialog.showQtyDialog(thisActivity, mProductInfo);
+			//	ScannerActivity.saveToDBFromStartStockTake(getApplicationContext(), barcode, mStocktakeId);
+			//	Toast.makeText(getApplicationContext(), "saved" + barcode + " to db", Toast.LENGTH_SHORT).show();
+
+			StocktakeModel stocktakeModel = new StocktakeModel(dateScanned, dateScanned, Const.Status.PENDING, location,
+			                                                   "dummy",
+			                                                   "null");
+			//mProductInfo.put(ProductApiKey.BARCODE,barcode);
+			//	mProductInfo.put(ProductApiKey.ITEM_CODE,itemCode);
+
+			if (mProductInfo == null) {
+				Toast.makeText(getApplicationContext(), "Not found product info. Please scan again", Toast.LENGTH_SHORT).show();
+			}
+			else {
+				CustomDialog.showQtyDialog(thisActivity, mProductInfo, stocktakeModel);
+			}
 		}
 	});
 	mZBarBtnFragment.mCancelTv.setOnClickListener(new View.OnClickListener() {
@@ -90,21 +108,18 @@ public void onCreate(Bundle state) {
 		}
 	});
 
-
 }
 
-
-public void hideTopInfo(){
+public void hideTopInfo() {
 
 	mZBarBtnTopInfo.hidTopInfo();
 }
 
-public void showTopInfo(){
+public void showTopInfo() {
 	mZBarBtnTopInfo.showTopInfo();
 }
 
 public void setZBarBtnTopInfo(String barcode) {
-	//mZBarBtnTopInfo.
 	mZBarBtnTopInfo.setEmptyText(barcode);
 	new HttpAsyncTaskGET().execute(Const.getApiUrl(barcode));
 }
@@ -144,10 +159,7 @@ public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {
 	protected void onPostExecute(String result) {
 		this.result = result;
 		try {
-
-			// setViewFromJson(networkUtil.jsonToMap(result));
-			mProductInfo=mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result), barcode);
-
+			mProductInfo = mZBarBtnTopInfo.setViewFromJson(networkUtil.jsonToMap(result), barcode);
 		}
 		catch (JSONException e) {
 			e.printStackTrace();
@@ -193,7 +205,9 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 		setupFormats();
 		//mScannerView.setEnabled(false);
 		//mScannerView.setVisibility(View.GONE);
-		mScannerView.setRotation((float) 90.0);
+//		mScannerView.setRotation((float) 90.0);
+		//mScannerView.setBottom();
+
 		return mScannerView;
 	}
 

@@ -45,7 +45,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	ab.setDisplayHomeAsUpEnabled(true);
 
 
-	String[] tabTitles = {"TIME", "QTY", "LOCATION", "STATUS"};
+	String[] tabTitles = {"DATE/TIME", "QTY", "LOCATION", "STATUS"};
 	setTabLayout(tabTitles);
 
 	mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -99,8 +99,17 @@ public boolean onOptionsItemSelected(MenuItem item) {
 protected void onResumeFragments() {
 	super.onResumeFragments();
 	Log.d(TAG, "onResumeFragment");
+try{
 	recycleFragment.initDataSet(getApplicationContext());
-recycleFragment.setFragmentAdaptor();
+	recycleFragment.setFragmentAdaptor();
+}catch (NullPointerException e){
+	recycleFragment = (ViewStockFragment) RecycleUtil.setUpRecycleFragment(thisSavedInstanceState,
+	                                                                       thisActivity, ModelType
+			                                                                       .STOCK_TAKE);
+	recycleFragment.initDataSet(getApplicationContext());
+	recycleFragment.setFragmentAdaptor();
+}
+
 
 //RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.STOCK_TAKE);
 

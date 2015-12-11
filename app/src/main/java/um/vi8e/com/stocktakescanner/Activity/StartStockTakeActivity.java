@@ -51,6 +51,15 @@ protected void onCreate(Bundle savedInstanceState) {
 	});
 	setDateTv = (TextView) cardView.findViewById(R.id.setDateTv);
 	locationEditText = (EditText) findViewById(R.id.locationEditText);
+
+
+Calendar calendar=Calendar.getInstance();
+	calendar.getTimeInMillis();
+	Date date = new Date();
+
+
+	setDateTv.setText(DateTimeHelper.getFormatedDate(date));
+
 	Button startNow = (Button) findViewById(R.id.startNow);
 	startNow.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
@@ -74,6 +83,10 @@ public void onClickFab(View view){
 	startScan();
 }
 
+
+public void onCancel(){
+	finish();
+}
 private void startScan() {
 	//IntentCaller.scanner(thisActivity);
 	//IntentCaller.zBarscanner(thisActivity);

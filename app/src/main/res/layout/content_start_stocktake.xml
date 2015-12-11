@@ -31,13 +31,20 @@
         android:layout_alignParentStart="true"/>
 
 <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Scan Barcode"
+        android:text="START STOCK TAKE"
         android:id="@+id/startNow"
-        android:layout_below="@+id/viewSetDate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"/>
+        android:layout_above="@+id/Cancel"
+        android:layout_alignParentEnd="true"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CANCEL"
+                android:id="@+id/Cancel"
+                android:onClick="onCancel"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
 
 
         <RelativeLayout
@@ -45,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/viewSetDate"
                 android:layout_below="@+id/locationEditText"
+                android:elevation="2dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="29dp">
 
