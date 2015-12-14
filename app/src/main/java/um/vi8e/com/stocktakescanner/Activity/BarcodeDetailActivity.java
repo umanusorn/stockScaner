@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,18 +17,23 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
+import um.vi8e.com.stocktakescanner.Activity.viewStockTakeResult.StocktakeresultModel;
 import um.vi8e.com.stocktakescanner.Activity.zbar.ScannerFragmentActivity;
 import um.vi8e.com.stocktakescanner.R;
 import um.vi8e.com.stocktakescanner.provider.stocktake.StocktakeColumns;
 import um.vi8e.com.stocktakescanner.provider.stocktakeresult.StocktakeresultColumns;
 import um.vi8e.com.stocktakescanner.utils.ActivityUi;
 import um.vi8e.com.stocktakescanner.utils.Const;
+import um.vi8e.com.stocktakescanner.utils.CustomDialog;
 import um.vi8e.com.stocktakescanner.utils.ProductApiKey;
 import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
 public class BarcodeDetailActivity extends CoreActivity {
 
-TextView barcodeTv, dateTimeScannedTv, qty, priceTv, descTv, fullDetailTv,cancel,saveNExit;
+TextView barcodeTv, dateTimeScannedTv, qty, descTv, fullDetailTv,cancel,saveNExit,saveNContinue;
+TextView normalPrice,promoPrice,itemCode;
+ImageView minusBtn, plusBtn;
+private String mStockId;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -42,29 +48,62 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	final String barcode = extras.getString(StocktakeresultColumns.BARCODE);
 	final String dateTime = extras.getString(StocktakeresultColumns.DATETIME_SCANNNED);
-	final String stockId=extras.getString(StocktakeresultColumns.STOCKTAKE_ID);
+	mStockId = extras.getString(StocktakeresultColumns.STOCKTAKE_ID);
 	final String location = extras.getString(StocktakeColumns.LOCATION);
 
 	dateTimeScannedTv = (TextView) findViewById(R.id.dateTimeScanned);
-	priceTv = (TextView) findViewById(R.id.barcodeValue);
+	//priceTv = (TextView) findViewById(R.id.barcodeValue);
 	descTv = (TextView) findViewById(R.id.desc);
 	fullDetailTv = (TextView) findViewById(R.id.fulldetail);
 	barcodeTv = (TextView) findViewById(R.id.barcodeValue);
-	cancel=(TextView)findViewById(R.id.cancel);
-	saveNExit=(TextView)findViewById(R.id.saveNExit);
+	cancel = (TextView) findViewById(R.id.cancel);
+	saveNExit = (TextView) findViewById(R.id.saveNExit);
+	saveNContinue = (TextView) findViewById(R.id.saveNContinue);
 
-	saveNExit.setOnClickListener(new View.OnClickListener() {
+	normalPrice = (TextView) findViewById(R.id.normalPrice);
+	promoPrice = (TextView) findViewById(R.id.promoPrice);
+itemCode=(TextView)findViewById(R.id.itemCodeValue);
+	minusBtn= (ImageView) findViewById(R.id.minusBtn);
+	plusBtn= (ImageView) findViewById(R.id.plusBtn);
+
+
+
+	qty=(TextView)findViewById(R.id.qtyText);
+
+
+plusBtn.setOnClickListener(new View.OnClickListener() {
+	@Override public void onClick(View v) {
+		CustomDialog.plusQty(1,qty,minusBtn,thisActivity);
+	}
+});
+
+	minusBtn.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			ScannerActivity.saveToDB(getApplicationContext(),barcode,stockId,location,dateTime,"1");
-			Toast.makeText( getApplicationContext(),"saved",Toast.LENGTH_LONG).show();
-			ScannerFragmentActivity.isBack=true;
+			CustomDialog.plusQty(-1,qty,minusBtn,thisActivity);
+		}
+	});
+	barcodeTv.setText(barcode);
+	dateTimeScannedTv.setText(dateTime);
+
+	saveNContinue.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			StocktakeresultModel stocktakeresultModel=
+			ScannerActivity.saveToDB(getApplicationContext(), barcode, mStockId, location, dateTime, qty.getText().toString());
+			Toast.makeText(getApplicationContext(), "saved", Toast.LENGTH_LONG).show();
+			ScannerFragmentActivity.isBack = false;
+			ScannerFragmentActivity.mStocktakeId = stocktakeresultModel.getStocktakeId();
 			finish();
 		}
 	});
 
-
-	barcodeTv.setText(barcode);
-	dateTimeScannedTv.setText(dateTime);
+	saveNExit.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			ScannerActivity.saveToDB(getApplicationContext(), barcode, mStockId, location, dateTime, qty.getText().toString());
+			Toast.makeText(getApplicationContext(), "saved", Toast.LENGTH_LONG).show();
+			ScannerFragmentActivity.isBack = true;
+			finish();
+		}
+	});
 
 cancel.setOnClickListener(new View.OnClickListener() {
 	@Override public void onClick(View v) {
@@ -99,12 +138,15 @@ void setViewFromJson(HashMap<String, String> productInfo){
 	fullDetailTv.setText(fulldetail);
 
 	if(productInfo.get(ProductApiKey.STATUS).equals("AS")){
-		priceTv.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
 		descTv.setText(productInfo.get(ProductApiKey.DESCRIPTION));
+		itemCode.setText(productInfo.get(ProductApiKey.ITEM_CODE));
+		normalPrice.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
 	}
 	else{
-		priceTv.setText("-");
 		descTv.setText("-");
+		promoPrice.setText("-");
+		normalPrice.setText("-");
+		itemCode.setText("-");
 	}
 }
 

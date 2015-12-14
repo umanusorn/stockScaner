@@ -2,6 +2,7 @@ package um.vi8e.com.stocktakescanner.utils;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,18 +38,20 @@ public static void showQtyDialog(final Activity thisContext, final HashMap<Strin
 		} );*/
 
 	TextView itemCode =(TextView)scoreDialog.findViewById(R.id.qtyDialogHeader);
-	final TextView qtyTextDialog=(TextView)scoreDialog.findViewById(R.id.qtyTextDialog);
-	itemCode.setText(thisContext.getString(R.string.qty_dialog_header)+" "+productInfo.get(ProductApiKey.ITEM_CODE));
+	final TextView qtyTextDialog=(TextView)scoreDialog.findViewById(R.id.qtyText);
+	itemCode.setText(thisContext.getString(R.string.qty_dialog_header) + " " + productInfo.get(ProductApiKey.ITEM_CODE));
 
-	scoreDialog.findViewById(R.id.minusBtn).setOnClickListener(new View.OnClickListener() {
+	final ImageView minusBtn = (ImageView) scoreDialog.findViewById(R.id.minusBtn);
+	minusBtn.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			plusQty(-1, scoreDialog,thisContext);
+			plusQty(-1, qtyTextDialog, minusBtn, thisContext);
 		}
 	});
 
-	scoreDialog.findViewById(R.id.plusBtn).setOnClickListener(new View.OnClickListener() {
+	final ImageView plusBtn = (ImageView) scoreDialog.findViewById(R.id.plusBtn);
+	plusBtn.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			plusQty(1, scoreDialog,thisContext);
+			plusQty(1, qtyTextDialog, minusBtn, thisContext);
 		}
 	});
 
@@ -71,15 +74,13 @@ public static void showQtyDialog(final Activity thisContext, final HashMap<Strin
 
 }
 
-static void plusQty(int amount, MaterialDialog scoreDialog, Activity activity) {
+public static void plusQty(int amount, TextView qtyTextDialog,ImageView minusBtn, Activity activity) {
 
-	//final StocktakeresultModel listModel = viewHolder.model;
-	//final int currentQty = Integer.parseInt(listModel.getQty());
-	TextView qtyTextDialog = (TextView) scoreDialog.findViewById(R.id.qtyTextDialog);
 	final int currentQty = Integer.parseInt(qtyTextDialog.getText().toString());
 	int newQty = currentQty + amount;
 	if (newQty <= 1) {
-		scoreDialog.findViewById(R.id.minusBtn).setEnabled(false);
+
+		minusBtn.setEnabled(false);
 
 		if (newQty < 1) {
 			Toast.makeText(activity, "Please press delete", Toast.LENGTH_SHORT).show();
@@ -88,7 +89,8 @@ static void plusQty(int amount, MaterialDialog scoreDialog, Activity activity) {
 
 	}
 	else {
-		scoreDialog.findViewById(R.id.minusBtn).setEnabled(true);
+
+		minusBtn.setEnabled(true);
 	}
 
 	String newQtyString = String.valueOf(newQty);

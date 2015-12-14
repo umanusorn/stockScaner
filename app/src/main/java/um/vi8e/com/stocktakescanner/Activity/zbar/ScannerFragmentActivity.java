@@ -43,7 +43,7 @@ private ScannerFragment mScannerFragment;
 ZBarBtnFragment mZBarBtnFragment;
 public ZBarBtnTopInfo mZBarBtnTopInfo;
 String barcode;
-private String                  mStocktakeId;
+public static String                  mStocktakeId;
 private AppCompatActivity       thisActivity;
 private HashMap<String, String> mProductInfo;
 

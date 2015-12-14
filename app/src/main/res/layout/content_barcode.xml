@@ -44,7 +44,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="barcodeValue"
+                          android:text="barcodeValue"
                         android:id="@+id/barcodeValue"
                         android:padding="5dp"
                         android:layout_below="@+id/textView33"/>
@@ -135,7 +135,7 @@
                                 android:layout_height="wrap_content"
 
                                 android:text="1"
-                                android:id="@+id/qtyTextDialog"
+                                android:id="@+id/qtyText"
                                 android:paddingLeft="25dp"
                                 android:paddingRight="25dp"
                                 android:paddingTop="10dp"
@@ -148,7 +148,7 @@
                                 android:id="@+id/plusBtn"
                                 android:src="@drawable/ic_add_circle_green_36dp"
                                 android:layout_centerVertical="true"
-                                android:layout_toEndOf="@+id/qtyTextDialog"/>
+                                android:layout_toEndOf="@+id/qtyText"/>
 
                         <ImageView
                                 android:layout_width="wrap_content"
