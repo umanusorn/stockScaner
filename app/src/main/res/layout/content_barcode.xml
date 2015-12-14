@@ -72,6 +72,19 @@
 
 
 
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                              android:orientation="vertical"
+                              android:layout_width="match_parent"
+                              android:background="@color/grey_300"
+                              android:layout_below="@id/itemCodeValue"
+                              android:layout_height="1dp">
+
+                </LinearLayout>
+
+
+
+
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -112,6 +125,18 @@
                         android:id="@+id/promoPrice"
                         android:layout_below="@+id/textView40"
                         android:layout_alignStart="@+id/itemCodeValue"/>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                              android:orientation="vertical"
+                              android:layout_width="match_parent"
+                              android:background="@color/grey_300"
+                              android:layout_below="@id/promoPrice"
+                              android:layout_height="1dp">
+
+                </LinearLayout>
+
+
+
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -119,7 +144,8 @@
                         android:id="@+id/textView77"
                         android:textSize="11sp"
                         android:textColor="@color/grey"
-                        android:padding="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="5dp"
                         android:layout_below="@id/normalPrice"
                         />
 
@@ -128,6 +154,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/relativeLayout4"
                         android:layout_below="@+id/promoPrice"
+                        android:paddingTop="5dp"
                         android:layout_alignStart="@+id/promoPrice">
 
                         <TextView

@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context="um.vi8e.com.stocktakescanner.Activity.BarcodeDetailActivity">
 
     <include
@@ -41,8 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:padding="10dp"
-            android:layout_below="@+id/relativeLayout5">
+            android:padding="10dp">
 
         <TextView
                 android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:text="Save &amp; Continue"
                 android:textAllCaps="true"
                 android:id="@+id/saveNContinue"
-                android:layout_above="@+id/saveNExit"
+                android:layout_alignParentTop="true"
                 android:layout_marginBottom="10dp"/>
 
         <TextView
@@ -69,7 +69,7 @@
                 android:text="Save &amp; Exit"
                 android:textAllCaps="true"
                 android:id="@+id/saveNExit"
-                android:layout_above="@+id/cancel"
+                android:layout_below="@+id/saveNContinue"
                 android:layout_marginBottom="10dp"/>
 
         <TextView
@@ -83,7 +83,7 @@
                 android:textAllCaps="true"
                 android:text="Cancel"
                 android:id="@+id/cancel"
-                android:layout_alignParentBottom="true"/>
+                android:layout_below="@id/saveNExit"/>
 
 
     </RelativeLayout>
