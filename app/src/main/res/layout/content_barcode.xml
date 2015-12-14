@@ -23,45 +23,153 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"/>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Barcode detail"
-                android:id="@+id/barcode_detail"
-                android:layout_marginTop="20dp"
-                android:layout_below="@+id/textView4"
-                android:layout_alignParentStart="true"/>
 
-
-
-        <TextView
-                android:layout_width="wrap_content"
+        <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Qty:"
-                android:id="@+id/textView4"
-                android:layout_marginTop="20dp"
-                android:layout_below="@+id/dateTimeScanned"
-                android:layout_alignParentStart="true"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="1"
-                android:id="@+id/qty"
-                android:layout_above="@+id/barcode_detail"
-                android:layout_toEndOf="@+id/textView4"
-                android:layout_marginStart="19dp"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Regular Price"
-                android:layout_marginTop="20dp"
-                android:id="@+id/textView33"
                 android:layout_below="@+id/desc"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/relativeLayout6">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BARCODE"
+                        android:id="@+id/textView33"
+                        android:textSize="11sp"
+                        android:textColor="@color/grey"
+                        android:padding="5dp"
+                        />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="barcodeValue"
+                        android:id="@+id/barcodeValue"
+                        android:padding="5dp"
+                        android:layout_below="@+id/textView33"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ITEM CODE"
+                        android:id="@+id/textView35"
+                        android:padding="5dp"
+                        android:textSize="11sp"
+                        android:textColor="@color/grey"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="itemCodeValue"
+                        android:gravity="center"
+                        android:layout_alignStart="@+id/textView35"
+                        android:padding="5dp"
+                        android:id="@+id/itemCodeValue"
+                        android:layout_below="@+id/textView35"/>
+
+
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NORMAL PRICE"
+                        android:id="@+id/textView39"
+                        android:textSize="11sp"
+                        android:textColor="@color/grey"
+                        android:padding="5dp"
+                        android:layout_below="@id/barcodeValue"
+                        />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="normalPrice"
+                        android:id="@+id/normalPrice"
+                        android:padding="5dp"
+                        android:layout_below="@+id/textView39"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PROMO PRICE"
+                        android:id="@+id/textView40"
+                        android:padding="5dp"
+                        android:textSize="11sp"
+                        android:textColor="@color/grey"
+                        android:layout_below="@id/barcodeValue"
+                        android:layout_alignStart="@+id/itemCodeValue"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="promoPrice"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"
+                        android:id="@+id/promoPrice"
+                        android:layout_below="@+id/textView40"
+                        android:layout_alignStart="@+id/itemCodeValue"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="QUANTITY"
+                        android:id="@+id/textView77"
+                        android:textSize="11sp"
+                        android:textColor="@color/grey"
+                        android:padding="5dp"
+                        android:layout_below="@id/normalPrice"
+                        />
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/relativeLayout4"
+                        android:layout_below="@+id/promoPrice"
+                        android:layout_alignStart="@+id/promoPrice">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="1"
+                                android:id="@+id/qtyTextDialog"
+                                android:paddingLeft="25dp"
+                                android:paddingRight="25dp"
+                                android:paddingTop="10dp"
+                                android:layout_toEndOf="@+id/minusBtn"
+                                />
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/plusBtn"
+                                android:src="@drawable/ic_add_circle_green_36dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/qtyTextDialog"/>
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/minusBtn"
+                                android:src="@drawable/ic_remove_circle_green_36dp"
+                                />
+                </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Description"
+                android:id="@+id/textView3"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"/>
 
         <TextView
@@ -72,28 +180,9 @@
                 android:id="@+id/desc"
                 android:textSize="14sp"
                 android:layout_below="@+id/textView3"
-                />
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Description"
-                android:id="@+id/textView3"
-                android:layout_below="@+id/barcode_detail"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="18dp"/>
+                android:layout_alignParentStart="true"/>
 
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="11.25"
-                android:id="@+id/price"
-                android:layout_marginStart="18dp"
-                android:layout_alignTop="@+id/textView33"
-                android:layout_toEndOf="@+id/textView33"/>
 
         <TextView
                 android:layout_width="match_parent"
@@ -101,6 +190,7 @@
                 android:text="Barcode detail"
                 android:id="@+id/fulldetail"
                 android:singleLine="false"
+                android:visibility="gone"
                 android:layout_below="@+id/textView5"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"/>
@@ -111,7 +201,9 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="FullDetail from Server (JSON)"
                 android:id="@+id/textView5"
+                android:visibility="gone"
                 android:layout_marginTop="60dp"
                 android:layout_below="@+id/textView33"
                 android:layout_alignParentStart="true"/>
+
 </RelativeLayout>

@@ -46,10 +46,10 @@ protected void onCreate(Bundle savedInstanceState) {
 	final String location = extras.getString(StocktakeColumns.LOCATION);
 
 	dateTimeScannedTv = (TextView) findViewById(R.id.dateTimeScanned);
-	priceTv = (TextView) findViewById(R.id.price);
+	priceTv = (TextView) findViewById(R.id.barcodeValue);
 	descTv = (TextView) findViewById(R.id.desc);
 	fullDetailTv = (TextView) findViewById(R.id.fulldetail);
-	barcodeTv = (TextView) findViewById(R.id.barcode_detail);
+	barcodeTv = (TextView) findViewById(R.id.barcodeValue);
 	cancel=(TextView)findViewById(R.id.cancel);
 	saveNExit=(TextView)findViewById(R.id.saveNExit);
 

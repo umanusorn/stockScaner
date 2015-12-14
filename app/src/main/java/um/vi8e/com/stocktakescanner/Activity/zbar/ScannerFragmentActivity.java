@@ -191,7 +191,6 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 	MenuInflater mMenuInflater;
 	private boolean isScan = true;
 
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
 		mScannerView = new ZBarScannerView(getActivity());
