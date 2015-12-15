@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,26 +31,32 @@ import um.vi8e.com.stocktakescanner.utils.networkUtil;
 
 public class BarcodeDetailActivity extends CoreActivity {
 
-TextView barcodeTv, dateTimeScannedTv, qty, descTv, fullDetailTv,cancel,saveNExit,saveNContinue;
-TextView normalPrice,promoPrice,itemCode;
+TextView barcodeTv, dateTimeScannedTv, qty, descTv, fullDetailTv, cancel, saveNExit, saveNContinue;
+TextView normalPrice, promoPrice, itemCode;
 ImageView minusBtn, plusBtn;
-private String mStockId;
+private String  mStockId;
+private String  mItemCodeValue;
+private Toolbar mToolbar;
+private String  mDateTime;
+private String  mBarcode;
+private String  mLocation;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_barcode);
-	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-	setSupportActionBar(toolbar);
+	mToolbar = (Toolbar) findViewById(R.id.toolbar);
+	setSupportActionBar(mToolbar);
 	tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 	tabLayout.setVisibility(View.GONE);
-	ActivityUi.setToolBar(this, toolbar, "Barcode Detail");
+
 	Bundle extras = getIntent().getExtras();
 
-	final String barcode = extras.getString(StocktakeresultColumns.BARCODE);
-	final String dateTime = extras.getString(StocktakeresultColumns.DATETIME_SCANNNED);
+	mBarcode = extras.getString(StocktakeresultColumns.BARCODE);
+	mDateTime = extras.getString(StocktakeresultColumns.DATETIME_SCANNNED);
 	mStockId = extras.getString(StocktakeresultColumns.STOCKTAKE_ID);
-	final String location = extras.getString(StocktakeColumns.LOCATION);
+	mLocation = extras.getString(StocktakeColumns.LOCATION);
+
 
 	dateTimeScannedTv = (TextView) findViewById(R.id.dateTimeScanned);
 	//priceTv = (TextView) findViewById(R.id.barcodeValue);
@@ -62,33 +69,38 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	normalPrice = (TextView) findViewById(R.id.normalPrice);
 	promoPrice = (TextView) findViewById(R.id.promoPrice);
-itemCode=(TextView)findViewById(R.id.itemCodeValue);
-	minusBtn= (ImageView) findViewById(R.id.minusBtn);
-	plusBtn= (ImageView) findViewById(R.id.plusBtn);
+	itemCode = (TextView) findViewById(R.id.itemCodeValue);
+	minusBtn = (ImageView) findViewById(R.id.minusBtn);
+	plusBtn = (ImageView) findViewById(R.id.plusBtn);
 
-
-
-	qty=(TextView)findViewById(R.id.qtyText);
-
-
-plusBtn.setOnClickListener(new View.OnClickListener() {
-	@Override public void onClick(View v) {
-		CustomDialog.plusQty(1,qty,minusBtn,thisActivity);
+	Log.d("verifyNoCon", extras.getString(Const.NO_CONTINUE) );
+	if (extras.getString(Const.NO_CONTINUE) != null) {
+		Log.d("barcodeNoCon", "noCon");
+		saveNContinue.setVisibility(View.GONE);
 	}
-});
+
+	qty = (TextView) findViewById(R.id.qtyText);
+
+
+	plusBtn.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			CustomDialog.plusQty(1, qty, minusBtn, thisActivity);
+		}
+	});
 
 	minusBtn.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			CustomDialog.plusQty(-1,qty,minusBtn,thisActivity);
+			CustomDialog.plusQty(-1, qty, minusBtn, thisActivity);
 		}
 	});
-	barcodeTv.setText(barcode);
-	dateTimeScannedTv.setText(dateTime);
+	barcodeTv.setText(mBarcode);
+	dateTimeScannedTv.setText(mDateTime);
 
 	saveNContinue.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			StocktakeresultModel stocktakeresultModel=
-			ScannerActivity.saveToDB(getApplicationContext(), barcode, mStockId, location, dateTime, qty.getText().toString());
+			StocktakeresultModel stocktakeresultModel =
+					ScannerActivity.saveToDB(getApplicationContext(),
+					                         mBarcode, mStockId, mLocation, mDateTime, qty.getText().toString());
 			Toast.makeText(getApplicationContext(), "saved", Toast.LENGTH_LONG).show();
 			ScannerFragmentActivity.isBack = false;
 			ScannerFragmentActivity.mStocktakeId = stocktakeresultModel.getStocktakeId();
@@ -98,65 +110,62 @@ plusBtn.setOnClickListener(new View.OnClickListener() {
 
 	saveNExit.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			ScannerActivity.saveToDB(getApplicationContext(), barcode, mStockId, location, dateTime, qty.getText().toString());
+			ScannerActivity.saveToDB(getApplicationContext(),
+			                         mBarcode, mStockId, mLocation, mDateTime, qty.getText().toString());
 			Toast.makeText(getApplicationContext(), "saved", Toast.LENGTH_LONG).show();
 			ScannerFragmentActivity.isBack = true;
 			finish();
 		}
 	});
 
-cancel.setOnClickListener(new View.OnClickListener() {
-	@Override public void onClick(View v) {
-		finish();
-	}
-});
-	// check if you are connected or not
-	if (isConnected()) {
-		//dateTimeScannedTv.setBackgroundColor(0xFF00CC00);
-		//dateTimeScannedTv.setText("You are conncted");
-	}
-	else {
-		//dateTimeScannedTv.setText("You are NOT conncted");
-	}
+	cancel.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			finish();
+		}
+	});
 
 	//686686
-
-	String test3 = Const.getApiUrl(barcode);
-	String test1 = "http://hmkcode.appspot.com/rest/controller/get.json";
+	String test3 = Const.getApiUrl(mBarcode);
 	new HttpAsyncTaskGET().execute(test3);
 
 }
 
-void setViewFromJson(HashMap<String, String> productInfo){
+void setViewFromJson(HashMap<String, String> productInfo) {
 	//barcodeTv.setText(productInfo.get(ProductApiKey.BARCODE));
-
-	String fulldetail="";
-	for (Map.Entry<String, String> entry : productInfo.entrySet())
-	{
-		fulldetail+= entry.getKey() + ":\t\t" + entry.getValue()+"\n";
+	mItemCodeValue = productInfo.get(ProductApiKey.ITEM_CODE);
+	String fulldetail = "";
+	for (Map.Entry<String, String> entry : productInfo.entrySet()) {
+		fulldetail += entry.getKey() + ":\t\t" + entry.getValue() + "\n";
 	}
 	fullDetailTv.setText(fulldetail);
 
-	if(productInfo.get(ProductApiKey.STATUS).equals("AS")){
+	if (productInfo.get(ProductApiKey.STATUS).equals("AS")) {
 		descTv.setText(productInfo.get(ProductApiKey.DESCRIPTION));
-		itemCode.setText(productInfo.get(ProductApiKey.ITEM_CODE));
+
+		itemCode.setText(mItemCodeValue);
 		normalPrice.setText(productInfo.get(ProductApiKey.REGULAR_PRICE));
 	}
-	else{
+	else {
 		descTv.setText("-");
 		promoPrice.setText("-");
 		normalPrice.setText("-");
 		itemCode.setText("-");
 	}
+
+	ActivityUi.setToolBar(this, mToolbar, "SKU  " + mItemCodeValue);
+	mToolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
 }
 
 public boolean isConnected() {
 	ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
 	NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-	if (networkInfo != null && networkInfo.isConnected())
+	if (networkInfo != null && networkInfo.isConnected()) {
 		return true;
-	else
+	}
+	else {
 		return false;
+	}
 }
 
 public class HttpAsyncTaskGET extends AsyncTask<String, Void, String> {

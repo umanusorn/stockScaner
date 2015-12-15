@@ -3,6 +3,7 @@ package um.vi8e.com.stocktakescanner.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import um.vi8e.com.stocktakescanner.Activity.BarcodeDetailActivity;
 import um.vi8e.com.stocktakescanner.Activity.DeveloperActivity;
@@ -62,6 +63,21 @@ void barcode ( Activity activity,StocktakeresultModel stocktakeresultModel) {
 	intent.putExtra(StocktakeresultColumns.STOCKTAKE_ID, stocktakeresultModel.getStocktakeId());
 	activity.startActivity ( intent );
 }
+
+public static
+void barcodeNoContinue ( Activity activity,StocktakeresultModel stocktakeresultModel) {
+	Intent intent = new Intent ( activity, BarcodeDetailActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	intent.putExtra(StocktakeresultColumns._ID, stocktakeresultModel.getId());
+	intent.putExtra(StocktakeresultColumns.BARCODE, stocktakeresultModel.getBarcode());
+	intent.putExtra(StocktakeresultColumns.DATETIME_SCANNNED, stocktakeresultModel.getDatetimeScannned());
+	intent.putExtra(StocktakeresultColumns.QTY, stocktakeresultModel.getQty());
+	intent.putExtra(StocktakeresultColumns.STOCKTAKE_ID, stocktakeresultModel.getStocktakeId());
+	intent.putExtra( Const.NO_CONTINUE,"true");
+	Log.d("barcodeNoCon","noCon");
+	activity.startActivity ( intent );
+}
+
 
 public static
 void barcode ( Activity activity,StocktakeresultModel stocktakeresultModel,String location) {
