@@ -73,7 +73,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	minusBtn = (ImageView) findViewById(R.id.minusBtn);
 	plusBtn = (ImageView) findViewById(R.id.plusBtn);
 
-	Log.d("verifyNoCon", extras.getString(Const.NO_CONTINUE) );
+//	Log.d("verifyNoCon", extras.getString(Const.NO_CONTINUE) );
 	if (extras.getString(Const.NO_CONTINUE) != null) {
 		Log.d("barcodeNoCon", "noCon");
 		saveNContinue.setVisibility(View.GONE);

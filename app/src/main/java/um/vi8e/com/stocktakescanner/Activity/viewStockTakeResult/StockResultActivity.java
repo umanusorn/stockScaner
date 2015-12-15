@@ -129,7 +129,21 @@ public boolean onCreateOptionsMenu(Menu menu) {
 }
 
 private void saveResult() {
-	ViewStockResultFragment.mDataSet.get(0);
+/*
+	if (ViewStockResultFragment.mDataSet.size() <= 0)
+		finish();
+*/
+
+	Log.d(TAG,"size="+ String.valueOf(ViewStockResultFragment.mDataSet.size()));
+//size=0??????
+	try{
+		ViewStockResultFragment.mDataSet.get(0);
+	}catch (IndexOutOfBoundsException e){
+		finish();
+	}
+
+
+
 	for (StocktakeresultModel stocktakeresultModel :
 			ViewStockResultFragment.mDataSet) {
 		String id = stocktakeresultModel.getId();

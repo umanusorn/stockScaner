@@ -208,10 +208,14 @@ public class ScannerFragment extends Fragment implements MessageDialogFragment.M
 			mCameraId = -1;
 		}
 		setupFormats();
+
+		//mScannerView.setRotation((float) 90.0);
 		//mScannerView.setEnabled(false);
 		//mScannerView.setVisibility(View.GONE);
 //		mScannerView.setRotation((float) 90.0);
 		//mScannerView.setBottom();
+		//mScannerView.setRotationX((float) 90.0);
+	//	mScannerView.setRotationY(90);
 
 		return mScannerView;
 	}

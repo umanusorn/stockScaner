@@ -78,7 +78,9 @@ setFragmentAdaptor();
 public void setFragmentAdaptor(){
 	mAdapter = new ViewStockAdapter(mDataSet, getContext());
 	// Set ViewStockResultAdapter as the adapter for RecyclerView.
+	Log.d(TAG,"beforeSetAdapter");
 	mRecyclerView.setAdapter(mAdapter);
+	Log.d(TAG,"DoneSetAdapter");
 }
 /**
  * Generates Strings for RecyclerView's adapter. This data would usually come
